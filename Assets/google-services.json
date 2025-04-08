@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "889099004142",
+    "project_id": "bubble-rush-969f4",
+    "storage_bucket": "bubble-rush-969f4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889099004142:android:01c0747e8b6d8b087cebff",
+        "android_client_info": {
+          "package_name": "com.ar.b.rush"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCFOpB3zS1t2wREQrKhl5RwF5C1X2pqxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

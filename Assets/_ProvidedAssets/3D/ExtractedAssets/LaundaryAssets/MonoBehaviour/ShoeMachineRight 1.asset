@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd416b23527d6ff6147d32a7c94b1880, type: 3}
+  m_Name: ShoeMachineRight 1
+  m_EditorClassIdentifier:
+  serializationData:
+    SerializedFormat: 0
+    SerializedBytes:
+    ReferencedUnityObjects: []
+    SerializedBytesString:
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  id: shoe_machine_right_1
+  title:
+  prefab: {fileID: 1839853686723426, guid: 659580549a7f109428d7c60d81652d89, type: 2}
+  icon: {fileID: 21300000, guid: 1c1becf2e9ff58944b39f6b250f0ebf8, type: 2}
+  secondIcon: {fileID: 0}
+  upgrades: []
+  buildingType: 2
+  produceMethod: 1
+  produceItem:
+    yieldResource: {fileID: 0}
+    amount: 1
+  craftItem:
+    yieldResource: {fileID: 114520674071520406, guid: 957a34ac2799bcb45bed7075a1d62374, type: 2}
+    amount: 1
+    resource: {fileID: 114579882151565291, guid: f4b21545c586a254a853572ed510780f, type: 2}
+  produceDuration: 5
+  inputCapacity: 6
+  outputCapacity: 9999
+  cost:
+    isFibonacciIncrement: 0
+    costType: 0
+    currency: {fileID: 11400000, guid: 1fb08d7205c557c4689d69242a7cd0fa, type: 2}
+    amount: 3000
+    paidAmount: 0
+    rewardAmount: 0
+    paidRewardAmount: 0

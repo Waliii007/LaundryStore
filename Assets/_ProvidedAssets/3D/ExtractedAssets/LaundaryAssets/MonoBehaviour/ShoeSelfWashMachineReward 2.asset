@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd416b23527d6ff6147d32a7c94b1880, type: 3}
+  m_Name: ShoeSelfWashMachineReward 2
+  m_EditorClassIdentifier:
+  serializationData:
+    SerializedFormat: 0
+    SerializedBytes:
+    ReferencedUnityObjects: []
+    SerializedBytesString:
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  id: s_selfwash_machine_8
+  title:
+  prefab: {fileID: 0}
+  icon: {fileID: 0}
+  secondIcon: {fileID: 0}
+  upgrades: []
+  buildingType: 2
+  produceMethod: 0
+  produceItem:
+    yieldResource: {fileID: 0}
+    amount: 1
+  craftItem:
+    yieldResource: {fileID: 114474641177220379, guid: 09c57af50e8085f4db363e8fdc0ee3f3, type: 2}
+    amount: 1
+    resource: {fileID: 114301903559702640, guid: e57f67dd26e9ca94895ce809d32fceb0, type: 2}
+  produceDuration: 10
+  inputCapacity: 100
+  outputCapacity: 9999
+  cost:
+    isFibonacciIncrement: 0
+    costType: 1
+    currency: {fileID: 11400000, guid: 1fb08d7205c557c4689d69242a7cd0fa, type: 2}
+    amount: 5
+    paidAmount: 0
+    rewardAmount: 1
+    paidRewardAmount: 0
