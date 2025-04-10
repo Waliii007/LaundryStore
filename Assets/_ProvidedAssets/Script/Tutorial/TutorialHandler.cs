@@ -49,12 +49,14 @@ namespace LaundaryMan
             DOVirtual.DelayedCall(1, () =>
                 ReferenceManager.Instance.tutorialHandler.TaskHandler(ReferenceManager.Instance.tutorialHandler
                     .currentTask + 1));
+          if(tasks[(int)currentTask]. GetComponent<TaskScript>().taskObject)  tasks[(int)currentTask]. GetComponent<TaskScript>().taskObject.SetActive(false);
         }
 
 
         private void OnDisable()
         {
             ReferenceManager.Instance.taskHandler.OnTaskUpdatedAction -= TaskCompleted;
+            
         }
     }
 }

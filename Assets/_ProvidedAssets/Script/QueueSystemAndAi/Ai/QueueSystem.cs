@@ -33,6 +33,7 @@ namespace LaundaryMan
             StartCoroutine(ReferenceManager.Instance.GameData.isTutorialCompleted
                 ? SpawnAndEnqueue()
                 : SpawnAndEnqueue(1));
+            StartCoroutine(CheckingCustomerAmount());
         }
 
         public void OnTutorialCompleted()
@@ -42,13 +43,23 @@ namespace LaundaryMan
 
         public WaitForSeconds waitForSeconds;
 
+        private IEnumerator CheckingCustomerAmount()
+        {
+            waitForSeconds = new WaitForSeconds(.1f);
+            while (!isGameEnd)
+            {
+                // print(_dirtyClothQueueAi.Count + ":" + (_dirtyClothQueueAi.Count < dirtyQueuePoints.Count));
+                tooManyCustomer.SetActive(!_canSpawn && !_canMove);
+                yield return waitForSeconds;
+            }
+        }
+
         private IEnumerator SpawnAndEnqueue()
         {
             waitForSeconds = new WaitForSeconds(Random.Range(5, 10));
             while (!isGameEnd)
             {
-                print(_dirtyClothQueueAi.Count + ":" + (_dirtyClothQueueAi.Count < dirtyQueuePoints.Count));
-
+                // print(_dirtyClothQueueAi.Count + ":" + (_dirtyClothQueueAi.Count < dirtyQueuePoints.Count));
                 if (!_canSpawn) yield return new WaitUntil(() => _canSpawn || isGameEnd);
                 if (isGameEnd) yield break;
                 SpawnAi();

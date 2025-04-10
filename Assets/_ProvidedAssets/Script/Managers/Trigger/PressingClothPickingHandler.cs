@@ -59,6 +59,8 @@ namespace LaundaryMan
             }
         }
 
+        
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -131,7 +133,6 @@ namespace LaundaryMan
             }
         }
 
-        public GameObject steam;
 
         IEnumerator Arranger()
         {
@@ -144,11 +145,13 @@ namespace LaundaryMan
                 tempList[i].transform.transform.SetPositionAndRotation(targetPosition, quaternion.identity);
             }
 
-            yield return  waitTimeForArranger;
+            yield return waitTimeForArranger;
             if (ReferenceManager.Instance.isGameEnd)
                 StartCoroutine(Arranger());
         }
+
         public WaitForSeconds waitTimeForArranger = new WaitForSeconds(1f);
+
         private void RearrangeStack(Stack<ClothFragment> _playerStack, GameObject _stackStarter)
         {
             Vector3 startPosition = _stackStarter.transform.position;

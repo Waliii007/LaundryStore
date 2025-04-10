@@ -29,11 +29,13 @@ namespace LaundaryMan
             }
         }
 
+        public GameObject triggerToOn;
         private IEnumerator CollectCash()
         {
             if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
             {
                 CompleteTutorial();
+                triggerToOn.SetActive(true);
             }
 
             while (isCollecting && cashStack.Count > 0)
@@ -58,7 +60,7 @@ namespace LaundaryMan
 
             // Move reset logic outside the loop
             checkoutHandler.cashStackCount = 0;
-            checkoutHandler.changeInY = 0.1f;  // Reset properly to avoid floating cash
+            checkoutHandler.changeInY = 0.1f; // Reset properly to avoid floating cash
 
             SaveAndLoadSystem.Instance.SaveGame();
         }
@@ -67,10 +69,13 @@ namespace LaundaryMan
         {
             var reference = ReferenceManager.Instance;
             reference.tutorialHandler.TaskCompleted();
+            
             reference.GameData.isTutorialCompleted = true;
             reference.taskHandler.HrHandler();
             reference.canvasManager.CanvasStateChanger(CanvasStates.ObjectivePanel);
             reference.objectivePanel.ShowObjective("Tutorial Complete");
+            reference.playerStackManager.pathDraw.gameObject.SetActive(false);
+            reference.playerStackManager.pathDraw.destination = null;
         }
     }
 }

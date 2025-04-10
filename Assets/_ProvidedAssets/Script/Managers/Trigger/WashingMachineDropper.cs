@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Invector.vCharacterController;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -356,6 +357,8 @@ namespace LaundaryMan
         #endregion
 
         #region TriggerEvent
+
+       
 
         private void OnTriggerExit(Collider other)
         {

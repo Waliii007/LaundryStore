@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Invector.vCharacterController;
 using UnityEngine;
 
 namespace LaundaryMan
@@ -34,6 +35,7 @@ namespace LaundaryMan
                 selectedAiReached = false;
             }
         }
+
         public WaitForSeconds waitForSecondsToCashier = new WaitForSeconds(0.5f);
         public bool isAICashierUnlocked;
 
@@ -59,6 +61,9 @@ namespace LaundaryMan
             }
         }
 
+        public GameObject playerPoint;
+        public GameObject lookatPoint;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -68,6 +73,8 @@ namespace LaundaryMan
                 if (_playerCoroutine == null)
                 {
                     _playerCoroutine = StartCoroutine(CheckOut());
+
+                   
                 }
             }
 
@@ -93,7 +100,7 @@ namespace LaundaryMan
                 // {
                 //     ReadyToShipClothes
                 // }
-                
+
                 yield return new WaitForSeconds(.15f);
                 if (ReadyToShipClothes.Count > 0)
                 {
@@ -167,7 +174,7 @@ namespace LaundaryMan
 
         private IEnumerator CashGenerate()
         {
-            if (cashPrefab  && cashStackPositions.Length == 3)
+            if (cashPrefab && cashStackPositions.Length == 3)
             {
                 // Determine column index (0 = Left, 1 = Center, 2 = Right)
                 int columnIndex = cashStackCount % 3;

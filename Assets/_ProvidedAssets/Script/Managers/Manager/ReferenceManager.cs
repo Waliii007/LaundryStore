@@ -15,12 +15,13 @@ namespace LaundaryMan
 
         public static ReferenceManager Instance { get; private set; }
 
-        //public GameObject environment;
 
         private void Awake()
         {
-           // environment.SetActive(true);
+            // environment.SetActive(true);
             Instance = this;
+            if (tutorialHandler.tasks[1].GetComponent<TaskScript>().taskObject)
+                tutorialHandler.tasks[1].GetComponent<TaskScript>().taskObject.SetActive(GameData.isTutorialCompleted);
         }
 
         #endregion

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameAnalyticsSDK.Setup;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,8 @@ namespace LaundaryMan
         private Coroutine _playerCoroutine;
         private bool isPlayerInside;
         public ThingsToUnlock thingsToUnlock;
-
+        public GameObject arrowObject;
+        public GameObject selfExplainationObject;
         #endregion
 
         #region TriggerEvents
@@ -29,31 +31,43 @@ namespace LaundaryMan
                 StopCoroutine(_playerCoroutine);
                 _playerCoroutine = null;
             }
+            selfExplainationObject.SetActive(true);
+            arrowObject?.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
+            selfExplainationObject.SetActive(isPlayerInside);
+
         }
 
         public bool isthingUnlocked = false;
-
+        public Text selfExplainationText;
         public void Init()
         {
             switch (thingsToUnlock)
             {
                 case ThingsToUnlock.LaundryMachine1:
                     cashToUnlock = ReferenceManager.Instance.GameData.gameEconomy.machine1Price;
+                    selfExplainationText.text = "Building First Machine";
                     break;
                 case ThingsToUnlock.LaundryMachine2:
                     cashToUnlock = ReferenceManager.Instance.GameData.gameEconomy.machine2Price;
+                    selfExplainationText.text = "Building Second Machine";
+
                     break;
                 case ThingsToUnlock.LaundryMachine3:
                     cashToUnlock = ReferenceManager.Instance.GameData.gameEconomy.machine3Price;
+                    selfExplainationText.text = "Building Third Machine";
                     break;
                 case ThingsToUnlock.HrOfHiringTeam:
                     cashToUnlock = ReferenceManager.Instance.GameData.gameEconomy.hrPrice;
+                    selfExplainationText.text = "Building HR Room";
                     break;
                 case ThingsToUnlock.HrOfUpgradingTeam:
                     cashToUnlock = ReferenceManager.Instance.GameData.gameEconomy.hrUpgradePrice;
+                    selfExplainationText.text = "Building Performance HR Room ";
+
                     break;
                 case ThingsToUnlock.Cashier:
                     cashToUnlock = ReferenceManager.Instance.GameData.gameEconomy.cashierPrice;
+                    selfExplainationText.text = "Unlocking Cashier";
                     break;
             }
 
@@ -69,8 +83,10 @@ namespace LaundaryMan
             {
                 this.gameObject.SetActive(false);
             }
-        }
+            selfExplainationObject.SetActive(false);
 
+        }
+            
         private void OnTriggerStay(Collider other)
         {
             if (!other.CompareTag("Player") &&
@@ -80,11 +96,14 @@ namespace LaundaryMan
 
             if (_playerCoroutine == null)
                 _playerCoroutine = StartCoroutine(HandlePlayerInteraction());
+            selfExplainationObject.SetActive(isPlayerInside);
+
         }
 
         public int initialCash = 2000;
         public Text amountText;
         public WaitForSeconds waitForSecondsAiSpawn = new WaitForSeconds(.1f);
+
         private IEnumerator HandlePlayerInteraction()
         {
             int initialPlayerCash = ReferenceManager.Instance.GameData.playerCash;

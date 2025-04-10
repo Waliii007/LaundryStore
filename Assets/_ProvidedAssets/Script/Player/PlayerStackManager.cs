@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using RootMotion.FinalIK;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace LaundaryMan
 {
@@ -11,7 +12,7 @@ namespace LaundaryMan
         public GameObject stackStarter;
         [SerializeField] protected FullBodyBipedIK bipedIk;
         public Stack<ClothFragment> ClothStack = new Stack<ClothFragment>();
-        
+        public NavmeshPathDraw pathDraw;
         private void Awake()
         {
             SetIk(0);

@@ -110,11 +110,14 @@ namespace LaundryMan
                     if (playerCoroutine == null)
                     {
                         playerCoroutine = StartCoroutine(HandlePlayerInteraction(playerStackManager));
+                       
                     }
                 }
             }
         }
 
+        public GameObject playerPoint;
+        public GameObject lookatPoint;
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -319,15 +322,14 @@ namespace LaundryMan
                                 ? stackStarter.transform.position
                                 : clothToWash.Peek().nextPosition.transform.position;
 
-                            clothFragment.transform.DOJump(targetPosition, 1f, 1, stackTime).
-                                OnComplete(() =>
+                            clothFragment.transform.DOJump(targetPosition, 1f, 1, stackTime).OnComplete(() =>
                             {
                                 clothToWash.Push(clothFragment);
                                 ai.customerObjectToStack.myClothFragment.Remove(clothFragment);
                             });
                             InBasketHaveElements?.Invoke();
-                                        
                         }
+
                     yield return new WaitForSeconds(stackTime);
                     yield return new WaitUntil(() => ReferenceManager.Instance.queueSystem._canMove);
                     ai.SetIk(0);

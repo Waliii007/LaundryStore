@@ -9,16 +9,24 @@ namespace LaundaryMan
     public class TaskScript : MonoBehaviour
     {
         public string tutorialObjective;
+        public Transform navmeshTarget;
 
         private void OnEnable()
         {
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.ObjectivePanel);
             ReferenceManager.Instance.objectivePanel.ShowObjective(tutorialObjective);
+
             TaskComplete();
+            ReferenceManager.Instance.playerStackManager.pathDraw.destination = navmeshTarget;
+            if (taskObject) taskObject.SetActive(true);
+            
         }
+
+        public GameObject taskObject;
 
         void TaskComplete()
         {
+
             switch (ReferenceManager.Instance.tutorialHandler.currentTask)
             {
                 case TutorialTask.UnlockLaundry:
@@ -26,9 +34,13 @@ namespace LaundaryMan
                     break;
                 case TutorialTask.PickLaundry:
                     StartCoroutine(PickLaundary());
+                 
+
                     break;
                 case TutorialTask.DropLaundry:
                     StartCoroutine(DropLaundary());
+                  
+
                     break;
                 case TutorialTask.PickCleanLaundry:
                     StartCoroutine(PickLaundary());
@@ -42,6 +54,7 @@ namespace LaundaryMan
                 case TutorialTask.CollectCash:
                     break;
             }
+
         }
 
         IEnumerator PickLaundary()
@@ -53,6 +66,8 @@ namespace LaundaryMan
             DOVirtual.DelayedCall(1, () =>
                 ReferenceManager.Instance.tutorialHandler.TaskHandler(ReferenceManager.Instance.tutorialHandler
                     .currentTask + 1));
+            if (taskObject) taskObject.gameObject.SetActive(false);
+
         }
 
         IEnumerator DropLaundary()
@@ -62,6 +77,8 @@ namespace LaundaryMan
             DOVirtual.DelayedCall(1, () =>
                 ReferenceManager.Instance.tutorialHandler.TaskHandler(ReferenceManager.Instance.tutorialHandler
                     .currentTask + 1));
+            if (taskObject) taskObject.gameObject.SetActive(false);
+
         }
     }
 }

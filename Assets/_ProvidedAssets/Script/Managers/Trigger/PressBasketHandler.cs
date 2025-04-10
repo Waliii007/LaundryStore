@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using Invector.vCharacterController;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -71,6 +72,7 @@ namespace LaundaryMan
             }
         }
 
+
         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -85,6 +87,10 @@ namespace LaundaryMan
                 }
             }
         }
+
+        public GameObject playerPoint;
+        public GameObject lookatPoint;
+
 
         private void OnTriggerEnter(Collider other)
         {
@@ -361,7 +367,7 @@ namespace LaundaryMan
                         cloth.positionInherit = checkoutHandler.counterStackPosition;
                         checkoutHandler.ReadyToShipClothes.Push(cloth);
                     });
-             
+
                 //  print("CodePushed");
             }
             else
@@ -377,7 +383,6 @@ namespace LaundaryMan
                 checkoutHandler.ReadyToShipClothes.Push(cloth);
                 cloth.transform.rotation = Quaternion.identity;
             }
-        
         }
 
         public Vector3 offset;
