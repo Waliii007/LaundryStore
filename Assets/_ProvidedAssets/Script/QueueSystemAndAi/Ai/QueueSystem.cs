@@ -42,15 +42,16 @@ namespace LaundaryMan
         }
 
         public WaitForSeconds waitForSeconds;
+        public WaitForSeconds _waitForSeconds;
 
         private IEnumerator CheckingCustomerAmount()
         {
-            waitForSeconds = new WaitForSeconds(.1f);
+            _waitForSeconds = new WaitForSeconds(.1f);
             while (!isGameEnd)
             {
                 // print(_dirtyClothQueueAi.Count + ":" + (_dirtyClothQueueAi.Count < dirtyQueuePoints.Count));
                 tooManyCustomer.SetActive(!_canSpawn && !_canMove);
-                yield return waitForSeconds;
+                yield return _waitForSeconds;
             }
         }
 
