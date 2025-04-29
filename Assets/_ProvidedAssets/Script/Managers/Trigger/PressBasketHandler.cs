@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
-using Invector.vCharacterController;
+using DG.Tweening; 
+using ToastPlugin;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LaundaryMan
 {
@@ -204,7 +205,9 @@ namespace LaundaryMan
         public float rotateSpeed = 200f;
         public Queue<ClothFragment> washedClothes = new Queue<ClothFragment>();
         private Coroutine _tubeCoroutine;
-
+        
+        
+      
         public void MoveClothesToPress(ClothFragment cloth)
         {
             washedClothes.Enqueue(cloth);
@@ -219,6 +222,8 @@ namespace LaundaryMan
         {
             while (clothToWash.Count > 0 || isPlayerInside)
             {
+                yield return new WaitUntil(() => !isRinEmpty);
+
                 if (clothToWash.Count > 0)
                 {
                     var cloth = clothToWash.Pop();
@@ -246,14 +251,19 @@ namespace LaundaryMan
         public GameObject ironStartPositionPoint;
         public GameObject ironClothesPoint;
         bool isIronMoving = false;
-        public GameObject steam;
-
+        public ParticleSystem steam;
+        public float rinCost=5;
+        public float totalRin=200;
+        public Image rinTrackingImage;
+        public bool isRinEmpty;
         public IEnumerator IronClothes(ClothFragment cloth)
         {
+         
             cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
             {
-                steam.gameObject.SetActive(false);
-
+                // steam.gameObject.SetActive(false);
+                steam.gameObject.SetActive(true);
+                steam.Play();
                 ironObject.transform.DOMove(ironMovePoint.transform.position, .5f).OnComplete(() =>
                 {
                     cloth.transform.DOMove(exitWaypoints.ElementAt(0).transform.position, .5f)
@@ -263,8 +273,8 @@ namespace LaundaryMan
                                 StartCoroutine(MoveThroughWaypoints(cloth));
                                 ironObject.transform.DOLookAt(ironClothesPoint.transform.position, .01f);
 
+
                                 isIronMoving = true;
-                                steam.gameObject.SetActive(true);
                             });
                 });
             });
@@ -276,29 +286,45 @@ namespace LaundaryMan
 
         public IEnumerator IronClothesReverse(ClothFragment cloth)
         {
+            isRinEmpty = totalRin < rinCost;
+
+            if (totalRin >= rinCost)
+            {
+                totalRin -= rinCost;
+                rinTrackingImage.fillAmount = (float)totalRin / 100f;
+            }
+
             cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
             {
-                steam.gameObject.SetActive(false);
-
+                steam.gameObject.SetActive(true);
+                steam.Play();
                 ironObject.transform.DOMove(ironStartPositionPoint.transform.position, .5f).OnComplete(() =>
                 {
-                    cloth.transform.DOMove(exitWaypoints.ElementAt(0).transform.position, .5f)
-                        .OnComplete(
-                            () =>
-                            {
-                                StartCoroutine(MoveThroughWaypoints(cloth));
-                                ironObject.transform.DOLookAt(ironClothesPoint.transform.position, .01f);
-                                isIronMoving = true;
-                                steam.gameObject.SetActive(true);
-                            });
+                    cloth.transform.DOMove(exitWaypoints.ElementAt(0).transform.position, .5f).OnComplete(() =>
+                    {
+                        StartCoroutine(MoveThroughWaypoints(cloth));
+                        ironObject.transform.DOLookAt(ironClothesPoint.transform.position, .01f);
+                        isIronMoving = true;
+                    });
                 });
             });
-            // });
 
             yield return new WaitForSeconds(1);
             yield return new WaitUntil(() => isIronMoving);
         }
-
+        public void RefillRin()
+        {
+            if (totalRin < 100)
+            {
+                totalRin = 100;
+                isRinEmpty = false;
+                rinTrackingImage.fillAmount = 1f;
+            }
+            else
+            {
+                ToastHelper.ShowToast("No need to refill Rin");
+            }
+        }
         public int index;
 
         private IEnumerator PressClothesAndRelease()
@@ -376,12 +402,17 @@ namespace LaundaryMan
                     .Peek()
                     .nextPosition.transform
                     .position, .1f).OnComplete(()
-                    => cloth.SetState(ClothState.Washing));
-                cloth.positionInherit = checkoutHandler.ReadyToShipClothes
-                    .Peek()
-                    .nextPosition;
-                checkoutHandler.ReadyToShipClothes.Push(cloth);
-                cloth.transform.rotation = Quaternion.identity;
+                    =>
+                {
+                    cloth.SetState(ClothState.Washing);
+
+
+                    cloth.positionInherit = checkoutHandler.ReadyToShipClothes
+                        .Peek()
+                        .nextPosition;
+                    checkoutHandler.ReadyToShipClothes.Push(cloth);
+                    cloth.transform.rotation = Quaternion.identity;
+                });
             }
         }
 

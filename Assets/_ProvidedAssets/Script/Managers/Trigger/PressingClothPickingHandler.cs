@@ -101,8 +101,7 @@ namespace LaundaryMan
             playerStackManager.TryGetComponent(out vThirdPersonInput tpi);
             if (tpi)
                 yield return new WaitUntil(() => !tpi.IsMoving());
-            while (isPlayerInside &&
-                   playerStackManager.ClothStack.Count < ReferenceManager.Instance.basketTrigger.limit)
+            while (isPlayerInside )
             {
                 if (clothToPress.Count > 0)
                 {

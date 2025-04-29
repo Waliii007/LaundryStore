@@ -14,6 +14,11 @@ namespace LaundaryMan
         public int cashierPrice = 999;
         public int hrPrice = 2000;
         public int hrUpgradePrice = 2000;
+        public int limitBasket = 10;
+        public int limitOnCleanBasket = 10; 
+        public int machineUpgradeIndex = 0; 
+        public int machine1UpgradeIndex = 0; 
+        public int machine2UpgradeIndex = 0; 
     }
 
     [System.Serializable]
@@ -24,7 +29,7 @@ namespace LaundaryMan
         public bool isCashierUnlocked;
         public int cleanAIUnlocked = 0;
         public int dirtyBoxAiUnlocked = 0;
-        public int playerCash = 2100;
+        public int playerCash = 210000;
         public bool isHrUnlocked = false;
         public bool isUpgradeHrUnlocked = false;
         public bool isTutorialCompleted = false;

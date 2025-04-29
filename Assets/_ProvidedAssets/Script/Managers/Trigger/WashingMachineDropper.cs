@@ -4,13 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Invector.vCharacterController;
+using ToastPlugin;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LaundaryMan
 {
     public class WashingMachineDropper : Dropper
     {
+        #region myAnimator
+
+        private void OnEnable()
+        {
+            limitOnBasket = ReferenceManager.Instance.GameData.gameEconomy.limitBasket;
+            limitOnCleanBasket = ReferenceManager.Instance.GameData.gameEconomy.limitOnCleanBasket;
+        }
+
+        #endregion
+
+
         private static readonly int MachineWashed = Animator.StringToHash("WashingMachine");
         private static readonly int DrayerAnimation = Animator.StringToHash("DrayerAnimation");
 
@@ -26,6 +40,8 @@ namespace LaundaryMan
         public Transform machineStackPoint; // Machine stacking position
 
         public Animator washingMachine;
+        public int limitOnBasket;
+        public int limitOnCleanBasket;
 
         private void RearrangeStack(PlayerStackManager playerStackManager)
         {
@@ -86,6 +102,7 @@ namespace LaundaryMan
             TempCLothes = new Stack<ClothFragment>(TempCLothes.Reverse());
             while (isPlayerInside && TempCLothes.Count > 0)
             {
+                yield return new WaitUntil(() => clothToWash.Count < limitOnBasket);
                 var cloth = TempCLothes.Pop();
                 cloth.transform.SetParent(stackMachineStarter.transform);
 
@@ -111,16 +128,12 @@ namespace LaundaryMan
                 yield return new WaitForSeconds(stackTime);
             }
 
-
             playerStackManager.SetIk(playerStackManager.ClothStack.Count <= 0 ? 0 : 1);
         }
 
         private IEnumerator HandlePlayerInteraction(AiStackManager playerStackManager)
         {
             Stack<ClothFragment> tempStack = new Stack<ClothFragment>();
-            if (GlobalConstant.isLogger)
-                print("Calling");
-// Transfer elements to a temporary stack to reverse order
             while (playerStackManager.ClothStack.Count > 0)
             {
                 tempStack.Push(playerStackManager.ClothStack.Pop());
@@ -146,7 +159,7 @@ namespace LaundaryMan
             }
 
             TempCLothes = new Stack<ClothFragment>(TempCLothes.Reverse());
-            while (isPlayerInside && TempCLothes.Count > 0)
+            while (isPlayerInside && TempCLothes.Count > 0 && clothToWash.Count < limitOnBasket)
             {
                 var cloth = TempCLothes.Pop();
                 cloth.transform.SetParent(stackMachineStarter.transform);
@@ -170,6 +183,10 @@ namespace LaundaryMan
                 yield return new WaitForSeconds(stackTime);
             }
 
+            print((playerStackManager.ClothStack.Count <=
+                   0) + ""
+                      + (playerStackManager.ClothStack.Count) +
+                      ":" + (TempCLothes.Count <= 0));
 
             playerStackManager.SetIk(playerStackManager.ClothStack.Count <= 0 ? 0 : 1);
         }
@@ -180,25 +197,49 @@ namespace LaundaryMan
 
         #region BasketToMachine
 
+        public Image detargentTrackingImage;
+        public bool isDetergentEmpty;
+        public int totalDetergent;
+        public int detergentCost;
         public WaitForSeconds waitForSecondsForClothes = new WaitForSeconds(1f);
+
+
+        public void Refill()
+        {
+            if (totalDetergent < 100)
+            {
+                totalDetergent = 100;
+                isDetergentEmpty = false;
+                detargentTrackingImage.fillAmount = 1f;
+            }
+            else
+            {
+                ToastHelper.ShowToast("Do not need to refill This Machine");
+            }
+        }
 
         private IEnumerator MoveClothesToMachine()
         {
+            yield return new WaitUntil(() =>
+                pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket);
             while (clothToWash.Count > 0 || isPlayerInside)
             {
-                if (clothToWash.Count > 0)
+                isDetergentEmpty = totalDetergent < detergentCost;
+                yield return new WaitUntil(() => !isDetergentEmpty);
+
+                if (clothToWash.Count > 0 && totalDetergent >= 0)
                 {
+                    totalDetergent -= detergentCost;
+                    detargentTrackingImage.fillAmount = (float)totalDetergent / 100f;
+
                     var cloth = clothToWash.Pop();
                     Vector3 targetPosition = machineStackPoint.position;
 
-                    // Move cloth to machine
                     cloth.transform.DOJump(targetPosition, 1f, 1, 2).OnComplete(() =>
                     {
                         AddWashedCloth(cloth);
                         washingMachine.SetTrigger(MachineWashed);
                     });
-
-
                     yield return waitForSecondsForClothes;
                 }
                 else
@@ -211,7 +252,6 @@ namespace LaundaryMan
         }
 
         #endregion
-
 
         #region FromTheTube
 
@@ -277,6 +317,7 @@ namespace LaundaryMan
             }
 
             yield return StartCoroutine(MoveThenJumpAndStack(cloth));
+
             if (!isOccupied)
                 ReferenceManager.Instance.cleanBoxAIManager.AddTask(pressingClothPickingHandler.aiPickPoint, this);
         }
@@ -358,8 +399,6 @@ namespace LaundaryMan
 
         #region TriggerEvent
 
-       
-
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -381,12 +420,13 @@ namespace LaundaryMan
                     }
 
                     RearrangeStack(playerStackManager);
-                    playerStackManager.SetIk(playerStackManager.ClothStack.Count == 0 ? 0 : 1);
                     if (_playerCoroutine != null)
                     {
                         StopCoroutine(_playerCoroutine);
                         _playerCoroutine = null;
                     }
+
+                    playerStackManager.SetIk(playerStackManager.ClothStack.Count == 0 ? 0 : 1);
                 }
                 else if (other.TryGetComponent(out AiStackManager aIStackManager))
                 {
@@ -404,12 +444,13 @@ namespace LaundaryMan
                     }
 
                     RearrangeStack(aIStackManager);
-                    aIStackManager.SetIk(aIStackManager.ClothStack.Count == 0 ? 0 : 1);
                     if (aICoroutine != null)
                     {
                         // StopCoroutine(aICoroutine);
                         aICoroutine = null;
                     }
+
+                    aIStackManager.SetIk(aIStackManager.ClothStack.Count == 0 ? 0 : 1);
                 }
             }
         }

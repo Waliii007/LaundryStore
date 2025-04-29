@@ -181,7 +181,7 @@ namespace LaundryMan
                 yield return new WaitUntil(() => !tpi.IsMoving());
             while (isPlayerInside)
             {
-                if (clothToWash.Count > 0 && playerStackManager.ClothStack.Count < limit)
+                if (clothToWash.Count > 0 )
                 {
                     var cloth = clothToWash.Pop();
                     cloth.transform.SetParent(playerStackManager.stackStarter.transform);

@@ -90,17 +90,12 @@ namespace LaundaryMan
         int _index = 0;
         [SerializeField] private Vector3 offset;
 
-        public Stack<ClothFragment> IronClothes = new Stack<ClothFragment>();
+      //  public Stack<ClothFragment> IronClothes = new Stack<ClothFragment>();
 
         public IEnumerator CheckOut()
         {
             while (isPlayerInside && ReferenceManager.Instance.queueSystem._washedClothQueueAi.Count > 0)
             {
-                // foreach (var in)
-                // {
-                //     ReadyToShipClothes
-                // }
-
                 yield return new WaitForSeconds(.15f);
                 if (ReadyToShipClothes.Count > 0)
                 {
@@ -108,7 +103,6 @@ namespace LaundaryMan
                     if (_index < ai.clothStack && ReadyToShipClothes.Count > 0)
                     {
                         ClothFragment cloth = ReadyToShipClothes.Pop();
-                        IronClothes.Push(cloth);
                         isCheckOut = false; // Ensure it's false before waiting
                         yield return new WaitForSeconds(.15f);
 
@@ -119,6 +113,8 @@ namespace LaundaryMan
                                     {
                                         isCheckOut = true;
                                         cloth.transform.SetParent(ai.customerObjectToStack.transform);
+                                        ai.customerObjectToStack.myClothFragment.Add(cloth);
+
                                     }
                                 );
                             ai.SetIk(1);
@@ -127,11 +123,15 @@ namespace LaundaryMan
                         {
                             cloth.transform.DOMove(ai.customerObjectToStack.myClothFragment[^1]
                                     .nextPosition.transform.position + offset, .2f)
-                                .OnComplete(() => isCheckOut = true);
-                            cloth.transform.SetParent(ai.customerObjectToStack.transform);
+                                .OnComplete(() =>
+                                {
+                                    isCheckOut = true;
+                                    cloth.transform.SetParent(ai.customerObjectToStack.transform);
+                                    ai.customerObjectToStack.myClothFragment.Add(cloth);
+
+                                });
                         }
 
-                        ai.customerObjectToStack.myClothFragment.Add(cloth);
                         yield return new WaitUntil(() => isCheckOut);
                         isCheckOut = false;
                         _index++;

@@ -44,7 +44,8 @@ namespace LaundaryMan
         public static Action OnPLayerGotUpgrade;
         public ObjectivePanel objectivePanel;
         public static int CustomerAmountOfClothForTutorial;
-
+        
+        public MachineUpgradeManager machineUpgradeManager;
         #endregion
 
         #region SaveSystemObserver

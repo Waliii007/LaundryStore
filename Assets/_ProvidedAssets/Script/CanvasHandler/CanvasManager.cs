@@ -66,5 +66,6 @@ public enum CanvasStates
     Hr,
     HrUpgrades,
     ObjectivePanel,
-    UnlockCashier
+    UnlockCashier,
+    RefillPanel
 }

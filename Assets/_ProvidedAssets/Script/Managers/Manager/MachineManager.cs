@@ -10,6 +10,8 @@ namespace LaundaryMan
 {
     public class MachineManager : MonoBehaviour
     {
+        #region MachineUnlocking
+
         private void OnEnable()
         {
             Init();
@@ -17,7 +19,6 @@ namespace LaundaryMan
 
         public void Init()
         {
-            
             for (int i = 0; i < ReferenceManager.Instance.GameData.unlockedMachine; i++)
             {
                 MachineByIndex(i);
@@ -44,5 +45,8 @@ namespace LaundaryMan
         }
 
         public List<GameObject> machines = new List<GameObject>();
+
+        #endregion
+ 
     }
 }

@@ -18,6 +18,10 @@ namespace LaundaryMan
             SetIk(0);
         }
 
+        public int ReturnIkValue()
+        {
+            return (int)bipedIk.solver.leftHandEffector.positionWeight;
+        }
         public void SetIk(float iKWeight)
         {
             bipedIk.solver.leftHandEffector.positionWeight = iKWeight;

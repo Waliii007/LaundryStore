@@ -104,8 +104,6 @@ namespace LaundaryMan
                     break;
             }
         }
-
-
         public override void SetDestination(GameObject destination)
         {
             aIDestinationSetter.target = destination.transform;
@@ -154,7 +152,7 @@ namespace LaundaryMan
 
         private IEnumerator DropLaundry()
         {
-            yield return new WaitUntil(() => aiStackManager.ClothStack.Count <= 0);
+            yield return new WaitUntil(() => aiStackManager.ReturnIkValue() == 0);
             ReferenceManager.Instance.dirtyBoxAiManager.UnregisterAgent(this);
             washingMachineDropper.isOccupiedbyDirty = false;
             yield return waitForSecondsToPickClothes;
