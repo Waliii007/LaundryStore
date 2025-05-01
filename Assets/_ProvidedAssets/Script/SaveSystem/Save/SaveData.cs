@@ -15,18 +15,25 @@ namespace LaundaryMan
         public int hrPrice = 2000;
         public int hrUpgradePrice = 2000;
         public int limitBasket = 10;
-        public int limitOnCleanBasket = 10; 
-        public int machineUpgradeIndex = 0; 
-        public int machine1UpgradeIndex = 0; 
-        public int machine2UpgradeIndex = 0; 
-        public int rinMax = 250; 
-        public int detergentMax = 250; 
-        public int detergentCapacity1 = 250; 
-        public int detergentCapacity2 = 250; 
-        public int detergentCapacity3 = 250; 
-        public int rin1Capacity = 250; 
-        public int rin2Capacity = 250; 
-        public int rin3Capacity = 250; 
+        public int limitOnCleanBasket = 10;
+        public int machineUpgradeIndex = 0;
+        public int machine1UpgradeIndex = 0;
+        public int machine2UpgradeIndex = 0;
+        public int rinMax = 250;
+        public int detergentMax = 250;
+        public int detergentCapacity1 = 250;
+        public int detergentCapacity2 = 250;
+        public int detergentCapacity3 = 250;
+        public int rin1Capacity = 250;
+        public int rin2Capacity = 250;
+        public int rin3Capacity = 250;
+        public int remainingDetergentBottleGreen = 1;
+        public int remainingDetergentBottleBlue = 1;
+        public int remainingDetergentBottleRed = 1;
+
+        public int remainingRinseBottleGreen = 0;
+        public int remainingRinseBottleBlue = 0;
+        public int remainingRinseBottleRed = 0;
     }
 
     [System.Serializable]
@@ -46,7 +53,7 @@ namespace LaundaryMan
         public int playerMovingSpeed = 0;
         public int stackingSpeed = 0;
         public int playerCapacity = 0;
-       
+
         public GameEconomy gameEconomy = new GameEconomy();
 
         [Serializable]
@@ -63,7 +70,7 @@ namespace LaundaryMan
 
         private void OnEnable()
         {
-            ConvertListToDictionary();  
+            ConvertListToDictionary();
         }
 
         public void ConvertListToDictionary()

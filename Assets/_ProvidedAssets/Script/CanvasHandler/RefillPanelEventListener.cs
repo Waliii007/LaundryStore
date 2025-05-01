@@ -217,12 +217,12 @@ namespace LaundaryMan
             }
         }
 
-        public void TryRefillMachine(int index)
+        public void TryRefillMachine(int index,int amount)
         {
             if (ReferenceManager.Instance.GameData.playerCash >= refillCost)
             {
                 ReferenceManager.Instance.GameData.playerCash -= refillCost;
-                washingMachineDropper[index].Refill();
+                washingMachineDropper[index].Refill(amount);
                 ShowToast("Machine refilled.");
             }
             else
@@ -236,7 +236,7 @@ namespace LaundaryMan
             if (ReferenceManager.Instance.GameData.playerCash >= refillCost)
             {
                 ReferenceManager.Instance.GameData.playerCash -= refillCost;
-                pressMachine[index].RefillRin();
+                pressMachine[index].RefillRin(250);
                 ShowToast("Rinse refilled.");
             }
             else
@@ -244,32 +244,32 @@ namespace LaundaryMan
                 ShowToast("Not enough cash. Watch ad.");
             }
         }
-
-        public void Machine1Refill() => TryRefillMachine(0);
-        public void Machine2Refill() => TryRefillMachine(1);
-        public void Machine3Refill() => TryRefillMachine(2);
-
-        public void Machine1RefillWithAdds() =>
-            TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(0), "RefillMachine1Detergent");
-
-        public void Machine2RefillWithAdds() =>
-            TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(1), "RefillMachine1Detergent");
-
-        public void Machine3RefillWithAdds() =>
-            TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(2), "RefillMachine1Detergent");
+        //
+        // public void Machine1Refill() => TryRefillMachine(0,250);
+        // public void Machine2Refill() => TryRefillMachine(1,250);
+        // public void Machine3Refill() => TryRefillMachine(2,250);
+        //
+        // public void Machine1RefillWithAdds() =>
+        //     TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(0), "RefillMachine1Detergent");
+        //
+        // public void Machine2RefillWithAdds() =>
+        //     TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(1), "RefillMachine1Detergent");
+        //
+        // public void Machine3RefillWithAdds() =>
+        //     TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(2), "RefillMachine1Detergent");
 
         public void Rins1Refill() => TryRefillRins(0);
         public void Rins2Refill() => TryRefillRins(1);
         public void Rins3Refill() => TryRefillRins(2);
 
-        public void Rin1RefillWithAdds() =>
-            TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(0), "RefillMachine1Detergent");
-
-        public void Rin2RefillWithAdds() =>
-            TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(1), "RefillMachine1Detergent");
-
-        public void Rin3RefillWithAdds() =>
-            TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(2), "RefillMachine1Detergent");
+        // public void Rin1RefillWithAdds() =>
+        //     TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(0), "RefillMachine1Detergent");
+        //
+        // public void Rin2RefillWithAdds() =>
+        //     TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(1), "RefillMachine1Detergent");
+        //
+        // public void Rin3RefillWithAdds() =>
+        //     TssAdsManager._Instance.ShowRewardedAd(() => TryRefillMachine(2), "RefillMachine1Detergent");
 
         public void Cross()
         {

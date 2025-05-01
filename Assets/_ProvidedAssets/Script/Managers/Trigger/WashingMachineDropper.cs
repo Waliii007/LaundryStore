@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace LaundaryMan
         {
             limitOnBasket = ReferenceManager.Instance.GameData.gameEconomy.limitBasket;
             limitOnCleanBasket = ReferenceManager.Instance.GameData.gameEconomy.limitOnCleanBasket;
+            canvasCheckCoroutine = StartCoroutine(CheckCanvasStateRoutine());
+
         }
 
         #endregion
@@ -201,7 +204,7 @@ namespace LaundaryMan
 
         #region BasketToMachine
 
-        public Image detargentTrackingImage;
+        public MachineCanvasManager machineCanvasManager;
         public bool isDetergentEmpty;
         public int totalDetergent;
         public int detergentCost;
@@ -213,68 +216,78 @@ namespace LaundaryMan
             switch (myIndex)
             {
                 case 0:
-                    refillAmount = totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity1;
+                    refillAmount = 250;
 
                     break;
                 case 1:
-                    refillAmount = totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity2;
+                    refillAmount = 250;
                     break;
                 case 2:
-                    refillAmount = totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity3;
+                    refillAmount = 250;
                     break;
             }
         }
 
         public int refillAmount;
 
-        public void Refill()
+        public void Refill(int amount)
         {
             if (totalDetergent <= refillAmount)
             {
-                switch (myIndex)
-                {
-                    case 0:
-                        totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity1;
-
-                        break;
-                    case 1:
-                        totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity2;
-
-                        break;
-                    case 2:
-                        totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity3;
-
-                        break;
-                }
-
+                totalDetergent = amount;
+                refillAmount = amount;
                 isDetergentEmpty = false;
-                detargentTrackingImage.fillAmount = 1f;
+                machineCanvasManager.detergentTrackingImage.fillAmount = 1f;
             }
             else
             {
                 ToastHelper.ShowToast("Do not need to refill This Machine");
             }
         }
+        private Coroutine canvasCheckCoroutine;
+      
+
+        private void OnDisable()
+        {
+            // Stop coroutine when disabled
+            if (canvasCheckCoroutine != null)
+                StopCoroutine(canvasCheckCoroutine);
+        }
+
+        private float fill;
+        private IEnumerator CheckCanvasStateRoutine()
+        {
+            while (true)
+            {
+                  fill = machineCanvasManager.detergentTrackingImage.fillAmount;
+
+                  machineCanvasManager.CanvasStateChanger(
+                      fill == 0f ? MachineCanvasStates.RefillNeeded : MachineCanvasStates.Full);
+                    
+                yield return waitState; // Adjust interval as needed
+            }
+        }
+        public WaitForSeconds waitState = new WaitForSeconds(.1f);
 
         private IEnumerator MoveClothesToMachine()
         {
             yield return new WaitUntil(() =>
             {
 //                print((pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket)
-             //   );
+                //   );
                 if (!(pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket))
                 {
                     ReferenceManager.Instance.cleanBoxAIManager.AddTask(pressingClothPickingHandler.aiPickPoint, this);
                     ReferenceManager.Instance.cleanBoxAIManager.AssignTask();
-
                 }
+
                 return pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket;
             });
-            
-            
-         //   print(pressingClothPickingHandler.clothToPress.Count + ": Adding to clothes");
-            
-            
+
+
+            //   print(pressingClothPickingHandler.clothToPress.Count + ": Adding to clothes");
+
+
             while (clothToWash.Count > 0 ||
                    isPlayerInside)
             {
@@ -284,7 +297,7 @@ namespace LaundaryMan
                 if (clothToWash.Count > 0 && totalDetergent >= 0)
                 {
                     totalDetergent -= detergentCost;
-                    detargentTrackingImage.fillAmount = (float)totalDetergent / 100f;
+                    machineCanvasManager.detergentTrackingImage.fillAmount = (float)totalDetergent / 100f;
 
                     var cloth = clothToWash.Pop();
                     Vector3 targetPosition = machineStackPoint.position;
@@ -388,11 +401,11 @@ namespace LaundaryMan
             yield return new WaitUntil(() =>
             {
 //                print((pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket)
-               // );
+                // );
                 if (!(pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket))
                 {
                     ReferenceManager.Instance.cleanBoxAIManager.AddTask(pressingClothPickingHandler.aiPickPoint, this);
-                    print(this.name + ": Adding to clothes " +pressingClothPickingHandler.name );
+                    print(this.name + ": Adding to clothes " + pressingClothPickingHandler.name);
                 }
 
                 ;

@@ -67,5 +67,8 @@ public enum CanvasStates
     HrUpgrades,
     ObjectivePanel,
     UnlockCashier,
-    RefillPanel
+    DetergentPurchase,
+    RefillDetergent,
+    RinPurchase,
+    RinRefill,
 }

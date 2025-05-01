@@ -256,7 +256,7 @@ namespace LaundaryMan
         public GameObject ironMovePoint;
         public GameObject ironStartPositionPoint;
         public GameObject ironClothesPoint;
-        [SerializeField]bool isIronMoving = false;
+        [SerializeField] bool isIronMoving = false;
         public ParticleSystem steam;
         public float rinCost = 5;
         public float totalRin = 200;
@@ -342,28 +342,17 @@ namespace LaundaryMan
 
         public float refillAmount;
 
-        public void RefillRin()
+        public void RefillRin(int amount)
         {
             if (totalRin < refillAmount)
             {
-                switch (myIndex)
-                {
-                    case 0:
-                         totalRin = ReferenceManager.Instance.GameData.gameEconomy.rin1Capacity;
-                        break;
-                    case 1:
-                          totalRin = ReferenceManager.Instance.GameData.gameEconomy.rin2Capacity;
-                        break;
-                    case 2:
-                         totalRin = ReferenceManager.Instance.GameData.gameEconomy.rin3Capacity;
-                        break;
-                }
+                refillAmount = totalRin = amount;
                 isRinEmpty = false;
                 rinTrackingImage.fillAmount = 1f;
             }
             else
             {
-                ToastHelper.ShowToast("No need to refill Rin");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("No need to refill Rin");
             }
         }
 

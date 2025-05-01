@@ -1,0 +1,61 @@
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace LaundaryMan
+{
+    public class MachineCanvasManager : MonoBehaviour
+    {
+        public MachineCanvasStates prev;
+        public MachineCanvasStates currentState;
+        public Image detergentTrackingImage;
+
+        private void OnEnable()
+        {
+            CanvasStateChanger(MachineCanvasStates.Full);
+        }
+
+        public WashingMachineDropper myDropper;
+
+
+        public void MachineRefillNeeded()
+        {
+            index = myDropper.myIndex;
+            ReferenceManager.Instance.detergentItemUI.index = index;
+            CanvasStateChanger(MachineCanvasStates.RefillNeeded);
+        }
+
+        public void OnClickRefillButton()
+        {
+            ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.RefillDetergent);
+        }
+
+        public void CanvasStateChanger(MachineCanvasStates newState)
+        {
+            prev = currentState;
+            currentState = newState;
+            canvasStates[(int)prev].SetActive(false);
+            canvasStates[(int)currentState].SetActive(true);
+            switch (newState)
+            {
+                case MachineCanvasStates.Full:
+                    break;
+                case MachineCanvasStates.RefillNeeded:
+                    ReferenceManager.Instance.notificationHandler.ShowNotification(
+                        $"Machine {index} detergent needs to be refilled");
+
+                    break;
+            }
+        }
+
+        private int index;
+        public WaitForSeconds waitForTextUpdate = new WaitForSeconds(.01f);
+        [SerializeField] private GameObject[] canvasStates;
+    }
+}
+
+public enum MachineCanvasStates
+{
+    Full,
+    RefillNeeded
+}

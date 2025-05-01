@@ -44,8 +44,11 @@ namespace LaundaryMan
         public static Action OnPLayerGotUpgrade;
         public ObjectivePanel objectivePanel;
         public static int CustomerAmountOfClothForTutorial;
-        
+        public DetergentPurchase detergentPurchase;
         public MachineUpgradeManager machineUpgradeManager;
+        public NotificationHandler notificationHandler;
+        public DetergentItemUI detergentItemUI;
+        public RinseItemUI rinseItemUI;
         #endregion
 
         #region SaveSystemObserver
