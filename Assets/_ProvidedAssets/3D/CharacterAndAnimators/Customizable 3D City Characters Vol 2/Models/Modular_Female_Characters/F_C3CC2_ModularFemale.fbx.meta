@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: deb4a35741aba1649a72ca9b8e4d3fed
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 21300
   internalIDToNameTable: []
   externalObjects: {}
   materials:
@@ -16,6 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -34,11 +36,10 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 1
+    meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importPhysicalCameras: 1
     importVisibility: 0
     importBlendShapes: 0
     importCameras: 0
@@ -66,7 +67,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 5
     normalImportMode: 0
@@ -1965,8 +1965,7 @@ ModelImporter:
     - name: HandThumb4.L
       parentName: HandThumb3.L
       position: {x: 0.002440054, y: 0.03128411, z: 0.00000016763806}
-      rotation: {x: 0.00000021653244, y: -0.000000028763331, z: -0.00000007515009,
-        w: 1}
+      rotation: {x: 0.00000021653244, y: -0.000000028763331, z: -0.00000007515009, w: 1}
       scale: {x: 0.9999998, y: 1.0000405, z: 1.0000257}
     - name: HandThumb4.L_end
       parentName: HandThumb4.L
@@ -1991,8 +1990,7 @@ ModelImporter:
     - name: HandIndex4.L
       parentName: HandIndex3.L
       position: {x: -0.00004865229, y: 0.029392209, z: 0.0000001238659}
-      rotation: {x: -0.00000006332992, y: 0.000000004337294, z: -0.000000028318675,
-        w: 1}
+      rotation: {x: -0.00000006332992, y: 0.000000004337294, z: -0.000000028318675, w: 1}
       scale: {x: 1.0000284, y: 1.0000485, z: 1.0000432}
     - name: HandIndex4.L_end
       parentName: HandIndex4.L
@@ -2017,8 +2015,7 @@ ModelImporter:
     - name: HandMiddle4.L
       parentName: HandMiddle3.L
       position: {x: -0.000054288656, y: 0.031615485, z: 0.000000091735274}
-      rotation: {x: 0.0000000018626449, y: -0.00000013385875, z: 0.000000010070602,
-        w: 1}
+      rotation: {x: 0.0000000018626449, y: -0.00000013385875, z: 0.000000010070602, w: 1}
       scale: {x: 1.0000147, y: 1.0000042, z: 1.0000075}
     - name: HandMiddle4.L_end
       parentName: HandMiddle4.L
@@ -2068,8 +2065,7 @@ ModelImporter:
     - name: HandPinky4.L
       parentName: HandPinky3.L
       position: {x: -0.00007335283, y: 0.022265991, z: 0.00000014528632}
-      rotation: {x: -0.00000008940694, y: 0.00000008748637, z: -0.000000019673294,
-        w: 1}
+      rotation: {x: -0.00000008940694, y: 0.00000008748637, z: -0.000000019673294, w: 1}
       scale: {x: 0.9999717, y: 0.9999872, z: 1.0000108}
     - name: HandPinky4.L_end
       parentName: HandPinky4.L
@@ -2114,8 +2110,7 @@ ModelImporter:
     - name: HandThumb4.R
       parentName: HandThumb3.R
       position: {x: 0.0014631748, y: 0.02408775, z: -0.00000009313226}
-      rotation: {x: -0.000000029802315, y: 0.000000031113068, z: 0.00000008872988,
-        w: 1}
+      rotation: {x: -0.000000029802315, y: 0.000000031113068, z: 0.00000008872988, w: 1}
       scale: {x: 1.0000046, y: 1.0000168, z: 0.9999933}
     - name: HandThumb4.R_end
       parentName: HandThumb4.R
@@ -2140,8 +2135,7 @@ ModelImporter:
     - name: HandIndex4.R
       parentName: HandIndex3.R
       position: {x: -0.00003732741, y: 0.02837475, z: 0.000000033527613}
-      rotation: {x: 0.000000024214382, y: -0.000000022431346, z: 0.000000017064052,
-        w: 1}
+      rotation: {x: 0.000000024214382, y: -0.000000022431346, z: 0.000000017064052, w: 1}
       scale: {x: 0.99998134, y: 0.99996257, z: 0.99998283}
     - name: HandIndex4.R_end
       parentName: HandIndex4.R
@@ -2166,8 +2160,7 @@ ModelImporter:
     - name: HandMiddle4.R
       parentName: HandMiddle3.R
       position: {x: 0.000047098845, y: 0.029409682, z: 0.00000010803342}
-      rotation: {x: -0.0000000037252903, y: -0.000000001821727, z: -0.000000066102004,
-        w: 1}
+      rotation: {x: -0.0000000037252903, y: -0.000000001821727, z: -0.000000066102004, w: 1}
       scale: {x: 1.0000048, y: 1.0000445, z: 0.9999892}
     - name: HandMiddle4.R_end
       parentName: HandMiddle4.R
@@ -2217,8 +2210,7 @@ ModelImporter:
     - name: HandPinky4.R
       parentName: HandPinky3.R
       position: {x: -0.000043416396, y: 0.020757336, z: 0.00000007357448}
-      rotation: {x: 0.00000001862645, y: 0.000000016736761, z: -0.000000029294622,
-        w: 1}
+      rotation: {x: 0.00000001862645, y: 0.000000016736761, z: -0.000000029294622, w: 1}
       scale: {x: 1.0000393, y: 1.0000407, z: 1.0000453}
     - name: HandPinky4.R_end
       parentName: HandPinky4.R
@@ -2278,8 +2270,7 @@ ModelImporter:
     - name: Toe_End.R
       parentName: ToeBase.R
       position: {x: 0.000000001717126, y: 0.053545736, z: 3.4924597e-10}
-      rotation: {x: -0.00000020861621, y: 0.0000000037252894, z: -0.00000007404013,
-        w: 1}
+      rotation: {x: -0.00000020861621, y: 0.0000000037252894, z: -0.00000007404013, w: 1}
       scale: {x: 1.0000665, y: 1.0000533, z: 1.0000174}
     - name: Toe_End.R_end
       parentName: Toe_End.R
@@ -2309,7 +2300,6 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

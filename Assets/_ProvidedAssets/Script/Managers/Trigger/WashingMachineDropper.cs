@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
-using Invector.vCharacterController;
 using ToastPlugin;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -71,6 +68,12 @@ namespace LaundaryMan
         public Stack<ClothFragment> TempCLothes = new Stack<ClothFragment>();
         Stack<ClothFragment> cleanClothes = new Stack<ClothFragment>();
 
+        private void Awake()
+        {
+            totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentMax;
+        }
+
+        public bool cleanBasket = false;
 
         private IEnumerator HandlePlayerInteraction(PlayerStackManager playerStackManager)
         {
@@ -100,9 +103,10 @@ namespace LaundaryMan
             }
 
             TempCLothes = new Stack<ClothFragment>(TempCLothes.Reverse());
+            yield return new WaitUntil(() => clothToWash.Count < limitOnBasket);
+
             while (isPlayerInside && TempCLothes.Count > 0)
             {
-                yield return new WaitUntil(() => clothToWash.Count < limitOnBasket);
                 var cloth = TempCLothes.Pop();
                 cloth.transform.SetParent(stackMachineStarter.transform);
 
@@ -202,13 +206,47 @@ namespace LaundaryMan
         public int totalDetergent;
         public int detergentCost;
         public WaitForSeconds waitForSecondsForClothes = new WaitForSeconds(1f);
+        public int myIndex;
 
+        public void InitDetergent()
+        {
+            switch (myIndex)
+            {
+                case 0:
+                    refillAmount = totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity1;
+
+                    break;
+                case 1:
+                    refillAmount = totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity2;
+                    break;
+                case 2:
+                    refillAmount = totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity3;
+                    break;
+            }
+        }
+
+        public int refillAmount;
 
         public void Refill()
         {
-            if (totalDetergent < 100)
+            if (totalDetergent <= refillAmount)
             {
-                totalDetergent = 100;
+                switch (myIndex)
+                {
+                    case 0:
+                        totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity1;
+
+                        break;
+                    case 1:
+                        totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity2;
+
+                        break;
+                    case 2:
+                        totalDetergent = ReferenceManager.Instance.GameData.gameEconomy.detergentCapacity3;
+
+                        break;
+                }
+
                 isDetergentEmpty = false;
                 detargentTrackingImage.fillAmount = 1f;
             }
@@ -221,8 +259,24 @@ namespace LaundaryMan
         private IEnumerator MoveClothesToMachine()
         {
             yield return new WaitUntil(() =>
-                pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket);
-            while (clothToWash.Count > 0 || isPlayerInside)
+            {
+//                print((pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket)
+             //   );
+                if (!(pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket))
+                {
+                    ReferenceManager.Instance.cleanBoxAIManager.AddTask(pressingClothPickingHandler.aiPickPoint, this);
+                    ReferenceManager.Instance.cleanBoxAIManager.AssignTask();
+
+                }
+                return pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket;
+            });
+            
+            
+         //   print(pressingClothPickingHandler.clothToPress.Count + ": Adding to clothes");
+            
+            
+            while (clothToWash.Count > 0 ||
+                   isPlayerInside)
             {
                 isDetergentEmpty = totalDetergent < detergentCost;
                 yield return new WaitUntil(() => !isDetergentEmpty);
@@ -298,7 +352,6 @@ namespace LaundaryMan
                     // Move towards waypoint
                     cloth.transform.position = Vector3.MoveTowards(cloth.transform.position, waypoint.position,
                         moveSpeed * Time.deltaTime);
-
                     // Rotate towards waypoint with spring effect
                     Vector3 direction = (waypoint.position - cloth.transform.position).normalized;
                     Quaternion lookRotation = Quaternion.LookRotation(direction);
@@ -317,9 +370,6 @@ namespace LaundaryMan
             }
 
             yield return StartCoroutine(MoveThenJumpAndStack(cloth));
-
-            if (!isOccupied)
-                ReferenceManager.Instance.cleanBoxAIManager.AddTask(pressingClothPickingHandler.aiPickPoint, this);
         }
 
         public bool isOccupied = false;
@@ -335,6 +385,20 @@ namespace LaundaryMan
 
         private IEnumerator MoveThenJumpAndStack(ClothFragment cloth)
         {
+            yield return new WaitUntil(() =>
+            {
+//                print((pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket)
+               // );
+                if (!(pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket))
+                {
+                    ReferenceManager.Instance.cleanBoxAIManager.AddTask(pressingClothPickingHandler.aiPickPoint, this);
+                    print(this.name + ": Adding to clothes " +pressingClothPickingHandler.name );
+                }
+
+                ;
+                return pressingClothPickingHandler.clothToPress.Count < limitOnCleanBasket;
+            });
+
             drayerAnimator.SetTrigger(DrayerAnimation);
             Vector3 movePoint = new Vector3(drayerPoint.transform.position.x, drayerPoint.transform.position.y,
                 drayerPoint.transform.position.z);
@@ -369,6 +433,8 @@ namespace LaundaryMan
             cloth.transform.DOJump(jumpPoint, 1.5f, 1, 0.8f).OnComplete(() =>
             {
                 pressingClothPickingHandler.Push(cloth);
+                if (!isOccupied)
+                    ReferenceManager.Instance.cleanBoxAIManager.AddTask(pressingClothPickingHandler.aiPickPoint, this);
                 jumpDone = true;
             });
             //RearrangeStack(pressingClothPickingHandler,);

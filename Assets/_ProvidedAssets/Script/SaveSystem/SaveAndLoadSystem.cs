@@ -40,6 +40,7 @@ namespace LaundaryMan
             File.WriteAllText(savePath, json);
 //            print($"Game data saved at: {savePath}");
         }
+
         public void ResetData()
         {
             string savePath = Path.Combine(Application.persistentDataPath, "MADARAUCHIHA.json");
@@ -56,6 +57,7 @@ namespace LaundaryMan
 
             Debug.Log("Game data has been reset.");
         }
+
         public void LoadGame()
         {
             saveData = new SaveData();
@@ -79,6 +81,9 @@ namespace LaundaryMan
                 saveData.stackingSpeed = loadedData.stackingSpeed;
                 saveData.playerCapacity = loadedData.playerCapacity;
 
+                saveData.gameEconomy.rinMax = loadedData.gameEconomy.rinMax;
+                saveData.gameEconomy.detergentMax = loadedData.gameEconomy.detergentMax;
+
 
                 saveData.gameEconomy.machine1Price = loadedData.gameEconomy.machine1Price;
                 saveData.gameEconomy.machine2Price = loadedData.gameEconomy.machine2Price;
@@ -86,16 +91,15 @@ namespace LaundaryMan
                 saveData.gameEconomy.cashierPrice = loadedData.gameEconomy.cashierPrice;
                 saveData.gameEconomy.hrPrice = loadedData.gameEconomy.hrPrice;
                 saveData.gameEconomy.hrUpgradePrice = loadedData.gameEconomy.hrUpgradePrice;
-                
-                
+
+
                 saveData.gameEconomy.machineUpgradeIndex = loadedData.gameEconomy.machineUpgradeIndex;
                 saveData.gameEconomy.machine1UpgradeIndex = loadedData.gameEconomy.machine1UpgradeIndex;
                 saveData.gameEconomy.machine2UpgradeIndex = loadedData.gameEconomy.machine2UpgradeIndex;
                 saveData.gameEconomy.limitOnCleanBasket = loadedData.gameEconomy.limitOnCleanBasket;
                 saveData.gameEconomy.limitBasket = loadedData.gameEconomy.limitBasket;
-                
-                
-                
+
+
                 saveData.selectedPlayersList = new List<SaveData.PlayerSelection>(loadedData.selectedPlayersList);
 //                print(loadedData.gameEconomy.cashierPrice + saveData.gameEconomy.cashierPrice);
                 saveData.ConvertListToDictionary();

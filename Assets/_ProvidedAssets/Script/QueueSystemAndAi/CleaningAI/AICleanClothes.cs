@@ -22,6 +22,7 @@ namespace LaundaryMan
                 DropPosition = drop;
             }
         }
+
         private static readonly int Movement = Animator.StringToHash("Movement");
 
         public enum AIState
@@ -34,7 +35,7 @@ namespace LaundaryMan
         }
 
         public AIState currentState = AIState.Idle;
-        private Task currentTask;
+        [SerializeField]private Task currentTask;
         public AiStackManager aiStackManager;
         public FollowerEntity followerEntity;
         public AIDestinationSetter aIDestinationSetter;
@@ -74,6 +75,9 @@ namespace LaundaryMan
             switch (currentState)
             {
                 case AIState.Idle:
+                    PickPoint = null;
+                    DropPoint = null;
+                    washingMachineDropper = null;
                     RegisterMe();
                     break;
                 case AIState.MovingToPick:
@@ -83,11 +87,11 @@ namespace LaundaryMan
                     StartCoroutine(PickLaundry());
                     break;
                 case AIState.MovingToDrop:
-                    
+
                     StartCoroutine(MoveToPosition(currentTask.DropPosition.transform, AIState.Dropping));
                     break;
                 case AIState.Dropping:
-                    
+
                     StartCoroutine(DropLaundry());
                     break;
             }
@@ -126,11 +130,11 @@ namespace LaundaryMan
 
             ChangeState(nextState);
         }
+
         WaitForSeconds waitForSecondsToPickClothes = new WaitForSeconds(2f);
+
         private IEnumerator PickLaundry()
         {
-            yield return new WaitUntil(() =>
-                aiStackManager.ClothStack.Count >= limitToPickClothes || washingMachineDropper.washedClothes.Count <= 0);
             yield return waitForSecondsToPickClothes;
             ChangeState(AIState.MovingToDrop);
         }
@@ -143,9 +147,10 @@ namespace LaundaryMan
             yield return waitForSecondsToPickClothes;
             ChangeState(AIState.Idle);
             SetDestination(sleepPoint);
-            
         }
+
         public GameObject sleepPoint;
+
         public void RegisterMe()
         {
             ReferenceManager.Instance.cleanBoxAIManager.RegisterAgent(this);

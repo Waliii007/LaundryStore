@@ -15,15 +15,14 @@ namespace LaundaryMan
 
         private void OnEnable()
         {
-            for (int i = 0; i < machines.Length; i++)
-            {
-                CurrentMachine(i);
-            }
+            CurrentMachine(0, ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex);
+            CurrentMachine(1, ReferenceManager.Instance.GameData.gameEconomy.machine1UpgradeIndex);
+            CurrentMachine(2, ReferenceManager.Instance.GameData.gameEconomy.machine2UpgradeIndex);
         }
 
-        public void CurrentMachine(int machineIndex)
+        public void CurrentMachine(int machineIndex, int updateIndex)
         {
-            int upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex;
+            int upgradeIndex = updateIndex;
 
             // Loop through all levels
             for (int i = 0; i < machines[machineIndex].partsLevels.Length; i++)
@@ -39,6 +38,19 @@ namespace LaundaryMan
         public void UpgradeMachine(int machineIndex)
         {
             int upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex;
+
+            switch (machineIndex)
+            {
+                case 0:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex;
+                    break;
+                case 1:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine1UpgradeIndex;
+                    break;
+                case 2:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine2UpgradeIndex;
+                    break;
+            }
 
             // Disable previous level parts if exists
             if (upgradeIndex > 0 && upgradeIndex - 1 < machines[machineIndex].partsLevels.Length)
@@ -67,7 +79,6 @@ namespace LaundaryMan
                 UpgradeMachine(i);
             }
         }
-        
     }
 
     [Serializable]

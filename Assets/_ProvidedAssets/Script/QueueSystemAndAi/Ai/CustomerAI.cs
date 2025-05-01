@@ -15,7 +15,7 @@ namespace LaundaryMan
         [SerializeField] private FollowerEntity followerEntity;
         public ClothPrefab customerObjectToStack;
         public int clothStack;
-        public List<GameObject> aiSkins;
+        public List<Animator> aiSkins;
         public GameObject leftPoint;
         public GameObject rightPoint;
 
@@ -23,7 +23,8 @@ namespace LaundaryMan
         {
             int i = Random.Range(0, aiSkins.Count);
 
-            aiSkins[i].SetActive(true);
+            animator.avatar = aiSkins.ElementAt(i).avatar;
+            aiSkins[i].gameObject.SetActive(true);
             for (int j = 0; j < aiSkins.Count; j++)
             {
                 if (j != i)

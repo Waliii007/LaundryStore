@@ -19,6 +19,14 @@ namespace LaundaryMan
         public int machineUpgradeIndex = 0; 
         public int machine1UpgradeIndex = 0; 
         public int machine2UpgradeIndex = 0; 
+        public int rinMax = 250; 
+        public int detergentMax = 250; 
+        public int detergentCapacity1 = 250; 
+        public int detergentCapacity2 = 250; 
+        public int detergentCapacity3 = 250; 
+        public int rin1Capacity = 250; 
+        public int rin2Capacity = 250; 
+        public int rin3Capacity = 250; 
     }
 
     [System.Serializable]

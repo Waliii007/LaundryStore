@@ -96,7 +96,8 @@ namespace LaundaryMan
         {
             while (isPlayerInside && ReferenceManager.Instance.queueSystem._washedClothQueueAi.Count > 0)
             {
-                yield return new WaitForSeconds(.15f);
+                
+                
                 if (ReadyToShipClothes.Count > 0)
                 {
                     ai = (CustomerAI)ReferenceManager.Instance.queueSystem._washedClothQueueAi.Peek();
@@ -104,7 +105,8 @@ namespace LaundaryMan
                     {
                         ClothFragment cloth = ReadyToShipClothes.Pop();
                         isCheckOut = false; // Ensure it's false before waiting
-                        yield return new WaitForSeconds(.15f);
+                       
+                        
 
                         if (ai.customerObjectToStack.myClothFragment.Count <= 0)
                         {

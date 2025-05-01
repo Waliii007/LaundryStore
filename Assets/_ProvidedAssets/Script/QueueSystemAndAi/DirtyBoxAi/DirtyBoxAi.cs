@@ -104,6 +104,7 @@ namespace LaundaryMan
                     break;
             }
         }
+
         public override void SetDestination(GameObject destination)
         {
             aIDestinationSetter.target = destination.transform;
@@ -142,8 +143,9 @@ namespace LaundaryMan
         private IEnumerator PickLaundry()
         {
             yield return new WaitUntil(() =>
-                aiStackManager.ClothStack.Count >= limitToPickClothes ||
-                washingMachineDropper.clothToWash.Count >= 0);
+                aiStackManager.ClothStack.Count >= limitToPickClothes);
+            // ||
+            // washingMachineDropper.clothToWash.Count >= 0);
 
             yield return waitForSecondsToPickClothes;
 
