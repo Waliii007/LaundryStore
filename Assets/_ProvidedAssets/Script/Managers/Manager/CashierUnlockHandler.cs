@@ -25,7 +25,7 @@ namespace LaundaryMan
             }
             else
             {
-                ToastHelper.ShowToast("Not enough coins to unlock the cashier.");
+               ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough coins to unlock the cashier.");
             }
         }
 

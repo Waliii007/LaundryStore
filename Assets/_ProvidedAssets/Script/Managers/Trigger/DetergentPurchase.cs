@@ -5,14 +5,14 @@ namespace LaundaryMan
     public enum DetergentType
     {
         Green = 0, // 250 it will wash 50 clothes  
-        Blue = 1,  // 400 it will wash 80  
-        Red = 2    // 500 it will wash 100 
+        Blue = 1, // 400 it will wash 80  
+        Red = 2 // 500 it will wash 100 
     }
 
     public class DetergentPurchase : MonoBehaviour
     {
         public WashingMachineDropper[] washingMachineDropper;
-
+        
         public void OnClickCrossButton()
         {
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
@@ -72,25 +72,62 @@ namespace LaundaryMan
 
         #region Use Buttons
 
+        public void OnBuyGreenButtonAds()
+        {
+            TssAdsManager._Instance.ShowRewardedAd(() =>
+            {
+                AddDetergent(DetergentType.Green, 1);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                UpdateDetergentUI();
+            }, "OnBuyGreenButton");
+        }
+
+        public void OnBuyBlueButtonAds()
+        {
+            TssAdsManager._Instance.ShowRewardedAd(() =>
+            {
+                AddDetergent(DetergentType.Blue, 1);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                UpdateDetergentUI();
+            }, "OnBuyBlueButton");
+        }
+
+        public void OnBuyRedButtonAds()
+        {
+            TssAdsManager._Instance.ShowRewardedAd(() =>
+            {
+                AddDetergent(DetergentType.Red, 1);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Red Rinse");
+                UpdateDetergentUI();
+            }, "OnBuyRedButton");
+        }
+
         public void OnUseGreenButton(int machineIndex)
         {
-            if (UseDetergent(DetergentType.Green))
+            if (UseDetergent(DetergentType.Green, machineIndex))
             {
                 washingMachineDropper[machineIndex].Refill(250);
                 UpdateDetergentUI();
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
             }
             else
             {
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.DetergentPurchase);
+
                 ReferenceManager.Instance.notificationHandler.ShowNotification("No Green Detergent available.");
+                
             }
         }
 
         public void OnUseBlueButton(int machineIndex)
         {
-            if (UseDetergent(DetergentType.Blue))
+            if (UseDetergent(DetergentType.Blue, machineIndex))
             {
                 washingMachineDropper[machineIndex].Refill(400);
                 UpdateDetergentUI();
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+
             }
             else
             {
@@ -100,13 +137,15 @@ namespace LaundaryMan
 
         public void OnUseRedButton(int machineIndex)
         {
-            if (UseDetergent(DetergentType.Red))
+            if (UseDetergent(DetergentType.Red, machineIndex))
             {
                 washingMachineDropper[machineIndex].Refill(500);
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 UpdateDetergentUI();
             }
             else
             {
+                
                 ReferenceManager.Instance.notificationHandler.ShowNotification("No Red Detergent available.");
             }
         }
@@ -131,9 +170,9 @@ namespace LaundaryMan
             }
         }
 
-        public bool UseDetergent(DetergentType type)
+        public bool UseDetergent(DetergentType type, int index)
         {
-            if (!HasDetergent(type)) return false;
+            if (!HasDetergent(type, index)) return false;
 
             switch (type)
             {
@@ -151,9 +190,10 @@ namespace LaundaryMan
             return true;
         }
 
-        public bool HasDetergent(DetergentType type)
+        public bool HasDetergent(DetergentType type, int refillIndex)
         {
-            return GetDetergentCount(type) > 0;
+            print(refillIndex);
+            return GetDetergentCount(type) > 0 && washingMachineDropper[refillIndex].totalDetergent <=0;
         }
 
         public int GetDetergentCount(DetergentType type)

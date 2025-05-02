@@ -260,7 +260,6 @@ namespace LaundaryMan
         public ParticleSystem steam;
         public float rinCost = 5;
         public float totalRin = 200;
-        public Image rinTrackingImage;
         public bool isRinEmpty;
 
         public IEnumerator IronClothes(ClothFragment cloth)
@@ -295,7 +294,12 @@ namespace LaundaryMan
             if (totalRin >= rinCost)
             {
                 totalRin -= rinCost;
-                rinTrackingImage.fillAmount = (float)totalRin / 100f;
+                rinseMachineCanvas.rinseTrackingImage.fillAmount = (float)totalRin / refillAmount;
+            }
+            else
+            {
+                rinseMachineCanvas.CanvasStateChanger(MachineCanvasStates.RefillNeeded);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("PressMachine need Rinse Refill");
             }
 
             cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
@@ -324,6 +328,8 @@ namespace LaundaryMan
             InitDetergent();
         }
 
+        private int fullAmount;
+
         public void InitDetergent()
         {
             switch (myIndex)
@@ -340,15 +346,17 @@ namespace LaundaryMan
             }
         }
 
+        public RinseMachineCanvas rinseMachineCanvas;
         public float refillAmount;
 
         public void RefillRin(int amount)
         {
             if (totalRin < refillAmount)
             {
+                rinseMachineCanvas.CanvasStateChanger(MachineCanvasStates.Full);
                 refillAmount = totalRin = amount;
                 isRinEmpty = false;
-                rinTrackingImage.fillAmount = 1f;
+                rinseMachineCanvas.rinseTrackingImage.fillAmount = 1f;
             }
             else
             {

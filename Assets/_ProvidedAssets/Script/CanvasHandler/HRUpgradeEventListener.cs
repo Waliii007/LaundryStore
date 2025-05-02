@@ -89,6 +89,10 @@ namespace LaundaryMan
                     SoundManager.instance.Play(SoundName.Upgrade);
                 }
             }
+            else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
+            }
         }
 
         public void StackingSpeedIncreaseRewarded()
@@ -110,6 +114,10 @@ namespace LaundaryMan
                         SoundManager.instance.Play(SoundName.Upgrade);
                     }
                 }, "StackingSpeed");
+            }
+            else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
 
             if (SoundManager.instance)
@@ -135,6 +143,10 @@ namespace LaundaryMan
                 {
                     SoundManager.instance.Play(SoundName.Upgrade);
                 }
+            }
+            else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
         }
 
@@ -173,6 +185,10 @@ namespace LaundaryMan
                 ReferenceManager.Instance.taskHandler.OnTaskCompleted();
                 ReferenceManager.Instance.SaveGameDataObserver();
                 UiUpdate();
+            }
+            else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
 
 
@@ -247,7 +263,6 @@ namespace LaundaryMan
                 else
                 {
                     machinePanel[i].SetActive(false);
-                    
                 }
             }
 
@@ -367,6 +382,9 @@ namespace LaundaryMan
             {
                 ReferenceManager.Instance.GameData.playerCash -= machineUpgrade[machineUpgradeIndex];
                 UpgradeMachine(0);
+            }else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
 
             UiUpdate();
@@ -380,6 +398,9 @@ namespace LaundaryMan
             {
                 ReferenceManager.Instance.GameData.playerCash -= machineUpgrade[machineUpgradeIndex];
                 UpgradeMachine(1);
+            }else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
 
             UiUpdate();
@@ -393,6 +414,9 @@ namespace LaundaryMan
             {
                 ReferenceManager.Instance.GameData.playerCash -= machineUpgrade[machineUpgradeIndex];
                 UpgradeMachine(2);
+            }else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
 
             UiUpdate();
@@ -409,6 +433,7 @@ namespace LaundaryMan
                     UpgradeMachine(0);
                 }
             }, "Machine1Upgrade");
+            
             UiUpdate();
         }
 

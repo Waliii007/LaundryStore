@@ -39,15 +39,20 @@ namespace LaundaryMan
             switch (newState)
             {
                 case MachineCanvasStates.Full:
+                    refillTrigger.gameObject.SetActive(false);
+
                     break;
                 case MachineCanvasStates.RefillNeeded:
-                    ReferenceManager.Instance.notificationHandler.ShowNotification(
-                        $"Machine {index} detergent needs to be refilled");
-
+                    if (once)
+                        ReferenceManager.Instance.notificationHandler.ShowNotification(
+                            $"Machine {index} detergent needs to be refilled");
+                    refillTrigger.gameObject.SetActive(true);
                     break;
             }
         }
 
+        public bool once;
+        public GameObject refillTrigger;
         private int index;
         public WaitForSeconds waitForTextUpdate = new WaitForSeconds(.01f);
         [SerializeField] private GameObject[] canvasStates;

@@ -89,7 +89,7 @@ namespace LaundryMan
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("AI"))
+            if (other.CompareTag("AI") )
             {
                 if (!aiQueue.Contains(other))
                     aiQueue.Enqueue(other);

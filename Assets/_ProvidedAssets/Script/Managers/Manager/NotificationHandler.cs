@@ -20,9 +20,7 @@ namespace LaundaryMan
 
         private void Awake()
         {
-            visiblePosition = notificationPanel.anchoredPosition;
-            hiddenPosition = new Vector2(visiblePosition.x, visiblePosition.y + 200); // slide from top
-            notificationPanel.anchoredPosition = hiddenPosition;
+             
         }
 
         public void ShowNotification()

@@ -5,6 +5,7 @@ using DG.Tweening;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 using GoogleMobileAds.Ump.Api;
+using LaundaryMan;
 using ToastPlugin;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -1110,7 +1111,7 @@ public class TSS_Admob : MonoBehaviour
         }
         else
         {
-            ToastHelper.ShowToast("Reward is not Loaded yet", false);
+            ReferenceManager.Instance.notificationHandler.ShowNotification("Reward is not Loaded yet");
             if (GlobalConstant.ISMAXON)
                 AppLovinMax.Instance?.ShowRewardedAd(ac);
             RequestAndLoadRewardedAd();

@@ -5,8 +5,8 @@ namespace LaundaryMan
     public enum RinseType
     {
         Green = 0, // 250 rinse amount
-        Blue = 1,  // 400 rinse amount
-        Red = 2    // 500 rinse amount
+        Blue = 1, // 400 rinse amount
+        Red = 2 // 500 rinse amount
     }
 
     public class RinsePurchase : MonoBehaviour
@@ -68,13 +68,47 @@ namespace LaundaryMan
             }
         }
 
+
+        public void OnBuyGreenButtonAds()
+        {
+            int price = 1000;
+            TssAdsManager._Instance.ShowRewardedAd(() =>
+            {
+                AddRinse(RinseType.Green, 1);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                UpdateRinseUI();
+            }, "OnBuyGreenButton");
+        }
+
+        public void OnBuyBlueButtonAds()
+        {
+            int price = 2000;
+            TssAdsManager._Instance.ShowRewardedAd(() =>
+            {
+                AddRinse(RinseType.Green, 1);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                UpdateRinseUI();
+            }, "OnBuyBlueButton");
+        }
+
+        public void OnBuyRedButtonAds()
+        {
+            int price = 3000;
+            TssAdsManager._Instance.ShowRewardedAd(() =>
+            {
+                AddRinse(RinseType.Red, 1);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Red Rinse");
+                UpdateRinseUI();
+            }, "OnBuyRedButton");
+        }
+
         #endregion
 
         #region Use Buttons
 
         public void OnUseGreenButton(int machineIndex)
         {
-            if (UseRinse(RinseType.Green))
+            if (UseRinse(RinseType.Green,machineIndex))
             {
                 washingMachineDropper[machineIndex].RefillRin(250);
                 UpdateRinseUI();
@@ -87,7 +121,7 @@ namespace LaundaryMan
 
         public void OnUseBlueButton(int machineIndex)
         {
-            if (UseRinse(RinseType.Blue))
+            if (UseRinse(RinseType.Blue,machineIndex))
             {
                 washingMachineDropper[machineIndex].RefillRin(400);
                 UpdateRinseUI();
@@ -100,7 +134,7 @@ namespace LaundaryMan
 
         public void OnUseRedButton(int machineIndex)
         {
-            if (UseRinse(RinseType.Red))
+            if (UseRinse(RinseType.Red,machineIndex))
             {
                 washingMachineDropper[machineIndex].RefillRin(500);
                 UpdateRinseUI();
@@ -131,9 +165,9 @@ namespace LaundaryMan
             }
         }
 
-        public bool UseRinse(RinseType type)
+        public bool UseRinse(RinseType type, int index)
         {
-            if (!HasRinse(type)) return false;
+            if (!HasRinse(type, index)) return false;
 
             switch (type)
             {
@@ -151,9 +185,9 @@ namespace LaundaryMan
             return true;
         }
 
-        public bool HasRinse(RinseType type)
+        public bool HasRinse(RinseType type, int index)
         {
-            return GetRinseCount(type) > 0;
+            return GetRinseCount(type) > 0 && washingMachineDropper[index];
         }
 
         public int GetRinseCount(RinseType type)

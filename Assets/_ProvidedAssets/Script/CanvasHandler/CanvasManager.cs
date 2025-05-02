@@ -11,7 +11,7 @@ namespace LaundaryMan
         public CanvasStates prev;
         public CanvasStates currentState;
         public Text cashText;
-
+        public MachineButton machineButton;
         private void OnEnable()
         {
             StartCoroutine(TextUpdater());

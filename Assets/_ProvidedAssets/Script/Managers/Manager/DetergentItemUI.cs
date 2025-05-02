@@ -20,16 +20,17 @@ namespace LaundaryMan
         public void GreenDetergent()
         {
             purchase.OnUseGreenButton(index);
+            
         }
 
         public void BlueDetergent()
         {
-            purchase.OnUseGreenButton(index);
+            purchase.OnUseBlueButton(index);
         }
 
         public void RedDetergent()
         {
-            purchase.OnUseGreenButton(index);
+            purchase.OnUseRedButton(index);
         }
 
         public void UpdateDetergentUI()

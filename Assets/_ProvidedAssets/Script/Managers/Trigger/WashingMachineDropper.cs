@@ -19,7 +19,6 @@ namespace LaundaryMan
             limitOnBasket = ReferenceManager.Instance.GameData.gameEconomy.limitBasket;
             limitOnCleanBasket = ReferenceManager.Instance.GameData.gameEconomy.limitOnCleanBasket;
             canvasCheckCoroutine = StartCoroutine(CheckCanvasStateRoutine());
-
         }
 
         #endregion
@@ -77,9 +76,14 @@ namespace LaundaryMan
         }
 
         public bool cleanBasket = false;
+        private int maxClothesPerCycle = 10;
+        private int currentClothesCount = 0;
 
         private IEnumerator HandlePlayerInteraction(PlayerStackManager playerStackManager)
         {
+            if (currentClothesCount >= maxClothesPerCycle)
+                yield break; // Skip if already at limit
+
             Stack<ClothFragment> tempStack = new Stack<ClothFragment>();
             while (playerStackManager.ClothStack.Count > 0)
             {
@@ -89,9 +93,10 @@ namespace LaundaryMan
             while (tempStack.Count > 0)
             {
                 var cloth = tempStack.Pop();
-                if (cloth.state == ClothState.Dirty)
+                if (cloth.state == ClothState.Dirty && TempCLothes.Count < maxClothesPerCycle)
                 {
                     TempCLothes.Push(cloth);
+                    currentClothesCount++;
                 }
                 else
                 {
@@ -99,14 +104,12 @@ namespace LaundaryMan
                 }
             }
 
-
             while (cleanClothes.Count > 0)
             {
                 playerStackManager.ClothStack.Push(cleanClothes.Pop());
             }
 
             TempCLothes = new Stack<ClothFragment>(TempCLothes.Reverse());
-            yield return new WaitUntil(() => clothToWash.Count < limitOnBasket);
 
             while (isPlayerInside && TempCLothes.Count > 0)
             {
@@ -130,13 +133,79 @@ namespace LaundaryMan
                         _clothMovementCoroutine = StartCoroutine(MoveClothesToMachine());
                     }
                 });
-                RearrangeStack(playerStackManager);
 
+                RearrangeStack(playerStackManager);
                 yield return new WaitForSeconds(stackTime);
             }
 
             playerStackManager.SetIk(playerStackManager.ClothStack.Count <= 0 ? 0 : 1);
         }
+
+// Call this method when processing finishes to allow the next batch
+        public void ResetClothCycle()
+        {
+            currentClothesCount = 0;
+        }
+
+        //
+        // private IEnumerator HandlePlayerInteraction(PlayerStackManager playerStackManager)
+        // {
+        //
+        //     Stack<ClothFragment> tempStack = new Stack<ClothFragment>();
+        //     while (playerStackManager.ClothStack.Count > 0)
+        //     {
+        //         tempStack.Push(playerStackManager.ClothStack.Pop());
+        //     }
+        //
+        //     while (tempStack.Count > 0)
+        //     {
+        //         var cloth = tempStack.Pop();
+        //         if (cloth.state == ClothState.Dirty)
+        //         {
+        //             TempCLothes.Push(cloth);
+        //         }
+        //         else
+        //         {
+        //             cleanClothes.Push(cloth);
+        //         }
+        //     }
+        //
+        //     while (cleanClothes.Count > 0)
+        //     {
+        //         playerStackManager.ClothStack.Push(cleanClothes.Pop());
+        //     }
+        //
+        //     TempCLothes = new Stack<ClothFragment>(TempCLothes.Reverse());
+        //
+        //     while (isPlayerInside && TempCLothes.Count > 0)
+        //     {
+        //         var cloth = TempCLothes.Pop();
+        //         cloth.transform.SetParent(stackMachineStarter.transform);
+        //
+        //         Vector3 targetPosition = (clothToWash.Count == 0)
+        //             ? stackMachineStarter.transform.position
+        //             : clothToWash.Peek().nextPosition.transform.position;
+        //
+        //         cloth.transform.DOJump(targetPosition, 1f, 1, stackTime).OnComplete(() =>
+        //         {
+        //             clothToWash.Push(cloth);
+        //             if (SoundManager.instance)
+        //             {
+        //                 SoundManager.instance.Play(SoundName.Pick);
+        //             }
+        //
+        //             if (_clothMovementCoroutine == null)
+        //             {
+        //                 _clothMovementCoroutine = StartCoroutine(MoveClothesToMachine());
+        //             }
+        //         });
+        //         RearrangeStack(playerStackManager);
+        //
+        //         yield return new WaitForSeconds(stackTime);
+        //     }
+        //
+        //     playerStackManager.SetIk(playerStackManager.ClothStack.Count <= 0 ? 0 : 1);
+        // }
 
         private IEnumerator HandlePlayerInteraction(AiStackManager playerStackManager)
         {
@@ -244,8 +313,9 @@ namespace LaundaryMan
                 ToastHelper.ShowToast("Do not need to refill This Machine");
             }
         }
+
         private Coroutine canvasCheckCoroutine;
-      
+
 
         private void OnDisable()
         {
@@ -255,18 +325,20 @@ namespace LaundaryMan
         }
 
         private float fill;
+
         private IEnumerator CheckCanvasStateRoutine()
         {
             while (true)
             {
-                  fill = machineCanvasManager.detergentTrackingImage.fillAmount;
+                fill = machineCanvasManager.detergentTrackingImage.fillAmount;
 
-                  machineCanvasManager.CanvasStateChanger(
-                      fill == 0f ? MachineCanvasStates.RefillNeeded : MachineCanvasStates.Full);
-                    
+                machineCanvasManager.CanvasStateChanger(
+                    fill == 0f ? MachineCanvasStates.RefillNeeded : MachineCanvasStates.Full);
+
                 yield return waitState; // Adjust interval as needed
             }
         }
+
         public WaitForSeconds waitState = new WaitForSeconds(.1f);
 
         private IEnumerator MoveClothesToMachine()
@@ -304,6 +376,7 @@ namespace LaundaryMan
 
                     cloth.transform.DOJump(targetPosition, 1f, 1, 2).OnComplete(() =>
                     {
+                        currentClothesCount--;
                         AddWashedCloth(cloth);
                         washingMachine.SetTrigger(MachineWashed);
                     });
@@ -536,7 +609,7 @@ namespace LaundaryMan
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 //     print("calling");
                 if (other.TryGetComponent(out PlayerStackManager playerStackManager))
@@ -551,7 +624,8 @@ namespace LaundaryMan
                             _playerCoroutine = StartCoroutine(HandlePlayerInteraction(playerStackManager));
                     }
                 }
-                else if (other.TryGetComponent(out AiStackManager aiStackManager))
+                else if (other.TryGetComponent(out AiStackManager aiStackManager) &&
+                         other.gameObject.layer == LayerMask.NameToLayer("AILAYER"))
                 {
                     isPlayerInside = true;
                     print("calling");
