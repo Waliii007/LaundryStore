@@ -32,8 +32,7 @@ namespace LaundaryMan
                     ReferenceManager.Instance.rinseItemUI.index = pressingClothPickingHandler.myIndex;
                     ReferenceManager.Instance.canvasManager.CanvasStateChanger(canvasState);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+              
             }
         }
     }

@@ -44,6 +44,7 @@ namespace LaundaryMan
                     ReferenceManager.Instance.canvasManager.machineButton.ChangeSprite(sprite);
                     ReferenceManager.Instance.canvasManager.machineButton.canvasState = canvasState;
                     ReferenceManager.Instance.canvasManager.machineButton.rinManager = rinManager;
+                    ReferenceManager.Instance.canvasManager.machineButton.rinManager = rinManager;
                     ReferenceManager.Instance.canvasManager.machineButton.pressingClothPickingHandler = pressingClothPickingHandler;
                         
                     break;

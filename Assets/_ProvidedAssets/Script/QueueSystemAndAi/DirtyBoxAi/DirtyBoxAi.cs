@@ -67,6 +67,14 @@ namespace LaundaryMan
         {
             base.OnAnimationUpdate();
             animator.SetFloat(Movement, followerEntity.velocity.magnitude);
+            if (washingMachineDropper && washingMachineDropper.refillAmount <= 0)
+            {
+                followerEntity.enabled = false;
+            }
+            else
+            {
+                followerEntity.enabled = true;
+            }
         }
 
         public void AssignTask(Task task)
@@ -126,6 +134,7 @@ namespace LaundaryMan
                     StartCoroutine(PickLaundry());
                     break;
                 case AIState.MovingToDrop:
+
                     SetDestination(targetPosition.gameObject);
                     yield return new WaitUntil(() =>
                         Vector3.Distance(transform.position, targetPosition.position) < 0.5f);
@@ -143,9 +152,7 @@ namespace LaundaryMan
         private IEnumerator PickLaundry()
         {
             yield return new WaitUntil(() =>
-                aiStackManager.ClothStack.Count >= limitToPickClothes);
-            // ||
-            // washingMachineDropper.clothToWash.Count >= 0);
+                aiStackManager.ClothStack.Count >= washingMachineDropper.limitOnBasket);
 
             yield return waitForSecondsToPickClothes;
 
@@ -154,7 +161,7 @@ namespace LaundaryMan
 
         private IEnumerator DropLaundry()
         {
-            yield return new WaitUntil(() => aiStackManager.ReturnIkValue() == 0);
+            yield return new WaitUntil(() => aiStackManager.ClothStack.Count <= 0);
             ReferenceManager.Instance.dirtyBoxAiManager.UnregisterAgent(this);
             washingMachineDropper.isOccupiedbyDirty = false;
             yield return waitForSecondsToPickClothes;

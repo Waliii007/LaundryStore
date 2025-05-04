@@ -19,6 +19,7 @@ namespace LaundaryMan
                 return;
 
             DirtyBoxAi.Task newTask = new DirtyBoxAi.Task(pickPosition, dropPosition[index]);
+            
             newTask.dropper = dropper;
             taskQueue.Enqueue(newTask);
             AssignTask();

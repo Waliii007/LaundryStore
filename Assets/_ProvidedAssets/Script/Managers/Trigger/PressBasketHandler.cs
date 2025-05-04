@@ -223,7 +223,6 @@ namespace LaundaryMan
             while (clothToWash.Count > 0 || isPlayerInside)
             {
 //                print("this is working "+ name);
-                yield return new WaitUntil(() => !isRinEmpty);
 
 //                print("this is working "+ name);
 
@@ -264,9 +263,11 @@ namespace LaundaryMan
 
         public IEnumerator IronClothes(ClothFragment cloth)
         {
+            yield return new WaitUntil(() => !isRinEmpty);
+
+
             cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
             {
-                // steam.gameObject.SetActive(false);
                 steam.gameObject.SetActive(true);
                 steam.Play();
                 ironObject.transform.DOMove(ironMovePoint.transform.position, .5f).OnComplete(() =>
@@ -281,11 +282,56 @@ namespace LaundaryMan
                             });
                 });
             });
-            // });
-
             yield return new WaitForSeconds(1);
             yield return new WaitUntil(() => isIronMoving);
         }
+
+        public IEnumerator IronClothesLevel2(ClothFragment cloth)
+        {
+            yield return new WaitUntil(() => !isRinEmpty);
+
+            ironObject.SetActive((false));
+            cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
+            {
+                steam.gameObject.SetActive(true);
+                steam.Play();
+
+                cloth.transform.DOMove(exitWaypoints.ElementAt(0).transform.position, .3f)
+                    .OnComplete(
+                        () =>
+                        {
+                            StartCoroutine(MoveThroughWaypoints(cloth));
+                            ironObject.transform.DOLookAt(ironClothesPoint.transform.position, .01f);
+                            isIronMoving = true;
+                        });
+            });
+            yield return new WaitForSeconds(1);
+            yield return new WaitUntil(() => isIronMoving);
+        }
+
+        public IEnumerator IronClothesLevel3(ClothFragment cloth)
+        {
+            yield return new WaitUntil(() => !isRinEmpty);
+            cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
+            {
+                steam.gameObject.SetActive(true);
+                steam.Play();
+                ironObject.transform.DOMove(ironMovePoint.transform.position, .5f).OnComplete(() =>
+                {
+                    cloth.transform.DOMove(exitWaypoints.ElementAt(0).transform.position, .5f)
+                        .OnComplete(
+                            () =>
+                            {
+                                StartCoroutine(MoveThroughWaypoints(cloth));
+                                ironObject.transform.DOLookAt(ironClothesPoint.transform.position, .01f);
+                                isIronMoving = true;
+                            });
+                });
+            });
+            yield return new WaitForSeconds(1);
+            yield return new WaitUntil(() => isIronMoving);
+        }
+
 
         public IEnumerator IronClothesReverse(ClothFragment cloth)
         {
@@ -314,6 +360,71 @@ namespace LaundaryMan
                         ironObject.transform.DOLookAt(ironClothesPoint.transform.position, .01f);
                         isIronMoving = true;
                     });
+                });
+            });
+
+            yield return new WaitForSeconds(1);
+            yield return new WaitUntil(() => isIronMoving);
+        }
+
+        public IEnumerator IronClothesLevel2Reverse(ClothFragment cloth)
+        {
+            isRinEmpty = totalRin < rinCost;
+
+            if (totalRin >= rinCost)
+            {
+                totalRin -= rinCost;
+                rinseMachineCanvas.rinseTrackingImage.fillAmount = (float)totalRin / refillAmount;
+            }
+            else
+            {
+                rinseMachineCanvas.CanvasStateChanger(MachineCanvasStates.RefillNeeded);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("PressMachine need Rinse Refill");
+            }
+
+            cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
+            {
+                steam.gameObject.SetActive(true);
+                steam.Play();
+                ironObject.gameObject.SetActive(false);
+
+                cloth.transform.DOMove(exitWaypoints.ElementAt(0).transform.position, .5f).OnComplete(() =>
+                {
+                    StartCoroutine(MoveThroughWaypoints(cloth));
+                    ironObject.transform.DOLookAt(ironClothesPoint.transform.position, .01f);
+                    isIronMoving = true;
+                });
+            });
+
+            yield return new WaitForSeconds(1);
+            yield return new WaitUntil(() => isIronMoving);
+        }
+
+        public IEnumerator IronClothesLevel3Reverse(ClothFragment cloth)
+        {
+            isRinEmpty = totalRin < rinCost;
+
+            if (totalRin >= rinCost)
+            {
+                totalRin -= rinCost;
+                rinseMachineCanvas.rinseTrackingImage.fillAmount = (float)totalRin / refillAmount;
+            }
+            else
+            {
+                rinseMachineCanvas.CanvasStateChanger(MachineCanvasStates.RefillNeeded);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("PressMachine need Rinse Refill");
+            }
+
+            cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
+            {
+                steam.gameObject.SetActive(true);
+                steam.Play();
+                ironObject.SetActive(false);
+                cloth.transform.DOMove(exitWaypoints.ElementAt(0).transform.position, .5f).OnComplete(() =>
+                {
+                    StartCoroutine(MoveThroughWaypoints(cloth));
+                    ironObject.transform.DOLookAt(ironClothesPoint.transform.position, .01f);
+                    isIronMoving = true;
                 });
             });
 
@@ -375,12 +486,109 @@ namespace LaundaryMan
                 ClothFragment cloth = washedClothes.Dequeue();
                 if (index == 0)
                 {
-                    StartCoroutine(IronClothes(cloth));
+                    switch (myIndex)
+                    {
+                        case 0:
+                            switch (ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex)
+                            {
+                                case 0:
+                                    StartCoroutine(IronClothes(cloth));
+                                    break;
+                                case 1:
+                                    StartCoroutine(IronClothesLevel2(cloth));
+                                    break;
+                                case 3:
+                                    StartCoroutine(IronClothesLevel3(cloth));
+                                    break;
+                            }
+
+                            break;
+                        case 1:
+                            switch (ReferenceManager.Instance.GameData.gameEconomy.machine1UpgradeIndex)
+                            {
+                                case 0:
+                                    StartCoroutine(IronClothes(cloth));
+                                    break;
+                                case 1:
+                                    StartCoroutine(IronClothesLevel2(cloth));
+                                    break;
+                                case 3:
+                                    StartCoroutine(IronClothesLevel3(cloth));
+                                    break;
+                            }
+
+                            break;
+                        case 2:
+                            switch (ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex)
+                            {
+                                case 0:
+                                    StartCoroutine(IronClothes(cloth));
+                                    break;
+                                case 1:
+                                    StartCoroutine(IronClothesLevel2(cloth));
+                                    break;
+                                case 3:
+                                    StartCoroutine(IronClothesLevel3(cloth));
+                                    break;
+                            }
+
+                            break;
+                    }
+
+
                     index = 1;
                 }
                 else if (index == 1)
                 {
-                    StartCoroutine(IronClothesReverse(cloth));
+                    switch (myIndex)
+                    {
+                        case 0:
+                            switch (ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex)
+                            {
+                                case 0:
+                                    StartCoroutine(IronClothesReverse(cloth));
+                                    break;
+                                case 1:
+                                    StartCoroutine(IronClothesLevel2Reverse(cloth));
+                                    break;
+                                case 3:
+                                    StartCoroutine(IronClothesLevel3Reverse(cloth));
+                                    break;
+                            }
+
+                            break;
+                        case 1:
+                            switch (ReferenceManager.Instance.GameData.gameEconomy.machine1UpgradeIndex)
+                            {
+                                case 0:
+                                    StartCoroutine(IronClothesReverse(cloth));
+                                    break;
+                                case 1:
+                                    StartCoroutine(IronClothesLevel2Reverse(cloth));
+                                    break;
+                                case 3:
+                                    StartCoroutine(IronClothesLevel3Reverse(cloth));
+                                    break;
+                            }
+
+                            break;
+                        case 2:
+                            switch (ReferenceManager.Instance.GameData.gameEconomy.machine2UpgradeIndex)
+                            {
+                                case 0:
+                                    StartCoroutine(IronClothesReverse(cloth));
+                                    break;
+                                case 1:
+                                    StartCoroutine(IronClothesLevel2Reverse(cloth));
+                                    break;
+                                case 3:
+                                    StartCoroutine(IronClothesLevel3Reverse(cloth));
+                                    break;
+                            }
+
+                            break;
+                    }
+
                     index = 0;
                 }
 

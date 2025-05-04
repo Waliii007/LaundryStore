@@ -338,6 +338,7 @@ namespace LaundryMan
                 }
 
                 yield return new WaitForSeconds(stackTime);
+                
                 int k = Random.Range(0,
                     (ReferenceManager.Instance.GameData.unlockedMachine == 0
                         ? 0
@@ -353,42 +354,6 @@ namespace LaundryMan
 
         public void checkifLOopStop()
         {
-            // //
-            // // int k = Random.Range(0,
-            // //     (ReferenceManager.Instance.GameData.unlockedMachine == 0
-            // //         ? 0
-            // //         : ReferenceManager.Instance.GameData.unlockedMachine - 1));
-            // int k = 0;
-            // if (ReferenceManager.Instance.GameData.unlockedMachine == 1)
-            // {
-            //     k = 0;
-            // }
-            // else if (ReferenceManager.Instance.GameData.unlockedMachine == 2)
-            // {
-            //     if (indexShuffling == 0)
-            //     {
-            //         k = indexShuffling = 1;
-            //     }
-            //     else
-            //     {
-            //         k = indexShuffling = 0;
-            //     }
-            // }
-            // else if (ReferenceManager.Instance.GameData.unlockedMachine == 3)
-            // {
-            //     if (indexShuffling == 0)
-            //     {
-            //         k = indexShuffling = 1;
-            //     }
-            //     else if (indexShuffling == 1)
-            //     {
-            //         k = indexShuffling = 2;
-            //     }
-            //     else if (indexShuffling == 2)
-            //     {
-            //         k = indexShuffling = 0;
-            //     }
-            // }
             int k = 0;
             int unlockedMachine = ReferenceManager.Instance.GameData.unlockedMachine;
 

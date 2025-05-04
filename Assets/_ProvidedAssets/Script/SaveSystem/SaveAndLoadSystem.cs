@@ -100,6 +100,20 @@ namespace LaundaryMan
                 saveData.gameEconomy.limitBasket = loadedData.gameEconomy.limitBasket;
 
 
+                saveData.gameEconomy.remainingDetergentBottleBlue = loadedData.gameEconomy.remainingDetergentBottleBlue;
+                saveData.gameEconomy.remainingDetergentBottleRed = loadedData.gameEconomy.remainingDetergentBottleRed;
+                saveData.gameEconomy.remainingDetergentBottleGreen =
+                    loadedData.gameEconomy.remainingDetergentBottleGreen;
+
+
+                saveData.gameEconomy.remainingRinseBottleBlue = loadedData.gameEconomy.remainingRinseBottleBlue;
+                saveData.gameEconomy.remainingRinseBottleGreen = loadedData.gameEconomy.remainingRinseBottleGreen;
+                saveData.gameEconomy.remainingRinseBottleBlue = loadedData.gameEconomy.remainingRinseBottleBlue;
+
+                saveData.gameEconomy.detergentCapacity1 = loadedData.gameEconomy.detergentCapacity1;
+                saveData.gameEconomy.detergentCapacity2 = loadedData.gameEconomy.detergentCapacity2;
+                saveData.gameEconomy.detergentCapacity3 = loadedData.gameEconomy.detergentCapacity3;
+
                 saveData.selectedPlayersList = new List<SaveData.PlayerSelection>(loadedData.selectedPlayersList);
 //                print(loadedData.gameEconomy.cashierPrice + saveData.gameEconomy.cashierPrice);
                 saveData.ConvertListToDictionary();

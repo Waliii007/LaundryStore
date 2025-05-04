@@ -19,6 +19,7 @@ namespace LaundaryMan
             limitOnBasket = ReferenceManager.Instance.GameData.gameEconomy.limitBasket;
             limitOnCleanBasket = ReferenceManager.Instance.GameData.gameEconomy.limitOnCleanBasket;
             canvasCheckCoroutine = StartCoroutine(CheckCanvasStateRoutine());
+            InitDetergent();
         }
 
         #endregion
@@ -259,10 +260,10 @@ namespace LaundaryMan
                 yield return new WaitForSeconds(stackTime);
             }
 
-            print((playerStackManager.ClothStack.Count <=
-                   0) + ""
-                      + (playerStackManager.ClothStack.Count) +
-                      ":" + (TempCLothes.Count <= 0));
+            // print((playerStackManager.ClothStack.Count <=
+            //        0) + ""
+            //           + (playerStackManager.ClothStack.Count) +
+            //           ":" + (TempCLothes.Count <= 0));
 
             playerStackManager.SetIk(playerStackManager.ClothStack.Count <= 0 ? 0 : 1);
         }
@@ -285,14 +286,14 @@ namespace LaundaryMan
             switch (myIndex)
             {
                 case 0:
-                    refillAmount = 250;
+                    totalDetergent = refillAmount = 250;
 
                     break;
                 case 1:
-                    refillAmount = 250;
+                    totalDetergent = refillAmount = 250;
                     break;
                 case 2:
-                    refillAmount = 250;
+                    totalDetergent = refillAmount = 250;
                     break;
             }
         }
@@ -369,7 +370,7 @@ namespace LaundaryMan
                 if (clothToWash.Count > 0 && totalDetergent >= 0)
                 {
                     totalDetergent -= detergentCost;
-                    machineCanvasManager.detergentTrackingImage.fillAmount = (float)totalDetergent / 100f;
+                    machineCanvasManager.detergentTrackingImage.fillAmount = (float)totalDetergent / refillAmount;
 
                     var cloth = clothToWash.Pop();
                     Vector3 targetPosition = machineStackPoint.position;
@@ -556,7 +557,8 @@ namespace LaundaryMan
             if (other.CompareTag("Player"))
             {
                 isPlayerInside = false;
-                if (other.TryGetComponent(out PlayerStackManager playerStackManager))
+                if (other.TryGetComponent(out PlayerStackManager playerStackManager) &&
+                    other.gameObject.layer == LayerMask.NameToLayer("Player"))
                 {
                     // **Store and return remaining dirty clothes**
                     Stack<ClothFragment> tempReversedStack = new Stack<ClothFragment>();
@@ -580,7 +582,8 @@ namespace LaundaryMan
 
                     playerStackManager.SetIk(playerStackManager.ClothStack.Count == 0 ? 0 : 1);
                 }
-                else if (other.TryGetComponent(out AiStackManager aIStackManager))
+                else if (other.TryGetComponent(out AiStackManager aIStackManager) &&
+                         other.gameObject.layer == LayerMask.NameToLayer("AILAYER"))
                 {
                     // **Store and return remaining dirty clothes**
                     Stack<ClothFragment> tempReversedStack = new Stack<ClothFragment>();
@@ -607,6 +610,7 @@ namespace LaundaryMan
             }
         }
 
+
         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag("Player") && other.gameObject.layer == LayerMask.NameToLayer("Player"))
@@ -624,18 +628,19 @@ namespace LaundaryMan
                             _playerCoroutine = StartCoroutine(HandlePlayerInteraction(playerStackManager));
                     }
                 }
-                else if (other.TryGetComponent(out AiStackManager aiStackManager) &&
-                         other.gameObject.layer == LayerMask.NameToLayer("AILAYER"))
-                {
-                    isPlayerInside = true;
-                    print("calling");
+            }
+            else if (
+                other.gameObject.layer == LayerMask.NameToLayer("AILAYER"))
+            {
+                other.TryGetComponent(out AiStackManager aiStackManager);
+                isPlayerInside = true;
+//                print("calling");
 
-                    if (aICoroutine == null)
-                    {
-                        if (GlobalConstant.isLogger)
-                            print("calling");
-                        aICoroutine = StartCoroutine(HandlePlayerInteraction(aiStackManager));
-                    }
+                if (aICoroutine == null)
+                {
+                    if (GlobalConstant.isLogger)
+                        print("calling");
+                    aICoroutine = StartCoroutine(HandlePlayerInteraction(aiStackManager));
                 }
             }
         }

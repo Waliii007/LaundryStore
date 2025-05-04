@@ -31,9 +31,9 @@ namespace LaundaryMan
         public int remainingDetergentBottleBlue = 1;
         public int remainingDetergentBottleRed = 1;
 
-        public int remainingRinseBottleGreen = 0;
-        public int remainingRinseBottleBlue = 0;
-        public int remainingRinseBottleRed = 0;
+        public int remainingRinseBottleGreen = 1;
+        public int remainingRinseBottleBlue = 1;
+        public int remainingRinseBottleRed = 1;
     }
 
     [System.Serializable]
