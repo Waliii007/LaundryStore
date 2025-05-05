@@ -151,7 +151,6 @@ namespace LaundaryMan
                             {
                                 ReferenceManager.Instance.tutorialHandler.TaskCompleted();
                                 ReferenceManager.Instance.tutorialHandler.UnSubscribe();
-                                ReferenceManager.Instance.queueSystem.OnTutorialCompleted();
                             }
                         }
 

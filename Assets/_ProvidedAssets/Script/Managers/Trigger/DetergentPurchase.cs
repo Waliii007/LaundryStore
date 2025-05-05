@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace LaundaryMan
@@ -12,6 +13,12 @@ namespace LaundaryMan
     public class DetergentPurchase : MonoBehaviour
     {
         public WashingMachineDropper[] washingMachineDropper;
+        public GameObject tutorialPanel;
+
+        private void OnEnable()
+        {
+            tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
+        }
 
         public void OnClickCrossButton()
         {
@@ -22,13 +29,17 @@ namespace LaundaryMan
 
         public void OnBuyGreenButton()
         {
-            int price = 1000;
+            int price = 150;
             if (ReferenceManager.Instance.GameData.playerCash >= price)
             {
                 AddDetergent(DetergentType.Green, 1);
                 ReferenceManager.Instance.GameData.playerCash -= price;
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Detergent");
                 UpdateDetergentUI();
+                if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+                {
+                    ReferenceManager.Instance.tutorialHandler.TaskCompleted();
+                }
             }
             else
             {
@@ -38,7 +49,7 @@ namespace LaundaryMan
 
         public void OnBuyBlueButton()
         {
-            int price = 2000;
+            int price = 200;
             if (ReferenceManager.Instance.GameData.playerCash >= price)
             {
                 AddDetergent(DetergentType.Blue, 1);
@@ -54,7 +65,7 @@ namespace LaundaryMan
 
         public void OnBuyRedButton()
         {
-            int price = 3000;
+            int price = 500;
             if (ReferenceManager.Instance.GameData.playerCash >= price)
             {
                 AddDetergent(DetergentType.Red, 1);
@@ -132,7 +143,6 @@ namespace LaundaryMan
             }
             else
             {
-                
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.DetergentPurchase);
 
                 ReferenceManager.Instance.notificationHandler.ShowNotification("No Blue Detergent available.");

@@ -38,7 +38,7 @@ namespace LaundaryMan
         private void OnTriggerStay(Collider other)
         {
             if (!other.CompareTag("Player") &&
-                other.gameObject.layer == ReferenceManager.Instance.playerStackManager.gameObject.layer) return;
+                other.gameObject.layer ==LayerMask.GetMask("Player")) return;
 
             isPlayerInside = true;
 

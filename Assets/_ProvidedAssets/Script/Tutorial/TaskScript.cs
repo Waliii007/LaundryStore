@@ -8,6 +8,7 @@ namespace LaundaryMan
 {
     public class TaskScript : MonoBehaviour
     {
+        [TextArea(2,6)]
         public string tutorialObjective;
         public Transform navmeshTarget;
 
@@ -19,14 +20,55 @@ namespace LaundaryMan
             TaskComplete();
             ReferenceManager.Instance.playerStackManager.pathDraw.destination = navmeshTarget;
             if (taskObject) taskObject.SetActive(true);
-            
+            TaskStart();
         }
 
         public GameObject taskObject;
+        
+
+        void TaskStart()
+        {
+            switch (ReferenceManager.Instance.tutorialHandler.currentTask)
+            {
+                case TutorialTask.UnlockLaundry:
+                    break;
+                case TutorialTask.PickLaundry:
+                    break;
+                case TutorialTask.DropLaundry:
+                    break;
+                case TutorialTask.PickCleanLaundry:
+                    break;
+                case TutorialTask.DropToPressLaundry:
+                    break;
+                case TutorialTask.CheckOut:
+                    break;
+                case TutorialTask.CollectCash:
+                    break;
+                case TutorialTask.RefillBuy:
+                     
+                    break;
+                case TutorialTask.RinseBuy:
+                   
+                    break;
+                case TutorialTask.RefillDetergent:
+                    WashingMachineDropper.totalDetergent = 0;
+                    WashingMachineDropper.EmptyForTutorial();
+                    ReferenceManager.Instance.playerStackManager.pathDraw.destination = navmeshTarget;
+                    PressBasketHandler.EmptyForTutorial();
+                    break;
+                case TutorialTask.RefillRinse:
+                    PressBasketHandler.EmptyForTutorial();
+                    ReferenceManager.Instance.playerStackManager.pathDraw.destination = navmeshTarget;
+                    PressBasketHandler.totalRin = 0;
+                    break;
+            }
+        }
+
+        public WashingMachineDropper WashingMachineDropper;
+        public PressBasketHandler PressBasketHandler;
 
         void TaskComplete()
         {
-
             switch (ReferenceManager.Instance.tutorialHandler.currentTask)
             {
                 case TutorialTask.UnlockLaundry:
@@ -34,12 +76,12 @@ namespace LaundaryMan
                     break;
                 case TutorialTask.PickLaundry:
                     StartCoroutine(PickLaundary());
-                 
+
 
                     break;
                 case TutorialTask.DropLaundry:
                     StartCoroutine(DropLaundary());
-                  
+
 
                     break;
                 case TutorialTask.PickCleanLaundry:
@@ -53,8 +95,9 @@ namespace LaundaryMan
                     break;
                 case TutorialTask.CollectCash:
                     break;
+                case TutorialTask.RefillRinse:
+                    break;
             }
-
         }
 
         IEnumerator PickLaundary()
@@ -67,7 +110,6 @@ namespace LaundaryMan
                 ReferenceManager.Instance.tutorialHandler.TaskHandler(ReferenceManager.Instance.tutorialHandler
                     .currentTask + 1));
             if (taskObject) taskObject.gameObject.SetActive(false);
-
         }
 
         IEnumerator DropLaundary()
@@ -78,7 +120,6 @@ namespace LaundaryMan
                 ReferenceManager.Instance.tutorialHandler.TaskHandler(ReferenceManager.Instance.tutorialHandler
                     .currentTask + 1));
             if (taskObject) taskObject.gameObject.SetActive(false);
-
         }
     }
 }

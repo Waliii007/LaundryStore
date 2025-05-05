@@ -13,7 +13,7 @@ namespace LaundaryMan
         public int indexTask;
         public TutorialTask prevTask;
         public TutorialTask currentTask;
-
+        public GameObject[] someTriggerToOff;
         private void Awake()
         {
             ReferenceManager.Instance.taskHandler.OnTaskUpdatedAction += TaskCompleted;
@@ -43,20 +43,37 @@ namespace LaundaryMan
             tasks[(int)prevTask].gameObject.SetActive(false);
             tasks[(int)currentTask].gameObject.SetActive(true);
         }
+        public void CompleteTutorial()
+        {
+            var reference = ReferenceManager.Instance;
+            reference.tutorialHandler.TaskCompleted();
 
+            reference.GameData.isTutorialCompleted = true;
+            reference.taskHandler.HrHandler();
+            reference.canvasManager.CanvasStateChanger(CanvasStates.ObjectivePanel);
+            reference.objectivePanel.ShowObjective("Tutorial Complete");
+            reference.playerStackManager.pathDraw.gameObject.SetActive(false);
+            reference.playerStackManager.pathDraw.destination = null;
+            foreach (var some in someTriggerToOff)
+            {
+                some.gameObject.SetActive(true);   
+            }
+        }
         public void TaskCompleted()
         {
             DOVirtual.DelayedCall(1, () =>
                 ReferenceManager.Instance.tutorialHandler.TaskHandler(ReferenceManager.Instance.tutorialHandler
                     .currentTask + 1));
-          if(tasks[(int)currentTask]. GetComponent<TaskScript>().taskObject)  tasks[(int)currentTask]. GetComponent<TaskScript>().taskObject.SetActive(false);
+            if (tasks[(int)currentTask].TryGetComponent<TaskScript>(out var taskScript) && taskScript.taskObject)
+            {
+                taskScript.taskObject.SetActive(false);
+            }
         }
 
 
         private void OnDisable()
         {
             ReferenceManager.Instance.taskHandler.OnTaskUpdatedAction -= TaskCompleted;
-            
         }
     }
 }
@@ -69,5 +86,10 @@ public enum TutorialTask
     PickCleanLaundry,
     DropToPressLaundry,
     CheckOut,
-    CollectCash
+    CollectCash,
+    RefillBuy,
+    RinseBuy,
+    RefillDetergent,
+    RefillRinse,
+    
 }

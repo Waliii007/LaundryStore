@@ -11,15 +11,20 @@ namespace LaundaryMan
         public Text redDetergentText;
         public DetergentPurchase purchase;
         public int index;
-
+        public GameObject tutorialPanel;
         private void OnEnable()
         {
             UpdateDetergentUI();
+            tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
         }
 
         public void GreenDetergent()
         {
             purchase.OnUseGreenButton(index);
+            if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+            {
+                ReferenceManager.Instance.tutorialHandler.TaskCompleted();
+            }
             
         }
 

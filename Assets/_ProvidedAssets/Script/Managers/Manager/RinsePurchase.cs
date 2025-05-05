@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace LaundaryMan
@@ -12,6 +13,12 @@ namespace LaundaryMan
     public class RinsePurchase : MonoBehaviour
     {
         public PressBasketHandler[] washingMachineDropper;
+        public GameObject tutorialPanel;
+
+        private void OnEnable()
+        {
+            tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
+        }
 
         public void OnClickCrossButton()
         {
@@ -22,13 +29,18 @@ namespace LaundaryMan
 
         public void OnBuyGreenButton()
         {
-            int price = 1000;
+            int price = 150;
             if (ReferenceManager.Instance.GameData.playerCash >= price)
             {
                 AddRinse(RinseType.Green, 1);
                 ReferenceManager.Instance.GameData.playerCash -= price;
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+
                 UpdateRinseUI();
+                if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+                {
+                    ReferenceManager.Instance.tutorialHandler.TaskCompleted();
+                }
             }
             else
             {
@@ -38,7 +50,7 @@ namespace LaundaryMan
 
         public void OnBuyBlueButton()
         {
-            int price = 2000;
+            int price = 200;
             if (ReferenceManager.Instance.GameData.playerCash >= price)
             {
                 AddRinse(RinseType.Blue, 1);
@@ -71,7 +83,6 @@ namespace LaundaryMan
 
         public void OnBuyGreenButtonAds()
         {
-            int price = 1000;
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
                 AddRinse(RinseType.Green, 1);
@@ -82,7 +93,7 @@ namespace LaundaryMan
 
         public void OnBuyBlueButtonAds()
         {
-            int price = 2000;
+            int price = 500;
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
                 AddRinse(RinseType.Green, 1);
@@ -114,7 +125,7 @@ namespace LaundaryMan
                 UpdateRinseUI();
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
-                washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Red);
+                washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Green);
             }
             else
             {
@@ -132,7 +143,7 @@ namespace LaundaryMan
                 UpdateRinseUI();
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
-                washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Red);
+                washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Blue);
             }
             else
             {
@@ -228,7 +239,7 @@ namespace LaundaryMan
         private void UpdateRinseUI()
         {
             var ui = ReferenceManager.Instance.rinseItemUI;
-            if (ui != null)
+            if (ui)
                 ui.UpdateRinseUI();
         }
     }

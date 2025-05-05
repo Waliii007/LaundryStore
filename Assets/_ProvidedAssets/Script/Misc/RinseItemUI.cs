@@ -20,6 +20,12 @@ namespace LaundaryMan
         public void GreenRinse()
         {
             purchase.OnUseGreenButton(index);
+            if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+            {
+                ReferenceManager.Instance.tutorialHandler.TaskCompleted();
+                ReferenceManager.Instance.tutorialHandler.CompleteTutorial();
+
+            }
         }
 
         public void BlueRinse()

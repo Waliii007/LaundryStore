@@ -72,7 +72,14 @@ namespace LaundaryMan
                 }
             }
         }
+        public void EmptyForTutorial()
+        {
+            isRinEmpty = true;
 
+            totalRin = 0;
+            rinseMachineCanvas.detargentImage.fillAmount = 0;
+            rinseMachineCanvas.CanvasStateChanger(MachineCanvasStates.RefillNeeded);
+        }
 
         private void OnTriggerStay(Collider other)
         {
@@ -227,8 +234,7 @@ namespace LaundaryMan
 //                print("this is working "+ name);
 
                 if (clothToWash.Count > 0)
-                {
-//                    print("this is working "+ name);
+                { 
 
                     var cloth = clothToWash.Pop();
                     Vector3 targetPosition = washedClothes.Count <= 0

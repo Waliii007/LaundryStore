@@ -35,7 +35,7 @@ namespace LaundaryMan
         {
             if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
             {
-                CompleteTutorial();
+                ReferenceManager.Instance.tutorialHandler.TaskCompleted();
                 triggerToOn.SetActive(true);
             }
 
