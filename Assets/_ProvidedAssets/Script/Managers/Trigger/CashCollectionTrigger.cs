@@ -30,6 +30,7 @@ namespace LaundaryMan
         }
 
         public GameObject triggerToOn;
+
         private IEnumerator CollectCash()
         {
             if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
@@ -48,13 +49,15 @@ namespace LaundaryMan
                     Vector3 targetPosition = cashStackPointer.position + new Vector3(0, cashStack.Count * -0.05f, 0);
                     cash.transform.DOMove(targetPosition, 0.42f).OnComplete(() =>
                     {
-                        ReferenceManager.Instance.GameData.playerCash += 50;
+                        float tipcash = ReferenceManager.Instance.snackbarManager.currentMultiplier;
+                        ReferenceManager.Instance.GameData.playerCash += 50 + (int)tipcash;
                         cash.transform.SetParent(cashStackPointer);
                         Destroy(cash.gameObject, 0.1f);
                     });
 
                     yield return new WaitForSeconds(0.1f);
                     ReferenceManager.Instance.SaveGameDataObserver();
+                    ReferenceManager.Instance.snackbarManager.OnCustomerServed();
                 }
             }
 
@@ -69,7 +72,7 @@ namespace LaundaryMan
         {
             var reference = ReferenceManager.Instance;
             reference.tutorialHandler.TaskCompleted();
-            
+
             reference.GameData.isTutorialCompleted = true;
             reference.taskHandler.HrHandler();
             reference.canvasManager.CanvasStateChanger(CanvasStates.ObjectivePanel);

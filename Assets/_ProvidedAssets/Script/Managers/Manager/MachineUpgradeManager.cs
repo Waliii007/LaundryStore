@@ -7,6 +7,7 @@ namespace LaundaryMan
     public class Machine
     {
         public MachineParts[] partsLevels; // Each index represents a level of upgrade
+        public PressBasketHandler pressBasketHandler;
     }
 
     public class MachineUpgradeManager : MonoBehaviour
@@ -28,9 +29,31 @@ namespace LaundaryMan
             for (int i = 0; i < machines[machineIndex].partsLevels.Length; i++)
             {
                 bool isActive = (i == upgradeIndex);
+
                 foreach (var part in machines[machineIndex].partsLevels[i].machineParts)
                 {
                     part.gameObject.SetActive(isActive);
+                }
+            }
+
+            switch (machineIndex)
+            {
+                case 0:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex;
+                    break;
+                case 1:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine1UpgradeIndex;
+                    break;
+                case 2:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine2UpgradeIndex;
+                    break;
+            }
+
+            if (upgradeIndex is 1 or 2)
+            {
+                if (machines[machineIndex].pressBasketHandler.ironObject.TryGetComponent(out MeshFilter meshFilter))
+                {
+                    meshFilter.mesh = null;
                 }
             }
         }
@@ -46,6 +69,7 @@ namespace LaundaryMan
                     break;
                 case 1:
                     upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine1UpgradeIndex;
+
                     break;
                 case 2:
                     upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine2UpgradeIndex;
@@ -67,6 +91,27 @@ namespace LaundaryMan
                 foreach (var part in machines[machineIndex].partsLevels[upgradeIndex].machineParts)
                 {
                     part.gameObject.SetActive(true);
+                }
+            }
+
+            switch (machineIndex)
+            {
+                case 0:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex;
+                    break;
+                case 1:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine1UpgradeIndex;
+                    break;
+                case 2:
+                    upgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine2UpgradeIndex;
+                    break;
+            }
+
+            if (upgradeIndex is 1 or 2)
+            {
+                if (machines[machineIndex].pressBasketHandler.ironObject.TryGetComponent(out MeshFilter meshFilter))
+                {
+                    meshFilter.mesh = null;
                 }
             }
         }

@@ -71,4 +71,5 @@ public enum CanvasStates
     RefillDetergent,
     RinPurchase,
     RinRefill,
+    CandyBar
 }

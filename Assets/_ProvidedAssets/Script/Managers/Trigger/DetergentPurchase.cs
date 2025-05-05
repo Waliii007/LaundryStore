@@ -12,7 +12,7 @@ namespace LaundaryMan
     public class DetergentPurchase : MonoBehaviour
     {
         public WashingMachineDropper[] washingMachineDropper;
-        
+
         public void OnClickCrossButton()
         {
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
@@ -110,13 +110,13 @@ namespace LaundaryMan
                 UpdateDetergentUI();
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+                washingMachineDropper[machineIndex].machineCanvasManager.DetergentImageChange(DetergentType.Green);
             }
             else
             {
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.DetergentPurchase);
 
                 ReferenceManager.Instance.notificationHandler.ShowNotification("No Green Detergent available.");
-                
             }
         }
 
@@ -127,10 +127,14 @@ namespace LaundaryMan
                 washingMachineDropper[machineIndex].Refill(400);
                 UpdateDetergentUI();
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
-
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+                washingMachineDropper[machineIndex].machineCanvasManager.DetergentImageChange(DetergentType.Blue);
             }
             else
             {
+                
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.DetergentPurchase);
+
                 ReferenceManager.Instance.notificationHandler.ShowNotification("No Blue Detergent available.");
             }
         }
@@ -141,11 +145,14 @@ namespace LaundaryMan
             {
                 washingMachineDropper[machineIndex].Refill(500);
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+                washingMachineDropper[machineIndex].machineCanvasManager.DetergentImageChange(DetergentType.Red);
                 UpdateDetergentUI();
             }
             else
             {
-                
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.DetergentPurchase);
+
                 ReferenceManager.Instance.notificationHandler.ShowNotification("No Red Detergent available.");
             }
         }
@@ -193,7 +200,7 @@ namespace LaundaryMan
         public bool HasDetergent(DetergentType type, int refillIndex)
         {
             print(refillIndex);
-            return GetDetergentCount(type) > 0 && washingMachineDropper[refillIndex].totalDetergent <=0;
+            return GetDetergentCount(type) > 0 && washingMachineDropper[refillIndex].totalDetergent <= 0;
         }
 
         public int GetDetergentCount(DetergentType type)
@@ -216,7 +223,7 @@ namespace LaundaryMan
         private void UpdateDetergentUI()
         {
             var ui = ReferenceManager.Instance.detergentItemUI;
-            if (ui != null)
+            if (ui)
                 ui.UpdateDetergentUI();
         }
     }

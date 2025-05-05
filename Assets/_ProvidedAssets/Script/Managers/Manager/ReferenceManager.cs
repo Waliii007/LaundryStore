@@ -49,6 +49,7 @@ namespace LaundaryMan
         public NotificationHandler notificationHandler;
         public DetergentItemUI detergentItemUI;
         public RinseItemUI rinseItemUI;
+        public SnackbarManager snackbarManager;
         #endregion
 
         #region SaveSystemObserver

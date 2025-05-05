@@ -9,10 +9,11 @@ namespace LaundaryMan
         public MachineCanvasStates prev;
         public MachineCanvasStates currentState;
         public Image detergentTrackingImage;
-
+        
         private void OnEnable()
         {
             CanvasStateChanger(MachineCanvasStates.Full);
+            DetergentImageChange(DetergentType.Green);
         }
 
         public WashingMachineDropper myDropper;
@@ -25,6 +26,15 @@ namespace LaundaryMan
             CanvasStateChanger(MachineCanvasStates.RefillNeeded);
         }
 
+        public Image detargentImage;
+        public Sprite[] detargentSprites;
+       
+        public void DetergentImageChange(DetergentType detargentuse)
+        {
+            detargentImage.preserveAspect = true;
+
+            detargentImage.sprite=detargentSprites[(int)detargentuse];
+        }
         public void OnClickRefillButton()
         {
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.RefillDetergent);

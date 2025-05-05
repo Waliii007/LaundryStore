@@ -108,40 +108,55 @@ namespace LaundaryMan
 
         public void OnUseGreenButton(int machineIndex)
         {
-            if (UseRinse(RinseType.Green,machineIndex))
+            if (UseRinse(RinseType.Green, machineIndex))
             {
                 washingMachineDropper[machineIndex].RefillRin(250);
                 UpdateRinseUI();
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+                washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Red);
             }
             else
             {
-                ReferenceManager.Instance.notificationHandler.ShowNotification("No Green Rinse available.");
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.RinPurchase);
+
+                ReferenceManager.Instance.notificationHandler.ShowNotification("No Rinse available.");
             }
         }
 
         public void OnUseBlueButton(int machineIndex)
         {
-            if (UseRinse(RinseType.Blue,machineIndex))
+            if (UseRinse(RinseType.Blue, machineIndex))
             {
                 washingMachineDropper[machineIndex].RefillRin(400);
                 UpdateRinseUI();
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+                washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Red);
             }
             else
             {
-                ReferenceManager.Instance.notificationHandler.ShowNotification("No Blue Rinse available.");
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.RinPurchase);
+
+                ReferenceManager.Instance.notificationHandler.ShowNotification("No Rinse available.");
             }
         }
 
         public void OnUseRedButton(int machineIndex)
         {
-            if (UseRinse(RinseType.Red,machineIndex))
+            if (UseRinse(RinseType.Red, machineIndex))
             {
                 washingMachineDropper[machineIndex].RefillRin(500);
                 UpdateRinseUI();
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+                washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Red);
             }
             else
             {
-                ReferenceManager.Instance.notificationHandler.ShowNotification("No Red Rinse available.");
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.RinPurchase);
+
+                ReferenceManager.Instance.notificationHandler.ShowNotification("No Rinse available.");
             }
         }
 
@@ -167,7 +182,10 @@ namespace LaundaryMan
 
         public bool UseRinse(RinseType type, int index)
         {
-            if (!HasRinse(type, index)) return false;
+            if (!HasRinse(type, index))
+            {
+                return false;
+            }
 
             switch (type)
             {
@@ -187,7 +205,7 @@ namespace LaundaryMan
 
         public bool HasRinse(RinseType type, int index)
         {
-            return GetRinseCount(type) > 0 && washingMachineDropper[index];
+            return GetRinseCount(type) > 0 && washingMachineDropper[index].totalRin <= 0;
         }
 
         public int GetRinseCount(RinseType type)

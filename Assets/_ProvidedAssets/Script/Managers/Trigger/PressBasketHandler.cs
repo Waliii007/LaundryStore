@@ -290,7 +290,7 @@ namespace LaundaryMan
         {
             yield return new WaitUntil(() => !isRinEmpty);
 
-            ironObject.SetActive((false));
+           // ironObject.SetActive((false));
             cloth.transform.DOMove(ironClothesPoint.transform.position, .1f).OnComplete(() =>
             {
                 steam.gameObject.SetActive(true);
@@ -419,7 +419,7 @@ namespace LaundaryMan
             {
                 steam.gameObject.SetActive(true);
                 steam.Play();
-                ironObject.SetActive(false);
+               // ironObject.SetActive(false);
                 cloth.transform.DOMove(exitWaypoints.ElementAt(0).transform.position, .5f).OnComplete(() =>
                 {
                     StartCoroutine(MoveThroughWaypoints(cloth));
@@ -497,7 +497,7 @@ namespace LaundaryMan
                                 case 1:
                                     StartCoroutine(IronClothesLevel2(cloth));
                                     break;
-                                case 3:
+                                case 2:
                                     StartCoroutine(IronClothesLevel3(cloth));
                                     break;
                             }
@@ -512,7 +512,7 @@ namespace LaundaryMan
                                 case 1:
                                     StartCoroutine(IronClothesLevel2(cloth));
                                     break;
-                                case 3:
+                                case 2:
                                     StartCoroutine(IronClothesLevel3(cloth));
                                     break;
                             }
@@ -527,7 +527,7 @@ namespace LaundaryMan
                                 case 1:
                                     StartCoroutine(IronClothesLevel2(cloth));
                                     break;
-                                case 3:
+                                case 2:
                                     StartCoroutine(IronClothesLevel3(cloth));
                                     break;
                             }
@@ -551,7 +551,7 @@ namespace LaundaryMan
                                 case 1:
                                     StartCoroutine(IronClothesLevel2Reverse(cloth));
                                     break;
-                                case 3:
+                                case 2:
                                     StartCoroutine(IronClothesLevel3Reverse(cloth));
                                     break;
                             }
@@ -566,7 +566,7 @@ namespace LaundaryMan
                                 case 1:
                                     StartCoroutine(IronClothesLevel2Reverse(cloth));
                                     break;
-                                case 3:
+                                case 2:
                                     StartCoroutine(IronClothesLevel3Reverse(cloth));
                                     break;
                             }
@@ -581,7 +581,7 @@ namespace LaundaryMan
                                 case 1:
                                     StartCoroutine(IronClothesLevel2Reverse(cloth));
                                     break;
-                                case 3:
+                                case 2:
                                     StartCoroutine(IronClothesLevel3Reverse(cloth));
                                     break;
                             }

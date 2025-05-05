@@ -14,11 +14,20 @@ namespace LaundaryMan
         private void OnEnable()
         {
             CanvasStateChanger(MachineCanvasStates.Full);
+            DetergentImageChange(DetergentType.Green);
+
         }
 
         public PressBasketHandler myDropper;
 
-
+        public Image detargentImage;
+        public Sprite[] detargentSprites;
+       
+        public void DetergentImageChange(DetergentType detargentuse)
+        {
+            detargentImage.preserveAspect = true;
+            detargentImage.sprite=detargentSprites[(int)detargentuse];
+        }
         public void MachineRefillNeeded()
         {
             index = myDropper.myIndex;
