@@ -646,6 +646,7 @@ GameObject:
   - component: {fileID: 8996302198402857632}
   - component: {fileID: 7789062448333580361}
   - component: {fileID: 8712003059343326745}
+  - component: {fileID: 4514971081216988912}
   m_Layer: 3
   m_Name: AI 1 1
   m_TagString: AI
@@ -671,6 +672,9 @@ Transform:
   - {fileID: 8894847510524178982}
   - {fileID: 6747180875857505321}
   - {fileID: 8802142341909450113}
+  - {fileID: 2276841500213024982}
+  - {fileID: 7530907853133345403}
+  - {fileID: 972538512191034153}
   - {fileID: 4299809722958679469}
   - {fileID: 594932933494616096}
   m_Father: {fileID: 0}
@@ -823,6 +827,9 @@ MonoBehaviour:
   - {fileID: 3283392939911440476}
   - {fileID: 811458920088761939}
   - {fileID: 3226636746302019579}
+  - {fileID: 5294222788451451564}
+  - {fileID: 4495441380936230913}
+  - {fileID: 6602006897077078355}
   leftPoint: {fileID: 8911643883280758291}
   rightPoint: {fileID: 4123757062247424476}
   bipedIk: {fileID: 0}
@@ -865,6 +872,20 @@ CapsuleCollider:
   m_Height: 1.9514817
   m_Direction: 1
   m_Center: {x: 0.115337074, y: 0.8841907, z: -0.096337795}
+--- !u!114 &4514971081216988912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508299148131310612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c671be8cae081bb4bad571d31fb0eb4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabID: -131293978
+  _isRenderersDisabled: 0
 --- !u!1 &6473279722398616705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,6 +1187,1540 @@ MonoBehaviour:
   myCloth: {fileID: 7831808365817890795, guid: f848f157b2ab43548935a88ad481a894, type: 3}
   myClothFragment: []
   myAiScript: {fileID: 8996302198402857632}
+--- !u!1001 &789713105825690818
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8325583607591772352}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98802716
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00022891161
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0014639162
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.15427311
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -17.749
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_Name
+      value: Female 05
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9645404
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0004605055
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0016835108
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.26392952
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 30.607
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3e802bed60dc57c4bb54eb16935f9144, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4416692408099074187}
+  m_SourcePrefab: {fileID: 100100000, guid: 9bedba7e3906ddd4ca15a510ab400f98, type: 3}
+--- !u!4 &181461792710939326 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 608321761475470972, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &447252963517843859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4416692408099074187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447252963517843859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70e525c82ce9413fa4d940ad7fcf1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixTransforms: 1
+  references:
+    root: {fileID: 972538512191034153}
+    pelvis: {fileID: 4697100838320403389}
+    leftThigh: {fileID: 2986439655252150977}
+    leftCalf: {fileID: 7623254309856432671}
+    leftFoot: {fileID: 3057115526345763571}
+    rightThigh: {fileID: 8911187207166182530}
+    rightCalf: {fileID: 5113630845782194712}
+    rightFoot: {fileID: 181461792710939326}
+    leftUpperArm: {fileID: 6532531850514049018}
+    leftForearm: {fileID: 7792036080703228475}
+    leftHand: {fileID: 5821460198658105601}
+    rightUpperArm: {fileID: 6462706340904315847}
+    rightForearm: {fileID: 2983284059558740330}
+    rightHand: {fileID: 1387164936188070666}
+    head: {fileID: 6562787444378141098}
+    spine:
+    - {fileID: 4992114311780139054}
+    - {fileID: 1898885133395629254}
+    eyes: []
+  solver:
+    executedInEditor: 0
+    IKPosition: {x: 0, y: 0, z: 0}
+    IKPositionWeight: 1
+    root: {fileID: 972538512191034153}
+    iterations: 4
+    chain:
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 4992114311780139054}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 01000000020000000300000004000000
+      childConstraints:
+      - pushElasticity: 0
+        pullElasticity: 1
+        bone1: {fileID: 6532531850514049018}
+        bone2: {fileID: 8911187207166182530}
+      - pushElasticity: 0
+        pullElasticity: 1
+        bone1: {fileID: 6462706340904315847}
+        bone2: {fileID: 2986439655252150977}
+      - pushElasticity: 0
+        pullElasticity: 0
+        bone1: {fileID: 6532531850514049018}
+        bone2: {fileID: 6462706340904315847}
+      - pushElasticity: 0
+        pullElasticity: 0
+        bone1: {fileID: 2986439655252150977}
+        bone2: {fileID: 8911187207166182530}
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 6532531850514049018}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 7792036080703228475}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 5821460198658105601}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 6462706340904315847}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 2983284059558740330}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 1387164936188070666}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 2986439655252150977}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 7623254309856432671}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 3057115526345763571}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 8911187207166182530}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 5113630845782194712}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 181461792710939326}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    effectors:
+    - bone: {fileID: 4992114311780139054}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones:
+      - {fileID: 2986439655252150977}
+      - {fileID: 8911187207166182530}
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 6532531850514049018}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 6462706340904315847}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 2986439655252150977}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 8911187207166182530}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 5821460198658105601}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 6532531850514049018}
+      planeBone2: {fileID: 6462706340904315847}
+      planeBone3: {fileID: 4992114311780139054}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 1387164936188070666}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 6462706340904315847}
+      planeBone2: {fileID: 6532531850514049018}
+      planeBone3: {fileID: 4992114311780139054}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 3057115526345763571}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 2986439655252150977}
+      planeBone2: {fileID: 8911187207166182530}
+      planeBone3: {fileID: 4992114311780139054}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 181461792710939326}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 8911187207166182530}
+      planeBone2: {fileID: 2986439655252150977}
+      planeBone3: {fileID: 4992114311780139054}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    spineMapping:
+      spineBones:
+      - {fileID: 4697100838320403389}
+      - {fileID: 4992114311780139054}
+      - {fileID: 1898885133395629254}
+      leftUpperArmBone: {fileID: 6532531850514049018}
+      rightUpperArmBone: {fileID: 6462706340904315847}
+      leftThighBone: {fileID: 2986439655252150977}
+      rightThighBone: {fileID: 8911187207166182530}
+      iterations: 3
+      twistWeight: 1
+    boneMappings:
+    - bone: {fileID: 6562787444378141098}
+      maintainRotationWeight: 0
+    limbMappings:
+    - parentBone: {fileID: 3126578640298210358}
+      bone1: {fileID: 6532531850514049018}
+      bone2: {fileID: 7792036080703228475}
+      bone3: {fileID: 5821460198658105601}
+      maintainRotationWeight: 0
+      weight: 1
+    - parentBone: {fileID: 7550622584730471775}
+      bone1: {fileID: 6462706340904315847}
+      bone2: {fileID: 2983284059558740330}
+      bone3: {fileID: 1387164936188070666}
+      maintainRotationWeight: 0
+      weight: 1
+    - parentBone: {fileID: 0}
+      bone1: {fileID: 2986439655252150977}
+      bone2: {fileID: 7623254309856432671}
+      bone3: {fileID: 3057115526345763571}
+      maintainRotationWeight: 1
+      weight: 1
+    - parentBone: {fileID: 0}
+      bone1: {fileID: 8911187207166182530}
+      bone2: {fileID: 5113630845782194712}
+      bone3: {fileID: 181461792710939326}
+      maintainRotationWeight: 1
+      weight: 1
+    FABRIKPass: 1
+    rootNode: {fileID: 4992114311780139054}
+    spineStiffness: 0.5
+    pullBodyVertical: 0.5
+    pullBodyHorizontal: 0
+--- !u!4 &972538512191034153 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1387164936188070666 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1898885133395629254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8021001004253913084, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2983284059558740330 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2563496969622287784, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2986439655252150977 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2559285840627121667, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3057115526345763571 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6874584590210671055, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3126578640298210358 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6803169544883306252, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4697100838320403389 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4992114311780139054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3480699329000672020, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5113630845782194712 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3746190272939815206, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5821460198658105601 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6502182839619065283, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6462706340904315847 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6000407479487422213, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6532531850514049018 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3432401550182100168, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6562787444378141098 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6602006897077078355 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7550622584730471775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7078722787440015773, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7623254309856432671 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2072040086291044643, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7792036080703228475 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1812909498023395591, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8911187207166182530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8169382868667117632, guid: 9bedba7e3906ddd4ca15a510ab400f98,
+    type: 3}
+  m_PrefabInstance: {fileID: 789713105825690818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1734534819665018685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8325583607591772352}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.91432905
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.40384114
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.011899086
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.027804013
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -47.546
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 3.756
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -5.139
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96323556
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.26695025
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0077219903
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0292445
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -30.919
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -2.037
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 4.041
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9851201
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.0033231522
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0015574379
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.17182823
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.406
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -19.788
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_Name
+      value: Female 03
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.94329214
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.008317307
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0014267843
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.3318564
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.953
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.162
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 38.766
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3e802bed60dc57c4bb54eb16935f9144, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2707842946393628704}
+  m_SourcePrefab: {fileID: 100100000, guid: 5b4db70b8af28a144a10e4ee3cbe85d6, type: 3}
+--- !u!4 &119313438953832693 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &629906019375980345 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8021001004253913084, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1180927516480592193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 608321761475470972, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1500586992803562092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2707842946393628704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500586992803562092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70e525c82ce9413fa4d940ad7fcf1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixTransforms: 1
+  references:
+    root: {fileID: 2276841500213024982}
+    pelvis: {fileID: 6037257318081427522}
+    leftThigh: {fileID: 4293661982724833598}
+    leftCalf: {fileID: 8875729273020570080}
+    leftFoot: {fileID: 4074314586016424204}
+    rightThigh: {fileID: 7587778487163637629}
+    rightCalf: {fileID: 6057506361146339815}
+    rightFoot: {fileID: 1180927516480592193}
+    leftUpperArm: {fileID: 5210637020330241029}
+    leftForearm: {fileID: 9134723156770013636}
+    leftHand: {fileID: 4768796253709363966}
+    rightUpperArm: {fileID: 5429077209507438648}
+    rightForearm: {fileID: 4287726822710151829}
+    rightHand: {fileID: 119313438953832693}
+    head: {fileID: 5328996069652400725}
+    spine:
+    - {fileID: 6314148229329226705}
+    - {fileID: 629906019375980345}
+    eyes: []
+  solver:
+    executedInEditor: 0
+    IKPosition: {x: 0, y: 0, z: 0}
+    IKPositionWeight: 1
+    root: {fileID: 2276841500213024982}
+    iterations: 4
+    chain:
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 6314148229329226705}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 01000000020000000300000004000000
+      childConstraints:
+      - pushElasticity: 0
+        pullElasticity: 1
+        bone1: {fileID: 5210637020330241029}
+        bone2: {fileID: 7587778487163637629}
+      - pushElasticity: 0
+        pullElasticity: 1
+        bone1: {fileID: 5429077209507438648}
+        bone2: {fileID: 4293661982724833598}
+      - pushElasticity: 0
+        pullElasticity: 0
+        bone1: {fileID: 5210637020330241029}
+        bone2: {fileID: 5429077209507438648}
+      - pushElasticity: 0
+        pullElasticity: 0
+        bone1: {fileID: 4293661982724833598}
+        bone2: {fileID: 7587778487163637629}
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 5210637020330241029}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 9134723156770013636}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 4768796253709363966}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 5429077209507438648}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 4287726822710151829}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 119313438953832693}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 4293661982724833598}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 8875729273020570080}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 4074314586016424204}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 7587778487163637629}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 6057506361146339815}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 1180927516480592193}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    effectors:
+    - bone: {fileID: 6314148229329226705}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones:
+      - {fileID: 4293661982724833598}
+      - {fileID: 7587778487163637629}
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 5210637020330241029}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 5429077209507438648}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 4293661982724833598}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 7587778487163637629}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 4768796253709363966}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 5210637020330241029}
+      planeBone2: {fileID: 5429077209507438648}
+      planeBone3: {fileID: 6314148229329226705}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 119313438953832693}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 5429077209507438648}
+      planeBone2: {fileID: 5210637020330241029}
+      planeBone3: {fileID: 6314148229329226705}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 4074314586016424204}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 4293661982724833598}
+      planeBone2: {fileID: 7587778487163637629}
+      planeBone3: {fileID: 6314148229329226705}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 1180927516480592193}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 7587778487163637629}
+      planeBone2: {fileID: 4293661982724833598}
+      planeBone3: {fileID: 6314148229329226705}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    spineMapping:
+      spineBones:
+      - {fileID: 6037257318081427522}
+      - {fileID: 6314148229329226705}
+      - {fileID: 629906019375980345}
+      leftUpperArmBone: {fileID: 5210637020330241029}
+      rightUpperArmBone: {fileID: 5429077209507438648}
+      leftThighBone: {fileID: 4293661982724833598}
+      rightThighBone: {fileID: 7587778487163637629}
+      iterations: 3
+      twistWeight: 1
+    boneMappings:
+    - bone: {fileID: 5328996069652400725}
+      maintainRotationWeight: 0
+    limbMappings:
+    - parentBone: {fileID: 4144445723881275337}
+      bone1: {fileID: 5210637020330241029}
+      bone2: {fileID: 9134723156770013636}
+      bone3: {fileID: 4768796253709363966}
+      maintainRotationWeight: 0
+      weight: 1
+    - parentBone: {fileID: 8804223791921022624}
+      bone1: {fileID: 5429077209507438648}
+      bone2: {fileID: 4287726822710151829}
+      bone3: {fileID: 119313438953832693}
+      maintainRotationWeight: 0
+      weight: 1
+    - parentBone: {fileID: 0}
+      bone1: {fileID: 4293661982724833598}
+      bone2: {fileID: 8875729273020570080}
+      bone3: {fileID: 4074314586016424204}
+      maintainRotationWeight: 1
+      weight: 1
+    - parentBone: {fileID: 0}
+      bone1: {fileID: 7587778487163637629}
+      bone2: {fileID: 6057506361146339815}
+      bone3: {fileID: 1180927516480592193}
+      maintainRotationWeight: 1
+      weight: 1
+    FABRIKPass: 1
+    rootNode: {fileID: 6314148229329226705}
+    spineStiffness: 0.5
+    pullBodyVertical: 0.5
+    pullBodyHorizontal: 0
+--- !u!4 &2276841500213024982 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4074314586016424204 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6874584590210671055, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4144445723881275337 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6803169544883306252, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4287726822710151829 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2563496969622287784, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4293661982724833598 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2559285840627121667, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4768796253709363966 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6502182839619065283, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5210637020330241029 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3432401550182100168, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5294222788451451564 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5328996069652400725 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5429077209507438648 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6000407479487422213, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6037257318081427522 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6057506361146339815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3746190272939815206, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6314148229329226705 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3480699329000672020, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7587778487163637629 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8169382868667117632, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8804223791921022624 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7078722787440015773, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8875729273020570080 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2072040086291044643, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9134723156770013636 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1812909498023395591, guid: 5b4db70b8af28a144a10e4ee3cbe85d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734534819665018685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5196897380750078554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3686,6 +5241,803 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -6803169544883306252, guid: 72c5efaf452fb8546aa93939948c01c4,
     type: 3}
   m_PrefabInstance: {fileID: 6496570277797219266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8001086431395779984
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8325583607591772352}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.72466296
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.68857807
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.018353388
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.019675255
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -85.751
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 46.449
+      objectReference: {fileID: 0}
+    - target: {fileID: -3746190272939815206, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -46.556
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8156871
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5778674
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0153851025
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.022069665
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -70.397
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -8.675
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 9.225
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97765136
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00021114945
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0009824752
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.21023032
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.115
+      objectReference: {fileID: 0}
+    - target: {fileID: -1812909498023395591, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -24.272
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_Name
+      value: Female 04
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.761916
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00068427616
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0008056067
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.647675
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0.121
+      objectReference: {fileID: 0}
+    - target: {fileID: 2563496969622287784, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 80.733
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3e802bed60dc57c4bb54eb16935f9144, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6296456283812853905}
+  m_SourcePrefab: {fileID: 100100000, guid: 2931ec0f1c2c5124f9189887dc6d9d84, type: 3}
+--- !u!4 &711236540183423849 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1812909498023395591, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &880228545384395597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2072040086291044643, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &951734417848019981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7078722787440015773, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2186193983449572816 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8169382868667117632, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2358623764007248252 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3480699329000672020, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2525193913596975946 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3746190272939815206, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2653598771739890415 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3834240452398776403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6502182839619065283, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4344895536562358933 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6000407479487422213, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4495441380936230913 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4535048123846975736 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4563335329778386600 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3432401550182100168, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5516339302093499283 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2559285840627121667, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5519952298910638136 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2563496969622287784, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5665485313828623716 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6803169544883306252, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5733363846833589153 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6874584590210671055, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7190269922680121537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6296456283812853905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7190269922680121537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70e525c82ce9413fa4d940ad7fcf1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixTransforms: 1
+  references:
+    root: {fileID: 7530907853133345403}
+    pelvis: {fileID: 2653598771739890415}
+    leftThigh: {fileID: 5516339302093499283}
+    leftCalf: {fileID: 880228545384395597}
+    leftFoot: {fileID: 5733363846833589153}
+    rightThigh: {fileID: 2186193983449572816}
+    rightCalf: {fileID: 2525193913596975946}
+    rightFoot: {fileID: 7455886052103402476}
+    leftUpperArm: {fileID: 4563335329778386600}
+    leftForearm: {fileID: 711236540183423849}
+    leftHand: {fileID: 3834240452398776403}
+    rightUpperArm: {fileID: 4344895536562358933}
+    rightForearm: {fileID: 5519952298910638136}
+    rightHand: {fileID: 8555781001490524760}
+    head: {fileID: 4535048123846975736}
+    spine:
+    - {fileID: 2358623764007248252}
+    - {fileID: 9198109256903030164}
+    eyes: []
+  solver:
+    executedInEditor: 0
+    IKPosition: {x: 0, y: 0, z: 0}
+    IKPositionWeight: 1
+    root: {fileID: 7530907853133345403}
+    iterations: 4
+    chain:
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 2358623764007248252}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 01000000020000000300000004000000
+      childConstraints:
+      - pushElasticity: 0
+        pullElasticity: 1
+        bone1: {fileID: 4563335329778386600}
+        bone2: {fileID: 2186193983449572816}
+      - pushElasticity: 0
+        pullElasticity: 1
+        bone1: {fileID: 4344895536562358933}
+        bone2: {fileID: 5516339302093499283}
+      - pushElasticity: 0
+        pullElasticity: 0
+        bone1: {fileID: 4563335329778386600}
+        bone2: {fileID: 4344895536562358933}
+      - pushElasticity: 0
+        pullElasticity: 0
+        bone1: {fileID: 5516339302093499283}
+        bone2: {fileID: 2186193983449572816}
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 4563335329778386600}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 711236540183423849}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 3834240452398776403}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 4344895536562358933}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 5519952298910638136}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 8555781001490524760}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 5516339302093499283}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 880228545384395597}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 5733363846833589153}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    - pin: 0
+      pull: 1
+      push: 0
+      pushParent: 0
+      reach: 0.1
+      reachSmoothing: 1
+      pushSmoothing: 1
+      nodes:
+      - transform: {fileID: 2186193983449572816}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 2525193913596975946}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      - transform: {fileID: 7455886052103402476}
+        weight: 1
+        solverPosition: {x: 0, y: 0, z: 0}
+        solverRotation: {x: 0, y: 0, z: 0, w: 1}
+        defaultLocalPosition: {x: 0, y: 0, z: 0}
+        defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+        length: 0
+        effectorPositionWeight: 0
+        effectorRotationWeight: 0
+        offset: {x: 0, y: 0, z: 0}
+      children: 
+      childConstraints: []
+      bendConstraint:
+        bone1: {fileID: 0}
+        bone2: {fileID: 0}
+        bone3: {fileID: 0}
+        bendGoal: {fileID: 0}
+        direction: {x: 1, y: 0, z: 0}
+        rotationOffset: {x: 0, y: 0, z: 0, w: 0}
+        weight: 0
+        defaultLocalDirection: {x: 0, y: 0, z: 0}
+        defaultChildDirection: {x: 0, y: 0, z: 0}
+    effectors:
+    - bone: {fileID: 2358623764007248252}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones:
+      - {fileID: 5516339302093499283}
+      - {fileID: 2186193983449572816}
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 4563335329778386600}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 4344895536562358933}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 5516339302093499283}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 2186193983449572816}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 0}
+      planeBone2: {fileID: 0}
+      planeBone3: {fileID: 0}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 3834240452398776403}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 4563335329778386600}
+      planeBone2: {fileID: 4344895536562358933}
+      planeBone3: {fileID: 2358623764007248252}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 8555781001490524760}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 4344895536562358933}
+      planeBone2: {fileID: 4563335329778386600}
+      planeBone3: {fileID: 2358623764007248252}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 5733363846833589153}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 5516339302093499283}
+      planeBone2: {fileID: 2186193983449572816}
+      planeBone3: {fileID: 2358623764007248252}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    - bone: {fileID: 7455886052103402476}
+      target: {fileID: 0}
+      positionWeight: 0
+      rotationWeight: 0
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      positionOffset: {x: 0, y: 0, z: 0}
+      effectChildNodes: 1
+      maintainRelativePositionWeight: 0
+      childBones: []
+      planeBone1: {fileID: 2186193983449572816}
+      planeBone2: {fileID: 5516339302093499283}
+      planeBone3: {fileID: 2358623764007248252}
+      planeRotationOffset: {x: 0, y: 0, z: 0, w: 1}
+    spineMapping:
+      spineBones:
+      - {fileID: 2653598771739890415}
+      - {fileID: 2358623764007248252}
+      - {fileID: 9198109256903030164}
+      leftUpperArmBone: {fileID: 4563335329778386600}
+      rightUpperArmBone: {fileID: 4344895536562358933}
+      leftThighBone: {fileID: 5516339302093499283}
+      rightThighBone: {fileID: 2186193983449572816}
+      iterations: 3
+      twistWeight: 1
+    boneMappings:
+    - bone: {fileID: 4535048123846975736}
+      maintainRotationWeight: 0
+    limbMappings:
+    - parentBone: {fileID: 5665485313828623716}
+      bone1: {fileID: 4563335329778386600}
+      bone2: {fileID: 711236540183423849}
+      bone3: {fileID: 3834240452398776403}
+      maintainRotationWeight: 0
+      weight: 1
+    - parentBone: {fileID: 951734417848019981}
+      bone1: {fileID: 4344895536562358933}
+      bone2: {fileID: 5519952298910638136}
+      bone3: {fileID: 8555781001490524760}
+      maintainRotationWeight: 0
+      weight: 1
+    - parentBone: {fileID: 0}
+      bone1: {fileID: 5516339302093499283}
+      bone2: {fileID: 880228545384395597}
+      bone3: {fileID: 5733363846833589153}
+      maintainRotationWeight: 1
+      weight: 1
+    - parentBone: {fileID: 0}
+      bone1: {fileID: 2186193983449572816}
+      bone2: {fileID: 2525193913596975946}
+      bone3: {fileID: 7455886052103402476}
+      maintainRotationWeight: 1
+      weight: 1
+    FABRIKPass: 1
+    rootNode: {fileID: 2358623764007248252}
+    spineStiffness: 0.5
+    pullBodyVertical: 0.5
+    pullBodyHorizontal: 0
+--- !u!4 &7455886052103402476 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 608321761475470972, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7530907853133345403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8555781001490524760 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9198109256903030164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8021001004253913084, guid: 2931ec0f1c2c5124f9189887dc6d9d84,
+    type: 3}
+  m_PrefabInstance: {fileID: 8001086431395779984}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9005617961241859533
 PrefabInstance:

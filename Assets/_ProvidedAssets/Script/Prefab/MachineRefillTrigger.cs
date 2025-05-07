@@ -20,35 +20,93 @@ namespace LaundaryMan
 
         public GameObject refill;
         public PressBasketHandler pressingClothPickingHandler;
+        private bool once;
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.gameObject.CompareTag("Player") ||
-                other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
-            ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(true);
+                other.gameObject.layer != LayerMask.NameToLayer("Player"))
+                return;
 
-            switch (machienType)
+            if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !once)
             {
-                case TypeMachine.Machine:
-                    ReferenceManager.Instance.canvasManager.machineButton.typeMachine = machienType;
+                once = true;
+              
 
-                    
-                    ReferenceManager.Instance.canvasManager.machineButton.ChangeSprite(sprite);
-                    ReferenceManager.Instance.canvasManager.machineButton.canvasState = canvasState;
-                    ReferenceManager.Instance.canvasManager.machineButton.washingMachineDropper =
-                        this.washingMachineDropper;
-                    
-                    break;
-                case TypeMachine.Rinse:
-                    ReferenceManager.Instance.canvasManager.machineButton.typeMachine = machienType;
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(true);
 
-                    ReferenceManager.Instance.canvasManager.machineButton.ChangeSprite(sprite);
-                    ReferenceManager.Instance.canvasManager.machineButton.canvasState = canvasState;
-                    ReferenceManager.Instance.canvasManager.machineButton.rinManager = rinManager;
-                    ReferenceManager.Instance.canvasManager.machineButton.rinManager = rinManager;
-                    ReferenceManager.Instance.canvasManager.machineButton.pressingClothPickingHandler = pressingClothPickingHandler;
-                        
-                    break;
+                switch (machienType)
+                {
+                    case TypeMachine.Machine:
+                        ReferenceManager.Instance.canvasManager.machineButton.typeMachine = machienType;
+
+
+                        ReferenceManager.Instance.canvasManager.machineButton.ChangeSprite(sprite);
+                        ReferenceManager.Instance.canvasManager.machineButton.canvasState = canvasState;
+                        ReferenceManager.Instance.canvasManager.machineButton.washingMachineDropper =
+                            this.washingMachineDropper;
+                        this.gameObject.SetActive(false);
+
+                        break;
+                    case TypeMachine.Rinse:
+                        ReferenceManager.Instance.canvasManager.machineButton.typeMachine = machienType;
+                        ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(true);
+
+                        ReferenceManager.Instance.canvasManager.machineButton.ChangeSprite(sprite);
+                        ReferenceManager.Instance.canvasManager.machineButton.canvasState = canvasState;
+                        ReferenceManager.Instance.canvasManager.machineButton.rinManager = rinManager;
+                        ReferenceManager.Instance.canvasManager.machineButton.rinManager = rinManager;
+                        ReferenceManager.Instance.canvasManager.machineButton.pressingClothPickingHandler =
+                            pressingClothPickingHandler;
+
+                        break;
+                }
             }
+          
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (ReferenceManager.Instance.GameData.isTutorialCompleted)
+
+            {
+                if (!other.gameObject.CompareTag("Player") ||
+                    other.gameObject.layer != LayerMask.NameToLayer("Player"))
+                    return;
+
+
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(true);
+
+                switch (machienType)
+                {
+                    case TypeMachine.Machine:
+                        ReferenceManager.Instance.canvasManager.machineButton.typeMachine = machienType;
+
+
+                        ReferenceManager.Instance.canvasManager.machineButton.ChangeSprite(sprite);
+                        ReferenceManager.Instance.canvasManager.machineButton.canvasState = canvasState;
+                        ReferenceManager.Instance.canvasManager.machineButton.washingMachineDropper =
+                            this.washingMachineDropper;
+
+
+                        break;
+                    case TypeMachine.Rinse:
+                        ReferenceManager.Instance.canvasManager.machineButton.typeMachine = machienType;
+
+                        ReferenceManager.Instance.canvasManager.machineButton.ChangeSprite(sprite);
+                        ReferenceManager.Instance.canvasManager.machineButton.canvasState = canvasState;
+                        ReferenceManager.Instance.canvasManager.machineButton.rinManager = rinManager;
+                        ReferenceManager.Instance.canvasManager.machineButton.rinManager = rinManager;
+                        ReferenceManager.Instance.canvasManager.machineButton.pressingClothPickingHandler =
+                            pressingClothPickingHandler;
+
+                        break;
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
         }
 
         private void OnTriggerExit(Collider other)
@@ -56,6 +114,7 @@ namespace LaundaryMan
             if (!other.gameObject.CompareTag("Player") ||
                 other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
             ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+            //ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
         }
 
         public void ChangeState()

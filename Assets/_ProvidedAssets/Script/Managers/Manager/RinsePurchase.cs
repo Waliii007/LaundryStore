@@ -14,9 +14,12 @@ namespace LaundaryMan
     {
         public PressBasketHandler[] washingMachineDropper;
         public GameObject tutorialPanel;
-
+        public bool once;
+        public GameObject crossBuuton;
         private void OnEnable()
         {
+            crossBuuton.SetActive(ReferenceManager.Instance.GameData.isTutorialCompleted);
+
             tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
         }
 
@@ -37,7 +40,7 @@ namespace LaundaryMan
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
 
                 UpdateRinseUI();
-                if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+                if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !once)
                 {
                     ReferenceManager.Instance.tutorialHandler.TaskCompleted();
                 }
@@ -116,7 +119,7 @@ namespace LaundaryMan
         #endregion
 
         #region Use Buttons
-
+        
         public void OnUseGreenButton(int machineIndex)
         {
             if (UseRinse(RinseType.Green, machineIndex))
@@ -126,6 +129,8 @@ namespace LaundaryMan
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
                 washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Green);
+                
+                
             }
             else
             {

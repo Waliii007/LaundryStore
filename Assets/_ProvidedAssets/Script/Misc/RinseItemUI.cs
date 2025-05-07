@@ -11,20 +11,24 @@ namespace LaundaryMan
         public Text redRinseText;
         public RinsePurchase purchase;
         public int index;
-
+        public GameObject crossButton;
+        public GameObject tutorialObject;
         private void OnEnable()
         {
             UpdateRinseUI();
+            crossButton.SetActive(ReferenceManager.Instance.GameData.isTutorialCompleted);
+            tutorialObject.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
         }
+
+        public bool once;
 
         public void GreenRinse()
         {
             purchase.OnUseGreenButton(index);
-            if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+            if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !once)
             {
                 ReferenceManager.Instance.tutorialHandler.TaskCompleted();
                 ReferenceManager.Instance.tutorialHandler.CompleteTutorial();
-
             }
         }
 

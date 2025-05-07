@@ -14,10 +14,11 @@ namespace LaundaryMan
     {
         public WashingMachineDropper[] washingMachineDropper;
         public GameObject tutorialPanel;
-
+        public GameObject crossButton;
         private void OnEnable()
         {
             tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
+            crossButton.SetActive(ReferenceManager.Instance.GameData.isTutorialCompleted);
         }
 
         public void OnClickCrossButton()
@@ -27,6 +28,7 @@ namespace LaundaryMan
 
         #region Buy Buttons
 
+        public bool once;
         public void OnBuyGreenButton()
         {
             int price = 150;
@@ -36,7 +38,7 @@ namespace LaundaryMan
                 ReferenceManager.Instance.GameData.playerCash -= price;
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Detergent");
                 UpdateDetergentUI();
-                if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+                if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !once)
                 {
                     ReferenceManager.Instance.tutorialHandler.TaskCompleted();
                 }
@@ -118,8 +120,10 @@ namespace LaundaryMan
             if (UseDetergent(DetergentType.Green, machineIndex))
             {
                 washingMachineDropper[machineIndex].Refill(250);
+                washingMachineDropper[machineIndex].machineCanvasManager.CanvasStateChanger(MachineCanvasStates.Full);
                 UpdateDetergentUI();
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
                 washingMachineDropper[machineIndex].machineCanvasManager.DetergentImageChange(DetergentType.Green);
             }

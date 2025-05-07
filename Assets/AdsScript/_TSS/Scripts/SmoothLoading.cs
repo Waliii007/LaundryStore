@@ -14,20 +14,19 @@ public class SmoothLoading : MonoBehaviour
     private AsyncOperation loadOperation;
 
     // Reference to the progress bar in the UI.
-    [SerializeField]
-    private Image progressBar;
+    [SerializeField] private Image progressBar;
 
     // Progress values.
     private float currentValue;
     private float targetValue;
 
     // Multiplier for progress animation speed.
-    [SerializeField]
-    [Range(0, 1)]
-    private float progressAnimationMultiplier = 0.25f;
+    [SerializeField] [Range(0, 1)] private float progressAnimationMultiplier = 0.25f;
+
     //public int sceneNum=1;
     public RectTransform rotatingImg;
     public RectTransform bg;
+
     /// <summary>
     /// Unity method called once at the start.
     /// Used here to start the loading progress.
@@ -40,11 +39,13 @@ public class SmoothLoading : MonoBehaviour
     }
 
     public GameObject animationPoint;
+
     private void OnEnable()
     {
         // Set 0 for progress values.
         progressBar.fillAmount = currentValue = targetValue = 0;
     }
+
     public void StartLoading(int sceneNum)
     {
         CanvasScriptSplash.instance.ChangeCanvas(CanvasStats.Loading);
@@ -53,7 +54,7 @@ public class SmoothLoading : MonoBehaviour
         //var currentScene = SceneManager.GetActiveScene();
         bg.DOAnchorPos(Vector3.zero, 1).SetEase(Ease.OutBounce);
         loadOperation = SceneManager.LoadSceneAsync(sceneNum);
-        
+
         // Don't active the scene when it's fully loaded, let the progress bar finish the animation.
         // With this flag set, progress will stop at 0.9f.
         loadOperation.allowSceneActivation = false;
@@ -61,15 +62,17 @@ public class SmoothLoading : MonoBehaviour
         //AdsManager.Instance.HideBanner();
         isLoading = true;
     }
+
     public void UnloadScene(int sceneNum)
     {
         SceneManager.UnloadSceneAsync(sceneNum);
         isLoading = true;
     }
+
     public void RestartScene(int sceneNum)
     {
         if (SceneManager.GetSceneByBuildIndex(sceneNum).isLoaded)
-        { 
+        {
             SceneManager.UnloadSceneAsync(sceneNum).completed += (AsyncOperation op) =>
             {
                 // Reload the scene additively after it's unloaded
@@ -88,7 +91,9 @@ public class SmoothLoading : MonoBehaviour
             Debug.LogWarning($"Scene 1 is not currently loaded!");
         }
     }
+
     Action callback = null;
+
     public void EmptyLoading(Action callBack)
     {
         CanvasScriptSplash.instance.ChangeCanvas(CanvasStats.Loading);
@@ -97,6 +102,7 @@ public class SmoothLoading : MonoBehaviour
         isLoading = true;
         callback = callBack;
     }
+
     /// <summary>
     /// Unity method called every frame.
     /// Used here to animate progress bar.
@@ -113,7 +119,7 @@ public class SmoothLoading : MonoBehaviour
         }
         else
             targetValue = 1;
- 
+
         currentValue = Mathf.MoveTowards(currentValue, targetValue, progressAnimationMultiplier * Time.deltaTime);
         progressBar.fillAmount = currentValue;
         MoveImageAlongLoadingBar();
@@ -125,15 +131,17 @@ public class SmoothLoading : MonoBehaviour
                 loadOperation.allowSceneActivation = true;
                 loadOperation = null;
             }
+
             isLoading = false;
             ShutLoading();
             targetValue = 0;
             Debug.Log("Loading Complete");
-           // gameObject.SetActive(false);
+            // gameObject.SetActive(false);
         }
     }
 
     public GameObject animationOutPoint;
+
     void ShutLoading()
     {
         bg.DOAnchorPos(new Vector3(0, 1450, 0), 0.5f).SetEase(Ease.InBounce).OnComplete(() =>
@@ -143,6 +151,7 @@ public class SmoothLoading : MonoBehaviour
             callback = null;
         });
     }
+
     private void MoveImageAlongLoadingBar()
     {
         // Get the width of the loading bar
@@ -152,6 +161,6 @@ public class SmoothLoading : MonoBehaviour
         float newXPosition = Mathf.Lerp(0, barWidth, progressBar.fillAmount);
 
         // Set the position of the moving image
-//        rotatingImg.anchoredPosition = new Vector2(newXPosition, rotatingImg.anchoredPosition.y);
+        rotatingImg.anchoredPosition = new Vector2(newXPosition, rotatingImg.anchoredPosition.y);
     }
 }

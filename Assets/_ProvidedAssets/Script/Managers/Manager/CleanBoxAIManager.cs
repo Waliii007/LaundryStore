@@ -14,20 +14,23 @@ namespace LaundaryMan
 
         public void AddTask(GameObject pickPosition, WashingMachineDropper dropper)
         {
-            // Check if a similar task already exists
-            foreach (var task in taskList)
+            if (availableAgents.Count > 0)
             {
-                if (task.PickPosition == pickPosition && task.dropper == dropper)
+                // Check if a similar task already exists
+                foreach (var task in taskList)
                 {
-                    return; // Task already exists, don't add again
+                    if (task.PickPosition == pickPosition && task.dropper == dropper)
+                    {
+                        return; // Task already exists, don't add again
+                    }
                 }
-            }
 
-            int i = Random.Range(0, ReferenceManager.Instance.GameData.unlockedMachine);
-            AICleanClothes.Task newTask = new AICleanClothes.Task(pickPosition, dropPosition[i]);
-            newTask.dropper = dropper;
-            taskList.Add(newTask);
-            AssignTask();
+                int i = Random.Range(0, ReferenceManager.Instance.GameData.unlockedMachine);
+                AICleanClothes.Task newTask = new AICleanClothes.Task(pickPosition, dropPosition[i]);
+                newTask.dropper = dropper;
+                taskList.Add(newTask);
+                AssignTask();
+            }
         }
 
         private void OnEnable()

@@ -58,10 +58,15 @@ namespace LaundaryMan
             {
                 some.gameObject.SetActive(true);   
             }
+            ReferenceManager.Instance.queueSystem.OnTutorialCompleted();
+            reference.SaveGameDataObserver();
+            StartCoroutine(washingMachineDropper.CheckCanvasStateRoutine());
+
         }
         public void TaskCompleted()
         {
-            DOVirtual.DelayedCall(1, () =>
+            ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+            DOVirtual.DelayedCall(.2f, () =>
                 ReferenceManager.Instance.tutorialHandler.TaskHandler(ReferenceManager.Instance.tutorialHandler
                     .currentTask + 1));
             if (tasks[(int)currentTask].TryGetComponent<TaskScript>(out var taskScript) && taskScript.taskObject)
@@ -69,7 +74,7 @@ namespace LaundaryMan
                 taskScript.taskObject.SetActive(false);
             }
         }
-
+        public WashingMachineDropper washingMachineDropper;
 
         private void OnDisable()
         {

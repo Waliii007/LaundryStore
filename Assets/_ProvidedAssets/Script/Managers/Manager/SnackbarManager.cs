@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace LaundaryMan
 {
@@ -71,7 +72,6 @@ namespace LaundaryMan
             }
             else
             {
-                
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough currency.");
             }
         }
@@ -85,13 +85,28 @@ namespace LaundaryMan
             UpdateFillImage();
             UpdateCanvasState();
             ReferenceManager.Instance.notificationHandler.ShowNotification($"{type} Cash Boost Activated ");
-            
-            
+
+            isBoostActive = true;
             // Update canvas on pack activation
         }
 
+        bool isBoostActive = false;
+        public int tipCash;
+        public int textToShow;
+
         public void OnCustomerServed()
         {
+            if (isBoostActive)
+            {
+                int TextToShow = Random.Range(10, 20);
+                tipCash += textToShow;
+                textToShow = TextToShow;
+            }
+            else
+            {
+                tipCash = 0;
+            }
+
             if (activePack == SnackbarType.None) return;
 
             remainingBoostedCustomers--;
@@ -104,10 +119,10 @@ namespace LaundaryMan
             }
         }
 
-        
 
         private void EndBoost()
         {
+            isBoostActive = false;
             activePack = SnackbarType.None;
             currentMultiplier = 1f;
             ResetFillImage();
@@ -138,6 +153,6 @@ namespace LaundaryMan
         public void BuyMaxPack() => BuyPack(2);
 
         public float GetCurrentMultiplier() => currentMultiplier;
-        public bool IsBoostActive() => activePack != SnackbarType.None;
+        public bool IsBoostActive() => isBoostActive;
     }
 }

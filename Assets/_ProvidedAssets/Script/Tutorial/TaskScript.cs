@@ -45,7 +45,6 @@ namespace LaundaryMan
                 case TutorialTask.CollectCash:
                     break;
                 case TutorialTask.RefillBuy:
-                     
                     break;
                 case TutorialTask.RinseBuy:
                    
@@ -54,12 +53,12 @@ namespace LaundaryMan
                     WashingMachineDropper.totalDetergent = 0;
                     WashingMachineDropper.EmptyForTutorial();
                     ReferenceManager.Instance.playerStackManager.pathDraw.destination = navmeshTarget;
-                    PressBasketHandler.EmptyForTutorial();
                     break;
                 case TutorialTask.RefillRinse:
                     PressBasketHandler.EmptyForTutorial();
                     ReferenceManager.Instance.playerStackManager.pathDraw.destination = navmeshTarget;
                     PressBasketHandler.totalRin = 0;
+                    ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
                     break;
             }
         }
@@ -97,6 +96,8 @@ namespace LaundaryMan
                     break;
                 case TutorialTask.RefillRinse:
                     break;
+                
+                
             }
         }
 

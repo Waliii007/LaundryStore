@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,10 +34,17 @@ namespace LaundaryMan
                 ReferenceManager.Instance.dirtyBoxAiManager.UnlockAi(ReferenceManager.Instance.GameData
                     .dirtyBoxAiUnlocked);
                 ReferenceManager.Instance.SaveGameDataObserver();
+                DOVirtual.DelayedCall(2f, (() =>
+                {
+                    ReferenceManager.Instance.basketTrigger.AddTask();
+
+                }));
+
                 if (SoundManager.instance)
                 {
                     SoundManager.instance.Play(SoundName.Upgrade);
                 }
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Worker Hired");
             }
 
             UiUpdate();
@@ -58,12 +66,18 @@ namespace LaundaryMan
                     ReferenceManager.Instance.dirtyBoxAiManager.UnlockAi(ReferenceManager.Instance.GameData
                         .dirtyBoxAiUnlocked);
                     ReferenceManager.Instance.SaveGameDataObserver();
+                    DOVirtual.DelayedCall(2f, (() =>
+                    {
+                        ReferenceManager.Instance.basketTrigger.AddTask();
 
+                    }));
                     if (SoundManager.instance)
                     {
                         SoundManager.instance.Play(SoundName.Upgrade);
                     }
                 }, "DirtyBoxAIUnlockLock");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Worker Hired");
+
             }
 
             UiUpdate();
@@ -89,9 +103,10 @@ namespace LaundaryMan
                     }
 
                     UiUpdate();
-
+                    ReferenceManager.Instance.notificationHandler.ShowNotification("Carry Capacity increased");
                     ReferenceManager.Instance.SaveGameDataObserver();
                 }, "CarryCapacityBoxAI");
+
             }
 
             UiUpdate();
@@ -114,6 +129,7 @@ namespace LaundaryMan
                     SoundManager.instance.Play(SoundName.Upgrade);
                 }
 
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Carry Capacity increased");
                 ReferenceManager.Instance.SaveGameDataObserver();
             }
 
@@ -139,6 +155,8 @@ namespace LaundaryMan
                     if (GlobalConstant.isLogger)
                         print("AI carryCapacityAI: " + ReferenceManager.Instance.GameData.speedOfAI);
                     //Observer
+                    ReferenceManager.Instance.notificationHandler.ShowNotification("Speed of Ai increased");
+
                     ReferenceManager.Instance.SaveGameDataObserver();
                     if (SoundManager.instance)
                     {
@@ -163,6 +181,8 @@ namespace LaundaryMan
                 if (GlobalConstant.isLogger)
                     print("AI carryCapacityAI: " + ReferenceManager.Instance.GameData.speedOfAI);
                 //Observer
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Speed of Ai increased");
+
                 ReferenceManager.Instance.SaveGameDataObserver();
 
                 if (SoundManager.instance)

@@ -43,15 +43,20 @@ namespace LaundaryMan
         public AIDestinationSetter aIDestinationSetter;
         public int limitToPickClothes = 0;
         public WashingMachineDropper washingMachineDropper;
+        public GameObject PickPoint;
+        public GameObject DropPoint;
+        public GameObject sleepPoint;
+
+        private float stateStartTime;
+        private float maxStateDuration = 10f;
+        private Coroutine observerCoroutine;
+        WaitForSeconds waitForSecondsToPickClothes = new WaitForSeconds(2f);
 
         protected override void OnAiEnable()
         {
             base.OnAiEnable();
             DOVirtual.DelayedCall(2, RegisterMe);
-
-
             DOVirtual.DelayedCall(3, ReferenceManager.Instance.dirtyBoxAiManager.AssignTask);
-            //  isInitialized = true;
         }
 
         public bool isInitialized
@@ -60,31 +65,20 @@ namespace LaundaryMan
             set => PlayerPrefs.SetInt("isInitialized" + this.name, value ? 1 : 0);
         }
 
-        public GameObject PickPoint;
-        public GameObject DropPoint;
-
         protected override void OnAnimationUpdate()
         {
             base.OnAnimationUpdate();
             animator.SetFloat(Movement, followerEntity.velocity.magnitude);
-            if (washingMachineDropper && washingMachineDropper.refillAmount <= 0)
-            {
-                followerEntity.enabled = false;
-            }
-            else
-            {
-                followerEntity.enabled = true;
-            }
+            followerEntity.enabled = washingMachineDropper == null || washingMachineDropper.refillAmount > 0;
         }
 
         public void AssignTask(Task task)
         {
             currentTask = task;
-            ChangeState(AIState.MovingToPick);
-//            print("Task assigned");
             PickPoint = task.PickPosition;
             DropPoint = task.DropPosition;
             washingMachineDropper = task.dropper;
+            ChangeState(AIState.MovingToPick);
         }
 
         private void ChangeState(AIState newState)
@@ -92,11 +86,15 @@ namespace LaundaryMan
             if (currentState == newState) return;
             currentState = newState;
 
+            stateStartTime = Time.time;
+            if (observerCoroutine != null)
+                StopCoroutine(observerCoroutine);
+            observerCoroutine = StartCoroutine(StateObserver());
+
             switch (currentState)
             {
                 case AIState.Idle:
                     RegisterMe();
-
                     break;
                 case AIState.MovingToPick:
                     StartCoroutine(MoveToPosition(currentTask.PickPosition.transform, AIState.Picking));
@@ -113,6 +111,33 @@ namespace LaundaryMan
             }
         }
 
+        private IEnumerator StateObserver()
+        {
+            while (true)
+            {
+                if (currentTask != null && currentTask.dropper)
+                {
+                    yield return new WaitUntil((() =>
+                        !currentTask.dropper.isDetergentEmpty && aiStackManager.ClothStack.Count > 0));
+                }
+
+                if (Time.time - stateStartTime > maxStateDuration && aiStackManager.ClothStack.Count <= 0)
+                {
+                    RegisterMe();
+                    ChangeState(AIState.Idle);
+                    yield break;
+                }
+                else
+                {
+                    stateStartTime = maxStateDuration;
+                }
+
+                yield return waitForSecondsChangeState;
+            }
+        }
+
+        public WaitForSeconds waitForSecondsChangeState = new WaitForSeconds(1f);
+
         public override void SetDestination(GameObject destination)
         {
             aIDestinationSetter.target = destination.transform;
@@ -120,42 +145,20 @@ namespace LaundaryMan
 
         private IEnumerator MoveToPosition(Transform targetPosition, AIState nextState)
         {
-            switch (currentState)
+            if (currentState == AIState.MovingToPick)
             {
-                case AIState.Idle:
-                    break;
-                case AIState.MovingToPick:
-                    SetDestination(targetPosition.gameObject);
-                    yield return new WaitUntil(() =>
-                        Vector3.Distance(transform.position, targetPosition.position) < 0.5f);
-                    ChangeState(nextState);
-                    break;
-                case AIState.Picking:
-                    StartCoroutine(PickLaundry());
-                    break;
-                case AIState.MovingToDrop:
-
-                    SetDestination(targetPosition.gameObject);
-                    yield return new WaitUntil(() =>
-                        Vector3.Distance(transform.position, targetPosition.position) < 0.5f);
-                    ChangeState(nextState);
-                    break;
-                case AIState.Dropping:
-                    break;
+                yield return new WaitUntil(() => !ReferenceManager.Instance.basketTrigger.isPlayerInside);
             }
 
+            SetDestination(targetPosition.gameObject);
+            yield return new WaitUntil(() => Vector3.Distance(transform.position, targetPosition.position) < 0.5f);
             ChangeState(nextState);
         }
 
-        WaitForSeconds waitForSecondsToPickClothes = new WaitForSeconds(2f);
-
         private IEnumerator PickLaundry()
         {
-            yield return new WaitUntil(() =>
-                aiStackManager.ClothStack.Count >= washingMachineDropper.limitOnBasket);
-
+            yield return new WaitUntil(() => aiStackManager.ClothStack.Count >= aiStackManager.maxClothesPerCycle);
             yield return waitForSecondsToPickClothes;
-
             ChangeState(AIState.MovingToDrop);
         }
 
@@ -163,14 +166,15 @@ namespace LaundaryMan
         {
             yield return new WaitUntil(() => aiStackManager.ClothStack.Count <= 0);
             ReferenceManager.Instance.dirtyBoxAiManager.UnregisterAgent(this);
-            washingMachineDropper.isOccupiedbyDirty = false;
-            yield return waitForSecondsToPickClothes;
+            if (washingMachineDropper)
+            {
+                washingMachineDropper.isOccupiedbyDirty = false;
+            }
 
+            yield return waitForSecondsToPickClothes;
             ChangeState(AIState.Idle);
             SetDestination(sleepPoint);
         }
-
-        public GameObject sleepPoint;
 
         public void RegisterMe()
         {

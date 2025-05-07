@@ -11,6 +11,12 @@ namespace LaundaryMan
         public WashingMachineDropper washingMachineDropper;
         public PressBasketHandler pressingClothPickingHandler;
         public RinseMachineCanvas rinManager;
+        public GameObject tutorialPanel;
+
+        private void OnEnable()
+        {
+            tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
+        }
 
         public void ChangeSprite(Sprite newSprite)
         {
@@ -19,8 +25,15 @@ namespace LaundaryMan
 
         public MachineRefillTrigger.TypeMachine typeMachine;
 
+        private void OnDisable()
+        {
+            tutorialPanel.SetActive(false);
+
+        }
+
         public void TriggerState()
         {
+            
             switch (typeMachine)
             {
                 case MachineRefillTrigger.TypeMachine.Machine:
@@ -32,8 +45,9 @@ namespace LaundaryMan
                     ReferenceManager.Instance.rinseItemUI.index = pressingClothPickingHandler.myIndex;
                     ReferenceManager.Instance.canvasManager.CanvasStateChanger(canvasState);
                     break;
-              
             }
+            this.gameObject.SetActive(false);
+
         }
     }
 }

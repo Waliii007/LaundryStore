@@ -13,6 +13,11 @@ namespace LaundaryMan
         public bool isPanelShown;
         public CanvasStates stateToCall = CanvasStates.Hr;
 
+        private void OnEnable()
+        {
+            fillImage.fillAmount = 0f;
+        }
+
         private void OnTriggerStay(Collider other)
         {
             if (!other.CompareTag("Player")) return;
@@ -27,7 +32,6 @@ namespace LaundaryMan
                     ReferenceManager.Instance.canvasManager.CanvasStateChanger(stateToCall);
                 }
             }
-            
         }
 
         private void OnTriggerExit(Collider other)

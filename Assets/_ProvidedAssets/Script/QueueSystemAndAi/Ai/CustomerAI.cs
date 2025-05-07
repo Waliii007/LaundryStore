@@ -29,7 +29,7 @@ namespace LaundaryMan
             {
                 if (j != i)
                 {
-                    Destroy(aiSkins[j]);
+                    Destroy(aiSkins[j].gameObject);
                 }
             }
 

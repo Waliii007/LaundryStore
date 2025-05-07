@@ -18,7 +18,7 @@ namespace LaundryMan
         public GameObject stackStarter;
         public int maxClothToStack = 5;
         public float stackTime = 1f;
-        private bool isPlayerInside = false;
+        public bool isPlayerInside = false;
         private Coroutine aiCoroutine;
         private Coroutine playerCoroutine;
         private Coroutine _aiCoroutine;
@@ -146,7 +146,8 @@ namespace LaundryMan
         {
             while (isPlayerInside)
             {
-                if (clothToWash.Count > 0)
+                // Respect AI's max clothes limit
+                if (clothToWash.Count > 0 && playerStackManager.ClothStack.Count < playerStackManager.maxClothesPerCycle)
                 {
                     var cloth = clothToWash.Pop();
                     cloth.transform.SetParent(playerStackManager.stackStarter.transform);
@@ -158,11 +159,12 @@ namespace LaundryMan
                     cloth.transform.DOJump(targetPosition, 1f, 1, stackTime).OnComplete(() =>
                     {
                         playerStackManager.ClothStack.Push(cloth);
+                       // playerStackManager.currentClothesCount++; // Track how many this AI has taken
                         RearrangeStack(playerStackManager);
                         ArrangeStack();
                     });
-                    playerStackManager.SetIk(1);
 
+                    playerStackManager.SetIk(1);
                     yield return new WaitForSeconds(stackTime);
                 }
                 else
@@ -171,6 +173,7 @@ namespace LaundryMan
                 }
             }
         }
+
 
         public int limit = 7;
 
@@ -339,15 +342,20 @@ namespace LaundryMan
 
                 yield return new WaitForSeconds(stackTime);
                 
-                int k = Random.Range(0,
-                    (ReferenceManager.Instance.GameData.unlockedMachine == 0
-                        ? 0
-                        : ReferenceManager.Instance.GameData.unlockedMachine));
-                ReferenceManager.Instance.dirtyBoxAiManager.AddTask(pickupPoint,
-                    dropPoint[k], k);
+                AddTask();
             }
 
             aiCoroutine = null;
+        }
+
+        public void AddTask()
+        {
+            int k = Random.Range(0,
+                (ReferenceManager.Instance.GameData.unlockedMachine == 0
+                    ? 0
+                    : ReferenceManager.Instance.GameData.unlockedMachine));
+            ReferenceManager.Instance.dirtyBoxAiManager.AddTask(pickupPoint,
+                dropPoint[k], k);
         }
 
         private int indexShuffling = 0;

@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Invector.vCharacterController;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace LaundaryMan
 {
@@ -73,8 +76,6 @@ namespace LaundaryMan
                 if (_playerCoroutine == null)
                 {
                     _playerCoroutine = StartCoroutine(CheckOut());
-
-                   
                 }
             }
 
@@ -90,77 +91,94 @@ namespace LaundaryMan
         int _index = 0;
         [SerializeField] private Vector3 offset;
 
-      //  public Stack<ClothFragment> IronClothes = new Stack<ClothFragment>();
+        //  public Stack<ClothFragment> IronClothes = new Stack<ClothFragment>();
+        float multiplier;
+        public int income;
 
         public IEnumerator CheckOut()
         {
             while (isPlayerInside && ReferenceManager.Instance.queueSystem._washedClothQueueAi.Count > 0)
             {
-                
-                
-                if (ReadyToShipClothes.Count > 0)
+                ai = (CustomerAI)ReferenceManager.Instance.queueSystem._washedClothQueueAi.Peek();
+
+                while (_index < ai.clothStack && ReadyToShipClothes.Count > 0)
                 {
-                    ai = (CustomerAI)ReferenceManager.Instance.queueSystem._washedClothQueueAi.Peek();
-                    if (_index < ai.clothStack && ReadyToShipClothes.Count > 0)
+                    ClothFragment cloth = ReadyToShipClothes.Pop();
+                    isCheckOut = false;
+
+                    if (ai.customerObjectToStack.myClothFragment.Count <= 0)
                     {
-                        ClothFragment cloth = ReadyToShipClothes.Pop();
-                        isCheckOut = false; // Ensure it's false before waiting
-                       
-                        
-
-                        if (ai.customerObjectToStack.myClothFragment.Count <= 0)
-                        {
-                            cloth.transform.DOMove(ai.customerObjectToStack.transform.position + offset, .2f)
-                                .OnComplete(() =>
-                                    {
-                                        isCheckOut = true;
-                                        cloth.transform.SetParent(ai.customerObjectToStack.transform);
-                                        ai.customerObjectToStack.myClothFragment.Add(cloth);
-
-                                    }
-                                );
-                            ai.SetIk(1);
-                        }
-                        else
-                        {
-                            cloth.transform.DOMove(ai.customerObjectToStack.myClothFragment[^1]
-                                    .nextPosition.transform.position + offset, .2f)
-                                .OnComplete(() =>
-                                {
-                                    isCheckOut = true;
-                                    cloth.transform.SetParent(ai.customerObjectToStack.transform);
-                                    ai.customerObjectToStack.myClothFragment.Add(cloth);
-
-                                });
-                        }
-
-                        yield return new WaitUntil(() => isCheckOut);
-                        isCheckOut = false;
-                        _index++;
-
-                        // Check here to process queue removal inside the loop
-                        if (_index == ai.clothStack)
-                        {
-                            ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
-                            yield return new WaitUntil(() => selectedAiReached);
-                            yield return new WaitForSeconds(1f);
-                            _index = 0;
-
-                            StartCoroutine(CashGenerate());
-                            if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+                        cloth.transform.DOMove(ai.customerObjectToStack.transform.position + offset, .2f).OnComplete(
+                            () =>
                             {
-                                ReferenceManager.Instance.tutorialHandler.TaskCompleted();
-                                ReferenceManager.Instance.tutorialHandler.UnSubscribe();
-                            }
-                        }
-
+                                isCheckOut = true;
+                                cloth.transform.SetParent(ai.customerObjectToStack.transform);
+                                ai.customerObjectToStack.myClothFragment.Add(cloth);
+                            });
                         ai.SetIk(1);
+                    }
+                    else
+                    {
+                        cloth.transform
+                            .DOMove(
+                                ai.customerObjectToStack.myClothFragment[^1].nextPosition.transform.position + offset,
+                                .2f).OnComplete(() =>
+                            {
+                                isCheckOut = true;
+                                cloth.transform.SetParent(ai.customerObjectToStack.transform);
+                                ai.customerObjectToStack.myClothFragment.Add(cloth);
+                            });
+                    }
+
+                    yield return new WaitUntil(() => isCheckOut);
+                    isCheckOut = false;
+                    _index++;
+                }
+
+                if (_index == ai.clothStack)
+                {
+                    ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
+                    income = _index * 10;
+                    if (ReferenceManager.Instance.snackbarManager.IsBoostActive())
+                    {
+                        multiplier = UnityEngine.Random.Range(10f, 20f);
+                        multiplier = multiplier/ 100f;
+                        
+                    }
+                    else
+                    {
+                        multiplier = 0;
+                    }
+
+                    ReferenceManager.Instance.snackbarManager.tipCash += income;
+                    ReferenceManager.Instance.snackbarManager.OnCustomerServed();
+                    ShowTipText($"{income} $, {(income * multiplier):F2} Tips+");
+                    yield return new WaitUntil(() => selectedAiReached);
+                    yield return new WaitForSeconds(1f);
+                    _index = 0;
+                    StartCoroutine(CashGenerate());
+
+                    if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+                    {
+                        ReferenceManager.Instance.tutorialHandler.TaskCompleted();
+                        ReferenceManager.Instance.tutorialHandler.UnSubscribe();
                     }
                 }
 
                 _playerCoroutine = null;
                 yield return null;
+                // break;
             }
+        }
+
+        public TextMeshPro textToShow;
+
+        public void ShowTipText(string tipText)
+        {
+            textToShow.gameObject.SetActive(true);
+
+            textToShow.text = tipText;
+            DOVirtual.DelayedCall(2f, () => textToShow.gameObject.SetActive(false));
         }
 
         #endregion

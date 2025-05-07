@@ -9,7 +9,7 @@ namespace LaundaryMan
         public MachineCanvasStates prev;
         public MachineCanvasStates currentState;
         public Image detergentTrackingImage;
-        
+
         private void OnEnable()
         {
             CanvasStateChanger(MachineCanvasStates.Full);
@@ -28,13 +28,14 @@ namespace LaundaryMan
 
         public Image detargentImage;
         public Sprite[] detargentSprites;
-       
+
         public void DetergentImageChange(DetergentType detargentuse)
         {
             detargentImage.preserveAspect = true;
 
-            detargentImage.sprite=detargentSprites[(int)detargentuse];
+            detargentImage.sprite = detargentSprites[(int)detargentuse];
         }
+
         public void OnClickRefillButton()
         {
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.RefillDetergent);
@@ -50,7 +51,8 @@ namespace LaundaryMan
             {
                 case MachineCanvasStates.Full:
                     refillTrigger.gameObject.SetActive(false);
-
+                    if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+                        ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
                     break;
                 case MachineCanvasStates.RefillNeeded:
                     if (once)

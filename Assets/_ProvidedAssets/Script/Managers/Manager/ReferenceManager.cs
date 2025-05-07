@@ -50,6 +50,7 @@ namespace LaundaryMan
         public DetergentItemUI detergentItemUI;
         public RinseItemUI rinseItemUI;
         public SnackbarManager snackbarManager;
+        public Camera mainCamera;
         #endregion
 
         #region SaveSystemObserver

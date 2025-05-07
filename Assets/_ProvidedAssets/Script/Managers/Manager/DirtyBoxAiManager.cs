@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
-
 
 namespace LaundaryMan
 {
     public class DirtyBoxAiManager : MonoBehaviour
     {
-        private Queue<DirtyBoxAi.Task> taskQueue = new Queue<DirtyBoxAi.Task>();
-        [SerializeField] private List<DirtyBoxAi> availableAgents = new List<DirtyBoxAi>();
+        public List<DirtyBoxAi.Task> taskList = new List<DirtyBoxAi.Task>();
+        [SerializeField] public List<DirtyBoxAi> availableAgents = new List<DirtyBoxAi>();
         [SerializeField] private GameObject[] dropPosition;
         [SerializeField] private DirtyBoxAi[] aiPlayers;
 
@@ -18,11 +16,13 @@ namespace LaundaryMan
             if (ReferenceManager.Instance.GameData.unlockedMachine == -1)
                 return;
 
-            DirtyBoxAi.Task newTask = new DirtyBoxAi.Task(pickPosition, dropPosition[index]);
-            
-            newTask.dropper = dropper;
-            taskQueue.Enqueue(newTask);
-            AssignTask();
+            if (availableAgents.Count > 0)
+            {
+                DirtyBoxAi.Task newTask = new DirtyBoxAi.Task(pickPosition, dropPosition[index]);
+                newTask.dropper = dropper;
+                taskList.Add(newTask);
+                AssignTask();
+            }
         }
 
         private void OnEnable()
@@ -45,13 +45,15 @@ namespace LaundaryMan
 
         public void AssignTask()
         {
-            if (taskQueue.Count > 0 && availableAgents.Count > 0)
+            if (taskList.Count > 0 && availableAgents.Count > 0)
             {
                 DirtyBoxAi agent = availableAgents[0];
                 availableAgents.RemoveAt(0);
-                DirtyBoxAi.Task currentTask = taskQueue.Dequeue();
+                DirtyBoxAi.Task currentTask = taskList[0];
+                taskList.RemoveAt(0);
                 currentTask.dropper.isOccupiedbyDirty = true;
                 agent.AssignTask(currentTask);
+                agent.aiStackManager.maxClothesPerCycle = currentTask.dropper.maxClothesPerCycle;
             }
         }
 
@@ -71,18 +73,5 @@ namespace LaundaryMan
 
             yield return waitForSeconds;
         }
-    }
-}
-
-[System.Serializable]
-public class DirtyTask
-{
-    public GameObject PickPosition;
-    public GameObject DropPosition;
-
-    public DirtyTask(GameObject pick, GameObject drop)
-    {
-        PickPosition = pick;
-        DropPosition = drop;
     }
 }
