@@ -176,7 +176,6 @@ namespace LaundaryMan
 
         private IEnumerator HandlePlayerInteraction(PlayerStackManager playerStackManager)
         {
-           
             try
             {
                 if (currentClothesCount >= maxClothesPerCycle)
@@ -310,7 +309,7 @@ namespace LaundaryMan
             while (isPlayerInside && TempCLothes.Count > 0)
             {
                 //if (playerStackManager.ClothStack.Count > 0)
-                    //playerStackManager.currentClothesCount--;
+                //playerStackManager.currentClothesCount--;
 
                 var cloth = TempCLothes.Pop();
                 cloth.transform.SetParent(stackMachineStarter.transform);
@@ -481,7 +480,8 @@ namespace LaundaryMan
 
                     cloth.transform.DOJump(targetPosition, 1f, 1, 2).OnComplete(() =>
                     {
-                        currentClothesCount--;
+                        if (currentClothesCount > 0)
+                            currentClothesCount--;
                         fullIndicator.SetActive(false);
 
                         AddWashedCloth(cloth);

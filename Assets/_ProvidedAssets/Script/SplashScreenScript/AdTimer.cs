@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 namespace LaundaryMan
@@ -7,6 +8,11 @@ namespace LaundaryMan
     {
         public float adTimer = 120f; // 2 minutes
         public float timeElapsed = 0f;
+
+        public void Init()
+        {
+            adTimer = GlobalConstant.adTimer;
+        }
 
         void Update()
         {

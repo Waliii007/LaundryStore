@@ -42,6 +42,10 @@ namespace LaundaryMan
 
                     break;
             }
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomScreenEvent(nameof(newState));
+            }
         }
 
         public WaitForSeconds waitForTextUpdate = new WaitForSeconds(.01f);
@@ -71,5 +75,7 @@ public enum CanvasStates
     RefillDetergent,
     RinPurchase,
     RinRefill,
-    CandyBar
+    CandyBar,
+    TutorialObjective,
+    Empty
 }

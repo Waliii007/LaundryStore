@@ -44,6 +44,10 @@ namespace LaundaryMan
                 {
                     ReferenceManager.Instance.tutorialHandler.TaskCompleted();
                 }
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnUseGreenButton) + "Rinse");
+                }
             }
             else
             {
@@ -60,6 +64,10 @@ namespace LaundaryMan
                 ReferenceManager.Instance.GameData.playerCash -= price;
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Blue Rinse");
                 UpdateRinseUI();
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnBuyBlueButton) + "Rinse");
+                }
             }
             else
             {
@@ -76,6 +84,10 @@ namespace LaundaryMan
                 ReferenceManager.Instance.GameData.playerCash -= price;
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Red Rinse");
                 UpdateRinseUI();
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnBuyRedButton) + "Rinse");
+                }
             }
             else
             {
@@ -91,6 +103,10 @@ namespace LaundaryMan
                 AddRinse(RinseType.Green, 1);
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
                 UpdateRinseUI();
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnBuyGreenButtonAds) + "Rinse");
+                }
             }, "OnBuyGreenButton");
         }
 
@@ -102,6 +118,10 @@ namespace LaundaryMan
                 AddRinse(RinseType.Green, 1);
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
                 UpdateRinseUI();
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnBuyBlueButtonAds) + "Rinse");
+                }
             }, "OnBuyBlueButton");
         }
 
@@ -113,6 +133,10 @@ namespace LaundaryMan
                 AddRinse(RinseType.Red, 1);
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Red Rinse");
                 UpdateRinseUI();
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnBuyRedButtonAds) + "Rinse");
+                }
             }, "OnBuyRedButton");
         }
 
@@ -129,7 +153,10 @@ namespace LaundaryMan
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
                 washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Green);
-                
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnUseGreenButton) + "Rinse");
+                }  
                 
             }
             else
@@ -149,6 +176,10 @@ namespace LaundaryMan
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
                 washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Blue);
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnUseBlueButton) + "Rinse");
+                } 
             }
             else
             {
@@ -167,6 +198,10 @@ namespace LaundaryMan
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
                 washingMachineDropper[machineIndex].rinseMachineCanvas.DetergentImageChange(DetergentType.Red);
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnUseRedButton) + "Rinse");
+                } 
             }
             else
             {

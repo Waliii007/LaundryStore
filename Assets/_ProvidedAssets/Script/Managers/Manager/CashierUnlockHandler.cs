@@ -22,6 +22,10 @@ namespace LaundaryMan
                 ReferenceManager.Instance.SaveGameDataObserver();
                 ReferenceManager.Instance.taskHandler.OnTaskCompleted();
                 ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(CashierUnlockBycash));
+                }
             }
             else
             {
@@ -40,6 +44,10 @@ namespace LaundaryMan
             ReferenceManager.Instance.SaveGameDataObserver();
             ReferenceManager.Instance.taskHandler.OnTaskCompleted();
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent("CashierUnlockByReward");
+            }
 
         }
     }

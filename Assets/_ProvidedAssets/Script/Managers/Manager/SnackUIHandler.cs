@@ -14,7 +14,7 @@ namespace LaundaryMan
 
         public void OnClickUseGreen()
         {
-            snackbarManager.BuyProPack();
+            snackbarManager.BuyBasicPack();
           
         }
 

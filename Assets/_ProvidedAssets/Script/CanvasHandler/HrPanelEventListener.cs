@@ -45,6 +45,10 @@ namespace LaundaryMan
                     SoundManager.instance.Play(SoundName.Upgrade);
                 }
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Worker Hired");
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(DirtyBoxAILock));
+                }
             }
 
             UiUpdate();
@@ -74,6 +78,10 @@ namespace LaundaryMan
                     if (SoundManager.instance)
                     {
                         SoundManager.instance.Play(SoundName.Upgrade);
+                    }
+                    if (TSS_AnalyticalManager.instance)
+                    {
+                        TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(DirtyBoxAILockRewarded));
                     }
                 }, "DirtyBoxAIUnlockLock");
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Worker Hired");
@@ -105,6 +113,10 @@ namespace LaundaryMan
                     UiUpdate();
                     ReferenceManager.Instance.notificationHandler.ShowNotification("Carry Capacity increased");
                     ReferenceManager.Instance.SaveGameDataObserver();
+                    if (TSS_AnalyticalManager.instance)
+                    {
+                        TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(DirtyBoxAILockRewarded));
+                    }
                 }, "CarryCapacityBoxAI");
 
             }
@@ -128,7 +140,10 @@ namespace LaundaryMan
                 {
                     SoundManager.instance.Play(SoundName.Upgrade);
                 }
-
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(CarryCapacityBoxAILock));
+                }
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Carry Capacity increased");
                 ReferenceManager.Instance.SaveGameDataObserver();
             }
@@ -162,6 +177,10 @@ namespace LaundaryMan
                     {
                         SoundManager.instance.Play(SoundName.Upgrade);
                     }
+                    if (TSS_AnalyticalManager.instance)
+                    {
+                        TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(SpeedOfAILockRewarded));
+                    }
                 }, "SpeedOfAI");
             }
 
@@ -188,6 +207,10 @@ namespace LaundaryMan
                 if (SoundManager.instance)
                 {
                     SoundManager.instance.Play(SoundName.Upgrade);
+                }
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(SpeedOfAILock));
                 }
             }
 
@@ -283,6 +306,10 @@ namespace LaundaryMan
         public void OnClickCross()
         {
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnClickCross));
+            }
             ReferenceManager.Instance.SaveGameDataObserver();
             if (SoundManager.instance)
             {
@@ -296,6 +323,10 @@ namespace LaundaryMan
             {
                 TssAdsManager._Instance.ShowRewardedAd(() =>
                 {
+                    if (TSS_AnalyticalManager.instance)
+                    {
+                        TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(CleanBoxAILockRewarded));
+                    }
                     int cleanIndex = ReferenceManager.Instance.GameData.cleanAIUnlocked;
 
                     if (cleanIndex >= cleanBasketAI.Length) return;
@@ -331,6 +362,10 @@ namespace LaundaryMan
                 if (SoundManager.instance)
                 {
                     SoundManager.instance.Play(SoundName.Upgrade);
+                }
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(CleanBoxAILock));
                 }
             }
 

@@ -9,9 +9,13 @@ public static class GlobalConstant
     public static bool AdsON = true;
     public static bool ShowAppOpen = false;
     public static bool ISMAXON = false;
-
+    public static bool useAdPriority;
     public static string TSS_Admob_Inter_IdHigh =
         "ca-app-pub-3940256099942544/1033173712";
+
+    public static string MoreGamesLink;
+    public static float adTimer;
+       
 
     public static string TSS_Admob_Inter_IdMid =
         "ca-app-pub-3940256099942544/1033173712";

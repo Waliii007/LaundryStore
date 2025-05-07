@@ -43,6 +43,7 @@ namespace LaundaryMan
         public static List<Ai> activePickers;
         public static Action OnPLayerGotUpgrade;
         public ObjectivePanel objectivePanel;
+        public TutorialObjectivePanel tutorialObjectivePanel;
         public static int CustomerAmountOfClothForTutorial;
         public DetergentPurchase detergentPurchase;
         public MachineUpgradeManager machineUpgradeManager;

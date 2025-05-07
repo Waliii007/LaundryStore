@@ -148,9 +148,31 @@ namespace LaundaryMan
 
 
         // Optional: expose public UI hooks
-        public void BuyBasicPack() => BuyPack(0);
-        public void BuyProPack() => BuyPack(1);
-        public void BuyMaxPack() => BuyPack(2);
+        public void BuyBasicPack()
+        {
+            BuyPack(0);
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(BuyBasicPack) + "Snack");
+            }
+        }
+
+        public void BuyProPack() {
+            
+            BuyPack(1);
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(BuyProPack) + "Snack");
+            } 
+        }
+        public void BuyMaxPack()
+        {
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(BuyProPack) + "Snack");
+            }
+            BuyPack(2);
+        }
 
         public float GetCurrentMultiplier() => currentMultiplier;
         public bool IsBoostActive() => isBoostActive;

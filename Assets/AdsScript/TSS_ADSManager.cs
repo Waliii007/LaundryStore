@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using GameAnalyticsSDK;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using LaundaryMan;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -52,18 +53,27 @@ public class TssAdsManager : MonoBehaviour
 
     public void Init()
     {
+        /* AppLovinSettings.Instance.SdkKey = GlobalConstant.MaxSdkKey;
+         print(AppLovinSettings.Instance.SdkKey);*/
+
+
         Debug.Log("Application.version " + Application.version);
 
         //DontDestroyOnLoad(this.gameObject);
         GameAnalytics.Initialize();
         PostInit();
+         adTimer.Init();
     }
+
+    public AdTimer adTimer;
+
 
     public TSS_Admob admobInstance;
     public AppLovinMax appLovinMax;
 
     void PostInit()
     {
+        //  admobInstance.appId = GlobalConstant.AppId;
         adPriority = GlobalConstant.adPriority;
         admobInstance.bannerIDMed = GlobalConstant.TSS_Admob_Banner_MID;
         admobInstance.InterMediumFloorID = GlobalConstant.TSS_Admob_Inter_IdMid;
@@ -93,6 +103,7 @@ public class TssAdsManager : MonoBehaviour
 
     public void ShowInterstitial(string placement)
     {
+        TSS_Admob.isInterstialAdPresent = true;
         if (isAdsRemove)
         {
             return;

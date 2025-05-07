@@ -14,6 +14,7 @@ namespace LaundaryMan
         public TutorialTask prevTask;
         public TutorialTask currentTask;
         public GameObject[] someTriggerToOff;
+
         private void Awake()
         {
             ReferenceManager.Instance.taskHandler.OnTaskUpdatedAction += TaskCompleted;
@@ -43,6 +44,7 @@ namespace LaundaryMan
             tasks[(int)prevTask].gameObject.SetActive(false);
             tasks[(int)currentTask].gameObject.SetActive(true);
         }
+
         public void CompleteTutorial()
         {
             var reference = ReferenceManager.Instance;
@@ -50,19 +52,26 @@ namespace LaundaryMan
 
             reference.GameData.isTutorialCompleted = true;
             reference.taskHandler.HrHandler();
-            reference.canvasManager.CanvasStateChanger(CanvasStates.ObjectivePanel);
-            reference.objectivePanel.ShowObjective("Tutorial Complete");
+            
+            reference.canvasManager.CanvasStateChanger(CanvasStates.TutorialObjective);
+            reference.tutorialObjectivePanel.ShowObjective("Voila!!! You have learned everything , Now run your Laundry Store.");
+            
             reference.playerStackManager.pathDraw.gameObject.SetActive(false);
             reference.playerStackManager.pathDraw.destination = null;
             foreach (var some in someTriggerToOff)
             {
-                some.gameObject.SetActive(true);   
+                some.gameObject.SetActive(true);
             }
+
             ReferenceManager.Instance.queueSystem.OnTutorialCompleted();
             reference.SaveGameDataObserver();
             StartCoroutine(washingMachineDropper.CheckCanvasStateRoutine());
-
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(CompleteTutorial) + "Snack");
+            }
         }
+
         public void TaskCompleted()
         {
             ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
@@ -74,6 +83,7 @@ namespace LaundaryMan
                 taskScript.taskObject.SetActive(false);
             }
         }
+
         public WashingMachineDropper washingMachineDropper;
 
         private void OnDisable()
@@ -96,5 +106,4 @@ public enum TutorialTask
     RinseBuy,
     RefillDetergent,
     RefillRinse,
-    
 }

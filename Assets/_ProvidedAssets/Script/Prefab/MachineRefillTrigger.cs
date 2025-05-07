@@ -31,7 +31,7 @@ namespace LaundaryMan
             if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !once)
             {
                 once = true;
-              
+
 
                 ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(true);
 
@@ -62,9 +62,10 @@ namespace LaundaryMan
                         break;
                 }
             }
-          
         }
 
+        public bool onceA;
+    
         private void OnTriggerStay(Collider other)
         {
             if (ReferenceManager.Instance.GameData.isTutorialCompleted)
@@ -74,8 +75,11 @@ namespace LaundaryMan
                     other.gameObject.layer != LayerMask.NameToLayer("Player"))
                     return;
 
-
-                ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(true);
+                if (!onceA)
+                {
+                    onceA = true;
+                    ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(true);
+                };
 
                 switch (machienType)
                 {
@@ -107,6 +111,7 @@ namespace LaundaryMan
 
         private void OnDisable()
         {
+            onceA = false;
         }
 
         private void OnTriggerExit(Collider other)
@@ -115,6 +120,8 @@ namespace LaundaryMan
                 other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
             ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
             //ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
+            onceA = false;
+
         }
 
         public void ChangeState()

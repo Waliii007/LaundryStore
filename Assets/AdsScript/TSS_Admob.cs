@@ -5,7 +5,6 @@ using DG.Tweening;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
 using GoogleMobileAds.Ump.Api;
-using LaundaryMan;
 using ToastPlugin;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -228,7 +227,19 @@ public class TSS_Admob : MonoBehaviour
         }
 
         Debug.Log("Initialization complete.");
+        RequestAndLoadAppOpenAd();
+        RequestAndLoadInterstitialAd();
+        RequestBannerAd();
+        RequestAndLoadRewardedAd();
+        RequestAndLoadInterstitialAd();
+        TopRequestBannerAd();
         MobileAdsEventExecutor.ExecuteInUpdate(() =>
+        {
+            print("I am executing in the background");
+        });
+
+        isAdmobInitialized = true;
+        /*MobileAdsEventExecutor.ExecuteInUpdate(() =>
         {
             RequestAndLoadAppOpenAd();
             RequestAndLoadInterstitialAd();
@@ -236,8 +247,10 @@ public class TSS_Admob : MonoBehaviour
             RequestAndLoadRewardedAd();
             RequestAndLoadInterstitialAd();
             TopRequestBannerAd();
+
+
             isAdmobInitialized = true;
-        });
+        });*/
     }
 
     #region AD INSPECTOR
@@ -326,14 +339,16 @@ public class TSS_Admob : MonoBehaviour
             return;
         }
 
-        PrintStatus("Requesting App Open ad.");
         var adUnitId = appOpenIDHigh;
-
-        switch (appOpenAdRequestFloorType)
+        if (GlobalConstant.useAdPriority)
         {
-            case RequestFloorType.High:
+            PrintStatus("Requesting App Open ad.");
+
+            switch (appOpenAdRequestFloorType)
+            {
+                case RequestFloorType.High:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = appOpenIDHigh;
 #elif UNITY_IPHONE
@@ -341,11 +356,11 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
+                    break;
 
-            case RequestFloorType.Meduim:
+                case RequestFloorType.Meduim:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = appOpenIDMed;
 #elif UNITY_IPHONE
@@ -353,11 +368,11 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
+                    break;
 
-            case RequestFloorType.Simple:
+                case RequestFloorType.Simple:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = appOpenIDLow;
 #elif UNITY_IPHONE
@@ -365,11 +380,24 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
+                    break;
 
-            case RequestFloorType.Failed:
-                appOpenAdRequestFloorType = RequestFloorType.High;
-                return; // Removed unnecessary `break;`
+                case RequestFloorType.Failed:
+                    appOpenAdRequestFloorType = RequestFloorType.High;
+                    return; // Removed unnecessary `break;`
+            }
+        }
+        else
+        {
+#if UNITY_EDITOR
+            adUnitId = "unused";
+#elif UNITY_ANDROID
+            adUnitId = appOpenIDLow;
+#elif UNITY_IPHONE
+            adUnitId = appOpenIDLow;
+#else
+            adUnitId = "unexpected_platform";
+#endif
         }
 
         // Destroy old instance if it exists
@@ -470,11 +498,13 @@ public class TSS_Admob : MonoBehaviour
         Debug.Log("Requesting Banner ad.");
         string adUnitId = bannerIDHigh;
 
-        switch (bannerAdRequestFloorType)
+        if (GlobalConstant.useAdPriority)
         {
-            case RequestFloorType.High:
+            switch (bannerAdRequestFloorType)
+            {
+                case RequestFloorType.High:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = bannerIDHigh;
 #elif UNITY_IPHONE
@@ -482,10 +512,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Meduim: // ✅ Fixed spelling from "Meduim" to "Medium"
+                    break;
+                case RequestFloorType.Meduim: // ✅ Fixed spelling from "Meduim" to "Medium"
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = bannerIDMed;
 #elif UNITY_IPHONE
@@ -493,10 +523,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Simple:
+                    break;
+                case RequestFloorType.Simple:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = LowBannerID;
 #elif UNITY_IPHONE
@@ -504,11 +534,24 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Failed:
-                Debug.Log("All banner ad floors failed. Restarting from High.");
-                bannerAdRequestFloorType = RequestFloorType.High; // ✅ Reset after trying all floors
-                return;
+                    break;
+                case RequestFloorType.Failed:
+                    Debug.Log("All banner ad floors failed. Restarting from High.");
+                    bannerAdRequestFloorType = RequestFloorType.High; // ✅ Reset after trying all floors
+                    return;
+            }
+        }
+        else
+        {
+#if UNITY_EDITOR
+            adUnitId = "unused";
+#elif UNITY_ANDROID
+            adUnitId = LowBannerID;
+#elif UNITY_IPHONE
+            adUnitId = LowBannerID;
+#else
+            adUnitId = "unexpected_platform";
+#endif
         }
 
         if (bannerView != null)
@@ -601,12 +644,13 @@ public class TSS_Admob : MonoBehaviour
     {
         Debug.Log("Requesting Banner ad.");
         string adUnitId = bannerIDHigh;
-
-        switch (TopbannerAdRequestFloorType)
+        if (GlobalConstant.useAdPriority)
         {
-            case RequestFloorType.High:
+            switch (TopbannerAdRequestFloorType)
+            {
+                case RequestFloorType.High:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = bannerIDHigh;
 #elif UNITY_IPHONE
@@ -614,10 +658,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Meduim: // ✅ Fixed spelling from "Meduim" to "Medium"
+                    break;
+                case RequestFloorType.Meduim: // ✅ Fixed spelling from "Meduim" to "Medium"
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = bannerIDMed;
 #elif UNITY_IPHONE
@@ -625,10 +669,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Simple:
+                    break;
+                case RequestFloorType.Simple:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = LowBannerID;
 #elif UNITY_IPHONE
@@ -636,11 +680,24 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Failed:
-                Debug.Log("All banner ad floors failed. Restarting from High.");
-                bannerAdRequestFloorType = RequestFloorType.High; // ✅ Reset after trying all floors
-                return;
+                    break;
+                case RequestFloorType.Failed:
+                    Debug.Log("All banner ad floors failed. Restarting from High.");
+                    bannerAdRequestFloorType = RequestFloorType.High; // ✅ Reset after trying all floors
+                    return;
+            }
+        }
+        else
+        {
+#if UNITY_EDITOR
+            adUnitId = "unused";
+#elif UNITY_ANDROID
+            adUnitId = LowBannerID;
+#elif UNITY_IPHONE
+            adUnitId = LowBannerID;
+#else
+            adUnitId = "unexpected_platform";
+#endif
         }
 
         if (TopbannerView != null)
@@ -734,12 +791,13 @@ public class TSS_Admob : MonoBehaviour
     {
         Debug.Log("Requesting Banner ad.");
         string adUnitId = bannerIDHigh;
-
-        switch (RECbannerAdRequestFloorType)
+        if (GlobalConstant.useAdPriority)
         {
-            case RequestFloorType.High:
+            switch (RECbannerAdRequestFloorType)
+            {
+                case RequestFloorType.High:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = bannerIDHigh;
 #elif UNITY_IPHONE
@@ -747,10 +805,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Meduim:
+                    break;
+                case RequestFloorType.Meduim:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = bannerIDMed;
 #elif UNITY_IPHONE
@@ -758,10 +816,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Simple:
+                    break;
+                case RequestFloorType.Simple:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = LowBannerID;
 #elif UNITY_IPHONE
@@ -769,10 +827,23 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Failed:
-                RECbannerAdRequestFloorType = RequestFloorType.High; // ✅ Reset after trying all floors
-                return;
+                    break;
+                case RequestFloorType.Failed:
+                    RECbannerAdRequestFloorType = RequestFloorType.High; // ✅ Reset after trying all floors
+                    return;
+            }
+        }
+        else
+        {
+#if UNITY_EDITOR
+            adUnitId = "unused";
+#elif UNITY_ANDROID
+            adUnitId = LowBannerID;
+#elif UNITY_IPHONE
+            adUnitId = LowBannerID;
+#else
+            adUnitId = "unexpected_platform";
+#endif
         }
 
         if (RectbannerView != null)
@@ -855,6 +926,7 @@ public class TSS_Admob : MonoBehaviour
     #region INTERSTITIAL ADS
 
     [HideInInspector] public bool Once;
+
     public RequestFloorType interAdRequestFloorType;
 
     public void RequestAndLoadInterstitialAd()
@@ -866,12 +938,14 @@ public class TSS_Admob : MonoBehaviour
 
         PrintStatus("Requesting Interstitial ad.");
         string adUnitId = InterHighFloorID;
-
-        switch (interAdRequestFloorType)
+        if (GlobalConstant.useAdPriority)
         {
-            case RequestFloorType.High:
+            switch (interAdRequestFloorType)
+
+            {
+                case RequestFloorType.High:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = InterHighFloorID;
 #elif UNITY_IPHONE
@@ -879,10 +953,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Meduim:
+                    break;
+                case RequestFloorType.Meduim:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = InterMediumFloorID;
 #elif UNITY_IPHONE
@@ -890,10 +964,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Simple:
+                    break;
+                case RequestFloorType.Simple:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = interstitialID;
 #elif UNITY_IPHONE
@@ -901,10 +975,23 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Failed:
-                interAdRequestFloorType = RequestFloorType.High; // ✅ Fixed
-                return;
+                    break;
+                case RequestFloorType.Failed:
+                    interAdRequestFloorType = RequestFloorType.High; // ✅ Fixed
+                    return;
+            }
+        }
+        else
+        {
+#if UNITY_EDITOR
+            adUnitId = "unused";
+#elif UNITY_ANDROID
+            adUnitId = interstitialID;
+#elif UNITY_IPHONE
+            adUnitId = interstitialID;
+#else
+            adUnitId = "unexpected_platform";
+#endif
         }
 
         if (interstitialAd != null)
@@ -1005,13 +1092,15 @@ public class TSS_Admob : MonoBehaviour
         }
 
         PrintStatus("Requesting Rewarded ad.");
-        string adUnitId = rewardedIDHigh;
 
-        switch (rewardedFlooringType)
+        string adUnitId = rewardedIDHigh;
+        if (GlobalConstant.useAdPriority)
         {
-            case RequestFloorType.High:
+            switch (rewardedFlooringType)
+            {
+                case RequestFloorType.High:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = rewardedIDHigh;
 #elif UNITY_IPHONE
@@ -1019,10 +1108,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Meduim:
+                    break;
+                case RequestFloorType.Meduim:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = rewardedIDMed;
 #elif UNITY_IPHONE
@@ -1030,10 +1119,10 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Simple:
+                    break;
+                case RequestFloorType.Simple:
 #if UNITY_EDITOR
-                adUnitId = "unused";
+                    adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = rewardedIDLow;  // ✅ Fixed
 #elif UNITY_IPHONE
@@ -1041,10 +1130,23 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                break;
-            case RequestFloorType.Failed:
-                rewardedFlooringType = RequestFloorType.High; // ✅ Fixed
-                return;
+                    break;
+                case RequestFloorType.Failed:
+                    rewardedFlooringType = RequestFloorType.High; // ✅ Fixed
+                    return;
+            }
+        }
+        else
+        {
+#if UNITY_EDITOR
+            adUnitId = "unused";
+#elif UNITY_ANDROID
+            adUnitId = rewardedIDLow;  // ✅ Fixed
+#elif UNITY_IPHONE
+            adUnitId = rewardedIDLow;  // ✅ Fixed
+#else
+            adUnitId = "unexpected_platform";
+#endif
         }
 
         RewardedAd.Load(adUnitId, CreateAdRequest(), (RewardedAd ad, LoadAdError loadError) =>
@@ -1111,7 +1213,7 @@ public class TSS_Admob : MonoBehaviour
         }
         else
         {
-            ReferenceManager.Instance.notificationHandler.ShowNotification("Reward is not Loaded yet");
+            ToastHelper.ShowToast("Reward is not Loaded yet", false);
             if (GlobalConstant.ISMAXON)
                 AppLovinMax.Instance?.ShowRewardedAd(ac);
             RequestAndLoadRewardedAd();

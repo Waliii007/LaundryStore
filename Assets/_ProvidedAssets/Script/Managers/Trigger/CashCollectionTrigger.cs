@@ -79,8 +79,8 @@ namespace LaundaryMan
 
             reference.GameData.isTutorialCompleted = true;
             reference.taskHandler.HrHandler();
-            reference.canvasManager.CanvasStateChanger(CanvasStates.ObjectivePanel);
-            reference.objectivePanel.ShowObjective("Tutorial Complete");
+            reference.canvasManager.CanvasStateChanger(CanvasStates.TutorialObjective);
+            reference.tutorialObjectivePanel.ShowObjective("Tutorial Complete");
             reference.playerStackManager.pathDraw.gameObject.SetActive(false);
             reference.playerStackManager.pathDraw.destination = null;
         }

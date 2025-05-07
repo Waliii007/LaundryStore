@@ -33,9 +33,6 @@ public class CanvasScriptSplash : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-
-        //DontDestroyOnLoad(this);
-     //   ChangeCanvas(CanvasStats.MainScreen);
     }
 }
 

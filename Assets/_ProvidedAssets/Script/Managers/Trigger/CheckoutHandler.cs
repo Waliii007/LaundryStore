@@ -66,6 +66,7 @@ namespace LaundaryMan
 
         public GameObject playerPoint;
         public GameObject lookatPoint;
+        public bool onceOnly;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -76,6 +77,11 @@ namespace LaundaryMan
                 if (_playerCoroutine == null)
                 {
                     _playerCoroutine = StartCoroutine(CheckOut());
+                    if (!onceOnly && !ReferenceManager.Instance.GameData.isTutorialCompleted)
+                    {
+                        onceOnly = true;
+                        ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.Empty);
+                    }
                 }
             }
 
@@ -142,8 +148,7 @@ namespace LaundaryMan
                     if (ReferenceManager.Instance.snackbarManager.IsBoostActive())
                     {
                         multiplier = UnityEngine.Random.Range(10f, 20f);
-                        multiplier = multiplier/ 100f;
-                        
+                        multiplier = multiplier / 100f;
                     }
                     else
                     {

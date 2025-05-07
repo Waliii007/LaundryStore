@@ -12,7 +12,8 @@ namespace LaundaryMan
         public float typingSpeed = 0.05f;
         public Transform[] positionsHolders;
         public GameObject panel;
-
+        public Sprite notificationSprites;
+        public Sprite sprites;
         public void ShowObjective(string objective)
         {
             int i = Random.Range(0, positionsHolders.Length);
@@ -31,6 +32,10 @@ namespace LaundaryMan
             if (SoundManager.instance)
             {
                 SoundManager.instance.Play(SoundName.Click);
+            }
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(BackButton));
             }
         }
 

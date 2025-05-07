@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Firebase.Analytics;
 using Invector.vCharacterController;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -56,12 +57,17 @@ namespace LaundaryMan
                     if (index >= playerMovingSpeed.Length) return;
 
                     ReferenceManager.Instance.GameData.playerMovingSpeed++;
-                    print("Player Moving Speed Upgraded: " + ReferenceManager.Instance.GameData.playerMovingSpeed);
+                    ReferenceManager.Instance.notificationHandler.ShowNotification("Player Moving Speed Upgraded");
                     ReferenceManager.Instance.SaveGameDataObserver();
                     UiUpdate();
                     if (SoundManager.instance)
                     {
                         SoundManager.instance.Play(SoundName.Upgrade);
+                    }
+
+                    if (TSS_AnalyticalManager.instance)
+                    {
+                        TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(PlayerMovingSpeedIncreaseRewarded));
                     }
                 }, "MovingSpeedUpgrade");
             }
@@ -81,12 +87,17 @@ namespace LaundaryMan
             {
                 ReferenceManager.Instance.GameData.playerCash -= cost;
                 ReferenceManager.Instance.GameData.playerMovingSpeed++;
-                print("Player Moving Speed Upgraded: " + ReferenceManager.Instance.GameData.playerMovingSpeed);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Player Moving Speed Upgraded");
                 ReferenceManager.Instance.SaveGameDataObserver();
                 UiUpdate();
                 if (SoundManager.instance)
                 {
                     SoundManager.instance.Play(SoundName.Upgrade);
+                }
+
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(PlayerMovingSpeedIncrease));
                 }
             }
             else
@@ -106,9 +117,14 @@ namespace LaundaryMan
 
                     ReferenceManager.Instance.GameData.stackingSpeed++;
 
-                    print("Stacking Speed Upgraded: " + ReferenceManager.Instance.GameData.stackingSpeed);
+                    ReferenceManager.Instance.notificationHandler.ShowNotification("Stacking Speed Upgraded: ");
                     ReferenceManager.Instance.SaveGameDataObserver();
                     UiUpdate();
+                    if (TSS_AnalyticalManager.instance)
+                    {
+                        TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(StackingSpeedIncreaseRewarded));
+                    }
+
                     if (SoundManager.instance)
                     {
                         SoundManager.instance.Play(SoundName.Upgrade);
@@ -136,12 +152,18 @@ namespace LaundaryMan
                 ReferenceManager.Instance.GameData.playerCash -= cost;
                 ReferenceManager.Instance.GameData.stackingSpeed++;
 
-                print("Stacking Speed Upgraded: " + ReferenceManager.Instance.GameData.stackingSpeed);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Stacking Speed Upgraded: ");
+
                 ReferenceManager.Instance.SaveGameDataObserver();
                 UiUpdate();
                 if (SoundManager.instance)
                 {
                     SoundManager.instance.Play(SoundName.Upgrade);
+                }
+
+                if (TSS_AnalyticalManager.instance)
+                {
+                    TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(StackingSpeedIncrease));
                 }
             }
             else
@@ -162,10 +184,14 @@ namespace LaundaryMan
 
                         ReferenceManager.Instance.GameData.playerCapacity++;
 
-                        print("Player Capacity Upgraded: " + ReferenceManager.Instance.GameData.playerCapacity);
+                        ReferenceManager.Instance.notificationHandler.ShowNotification("Player Capacity Upgraded: ");
                         ReferenceManager.Instance.taskHandler.OnTaskCompleted();
                         ReferenceManager.Instance.SaveGameDataObserver();
                         UiUpdate();
+                        if (TSS_AnalyticalManager.instance)
+                        {
+                            TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(CarryCapacityIncreaseRewarded));
+                        }
                     },
                     "CarryCapacity");
             }
@@ -181,7 +207,8 @@ namespace LaundaryMan
                 ReferenceManager.Instance.GameData.playerCash -= cost;
                 ReferenceManager.Instance.GameData.playerCapacity++;
 
-                print("Player Capacity Upgraded: " + ReferenceManager.Instance.GameData.playerCapacity);
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Player Capacity Upgraded: ");
+
                 ReferenceManager.Instance.taskHandler.OnTaskCompleted();
                 ReferenceManager.Instance.SaveGameDataObserver();
                 UiUpdate();
@@ -191,6 +218,10 @@ namespace LaundaryMan
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
 
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(CarryCapacity));
+            }
 
             if (SoundManager.instance)
             {
@@ -382,7 +413,8 @@ namespace LaundaryMan
             {
                 ReferenceManager.Instance.GameData.playerCash -= machineUpgrade[machineUpgradeIndex];
                 UpgradeMachine(0);
-            }else
+            }
+            else
             {
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
@@ -398,7 +430,8 @@ namespace LaundaryMan
             {
                 ReferenceManager.Instance.GameData.playerCash -= machineUpgrade[machineUpgradeIndex];
                 UpgradeMachine(1);
-            }else
+            }
+            else
             {
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
@@ -414,7 +447,8 @@ namespace LaundaryMan
             {
                 ReferenceManager.Instance.GameData.playerCash -= machineUpgrade[machineUpgradeIndex];
                 UpgradeMachine(2);
-            }else
+            }
+            else
             {
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Not Enough Money");
             }
@@ -433,7 +467,7 @@ namespace LaundaryMan
                     UpgradeMachine(0);
                 }
             }, "Machine1Upgrade");
-            
+
             UiUpdate();
         }
 
@@ -441,7 +475,7 @@ namespace LaundaryMan
         {
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
-                int machineUpgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex;
+                int machineUpgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine1UpgradeIndex;
 
                 if (ReferenceManager.Instance.GameData.playerCash >= machineUpgrade[machineUpgradeIndex])
                 {
@@ -455,7 +489,7 @@ namespace LaundaryMan
         {
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
-                int machineUpgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machineUpgradeIndex;
+                int machineUpgradeIndex = ReferenceManager.Instance.GameData.gameEconomy.machine2UpgradeIndex;
 
                 if (ReferenceManager.Instance.GameData.playerCash >= machineUpgrade[machineUpgradeIndex])
                 {

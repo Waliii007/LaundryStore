@@ -14,8 +14,8 @@ namespace LaundaryMan
 
         private void OnEnable()
         {
-            ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.ObjectivePanel);
-            ReferenceManager.Instance.objectivePanel.ShowObjective(tutorialObjective);
+            ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.TutorialObjective);
+            ReferenceManager.Instance.tutorialObjectivePanel.ShowObjective(tutorialObjective);
 
             TaskComplete();
             ReferenceManager.Instance.playerStackManager.pathDraw.destination = navmeshTarget;
