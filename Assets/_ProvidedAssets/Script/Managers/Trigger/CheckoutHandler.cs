@@ -16,6 +16,7 @@ namespace LaundaryMan
         public Stack<ClothFragment> ReadyToShipClothes = new Stack<ClothFragment>();
         public GameObject counterStackPosition;
         private Coroutine _playerCoroutine;
+        bool _isBusy;
         [SerializeField] bool isPlayerInside = false;
 
 
@@ -26,10 +27,11 @@ namespace LaundaryMan
             if (other.CompareTag("Player"))
             {
                 isPlayerInside = false;
-                if (_playerCoroutine != null)
+                if (_isBusy && _playerCoroutine != null)
                 {
                     StopCoroutine(_playerCoroutine);
                     _playerCoroutine = null;
+                    _isBusy = false;
                 }
             }
 
@@ -44,20 +46,20 @@ namespace LaundaryMan
 
         public IEnumerator AICashierUnlocked()
         {
-            while (isPlayerInside)
+      //      print("Calling coroutine"+_isBusy);
+            if (!_isBusy)
             {
-                if (_playerCoroutine == null)
-                {
-                    _playerCoroutine = StartCoroutine(CheckOut());
-                }
-
-                yield return waitForSecondsToCashier;
+                _isBusy = true;
+                _playerCoroutine = StartCoroutine(CheckOut());
             }
+
+            yield return null;
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (isAICashierUnlocked && (other.CompareTag("Player")))
+//            print("Trigger stay"+other.name);
+            if (other.CompareTag("Player"))
             {
                 StartCoroutine(AICashierUnlocked());
                 isPlayerInside = true;
@@ -74,8 +76,9 @@ namespace LaundaryMan
             {
                 isPlayerInside = true;
 
-                if (_playerCoroutine == null)
+                if (!_isBusy)
                 {
+                    _isBusy = true;
                     _playerCoroutine = StartCoroutine(CheckOut());
                     if (!onceOnly && !ReferenceManager.Instance.GameData.isTutorialCompleted)
                     {
@@ -100,13 +103,27 @@ namespace LaundaryMan
         //  public Stack<ClothFragment> IronClothes = new Stack<ClothFragment>();
         float multiplier;
         public int income;
-
+      
         public IEnumerator CheckOut()
         {
-            while (isPlayerInside && ReferenceManager.Instance.queueSystem._washedClothQueueAi.Count > 0)
+            yield return new WaitForSeconds(0.5f);
+            if (isPlayerInside && ReferenceManager.Instance.queueSystem._washedClothQueueAi.Count > 0)
             {
-                ai = (CustomerAI)ReferenceManager.Instance.queueSystem._washedClothQueueAi.Peek();
+                if (_index == 0)
+                {
+                    ai = (CustomerAI)ReferenceManager.Instance.queueSystem._washedClothQueueAi.Peek();
+//                    print("new ai found"+ai.name);
+                }
 
+
+                if (!ai)
+                {
+                    _index = 0;
+                    _isBusy = false;
+                    _playerCoroutine = null;
+                    yield break;
+                }
+//            print("cloths to give"+ReadyToShipClothes.Count +" and ai clothes:"+ai.clothStack);
                 while (_index < ai.clothStack && ReadyToShipClothes.Count > 0)
                 {
                     ClothFragment cloth = ReadyToShipClothes.Pop();
@@ -139,8 +156,11 @@ namespace LaundaryMan
                     yield return new WaitUntil(() => isCheckOut);
                     isCheckOut = false;
                     _index++;
+                    
+                 //   print(" cloths index is:"+_index);
                 }
 
+//                print("index: "+_index + " ai stack "+ ai.clothStack);
                 if (_index == ai.clothStack)
                 {
                     ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
@@ -154,14 +174,15 @@ namespace LaundaryMan
                     {
                         multiplier = 0;
                     }
-
+                    _index = 0;
+                    StartCoroutine(CashGenerate());
+                    
                     ReferenceManager.Instance.snackbarManager.tipCash += income;
                     ReferenceManager.Instance.snackbarManager.OnCustomerServed();
                     ShowTipText($"{income} $, {(income * multiplier):F2} Tips+");
                     yield return new WaitUntil(() => selectedAiReached);
                     yield return new WaitForSeconds(1f);
-                    _index = 0;
-                    StartCoroutine(CashGenerate());
+                    
 
                     if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
                     {
@@ -170,9 +191,17 @@ namespace LaundaryMan
                     }
                 }
 
+//                print("Nulling coroutine");
+                _isBusy = false;
                 _playerCoroutine = null;
                 yield return null;
                 // break;
+            }
+            else
+            {
+///                print("Nulling coroutine2");
+                _isBusy = false;
+                _playerCoroutine = null;
             }
         }
 

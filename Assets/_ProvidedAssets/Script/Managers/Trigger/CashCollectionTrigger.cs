@@ -52,15 +52,13 @@ namespace LaundaryMan
                     Vector3 targetPosition = cashStackPointer.position + new Vector3(0, cashStack.Count * -0.05f, 0);
                     cash.transform.DOMove(targetPosition, 0.42f).OnComplete(() =>
                     {
-                        float tipcash = ReferenceManager.Instance.snackbarManager.currentMultiplier;
-                       // ReferenceManager.Instance.GameData.playerCash += 50;
+                        // ReferenceManager.Instance.GameData.playerCash += 50;
 
                         cash.transform.SetParent(cashStackPointer);
                         Destroy(cash.gameObject, 0.1f);
                     });
 
                     yield return new WaitForSeconds(0.1f);
-                    ReferenceManager.Instance.GameData.playerCash += ReferenceManager.Instance.snackbarManager.tipCash;
                     ReferenceManager.Instance.SaveGameDataObserver();
                 }
             }
@@ -68,7 +66,9 @@ namespace LaundaryMan
             // Move reset logic outside the loop
             checkoutHandler.cashStackCount = 0;
             checkoutHandler.changeInY = 0.1f; // Reset properly to avoid floating cash
-
+            ReferenceManager.Instance.GameData.playerCash +=
+                ReferenceManager.Instance.snackbarManager.tipCash;
+            ReferenceManager.Instance.snackbarManager.tipCash = 0;
             SaveAndLoadSystem.Instance.SaveGame();
         }
 

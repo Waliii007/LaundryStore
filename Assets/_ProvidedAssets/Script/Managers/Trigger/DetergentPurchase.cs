@@ -22,8 +22,16 @@ namespace LaundaryMan
             crossButton.SetActive(ReferenceManager.Instance.GameData.isTutorialCompleted);
         }
 
+        public bool isDetergentFromTrigger;
         public void OnClickCrossButton()
         {
+            if (isDetergentFromTrigger)
+            {
+                isDetergentFromTrigger = false;
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(ReferenceManager.Instance.canvasManager.prev);
+                return;
+                
+            }
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
             if (TSS_AnalyticalManager.instance)
             {

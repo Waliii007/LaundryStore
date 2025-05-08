@@ -13,9 +13,12 @@ namespace LaundaryMan
         [SerializeField] protected FullBodyBipedIK bipedIk;
         public Stack<ClothFragment> ClothStack = new Stack<ClothFragment>();
         public NavmeshPathDraw pathDraw;
+        public int maxClothesPerCycle = 10;
+        public int currentClothesCount = 0;
         private void Awake()
         {
             SetIk(0);
+            
         }
 
         public int ReturnIkValue()

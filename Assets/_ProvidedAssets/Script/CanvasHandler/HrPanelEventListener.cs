@@ -50,6 +50,11 @@ namespace LaundaryMan
                     TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(DirtyBoxAILock));
                 }
             }
+            else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough Cash");
+                
+            }
 
             UiUpdate();
         }
@@ -146,6 +151,10 @@ namespace LaundaryMan
                 }
                 ReferenceManager.Instance.notificationHandler.ShowNotification("Carry Capacity increased");
                 ReferenceManager.Instance.SaveGameDataObserver();
+            } else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough Cash");
+                
             }
 
             UiUpdate();
@@ -182,6 +191,10 @@ namespace LaundaryMan
                         TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(SpeedOfAILockRewarded));
                     }
                 }, "SpeedOfAI");
+            } else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough Cash");
+                
             }
 
             UiUpdate();
@@ -212,6 +225,10 @@ namespace LaundaryMan
                 {
                     TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(SpeedOfAILock));
                 }
+            } else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough Cash");
+                
             }
 
             UiUpdate();
@@ -367,6 +384,10 @@ namespace LaundaryMan
                 {
                     TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(CleanBoxAILock));
                 }
+            } else
+            {
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough Cash");
+                
             }
 
             UiUpdate();

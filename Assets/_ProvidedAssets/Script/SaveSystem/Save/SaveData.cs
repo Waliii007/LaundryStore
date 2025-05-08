@@ -44,7 +44,7 @@ namespace LaundaryMan
         public bool isCashierUnlocked;
         public int cleanAIUnlocked = 0;
         public int dirtyBoxAiUnlocked = 0;
-        public int playerCash = 5000;
+        public int playerCash = 2500;
         public bool isHrUnlocked = false;
         public bool isUpgradeHrUnlocked = false;
         public bool isTutorialCompleted = false;

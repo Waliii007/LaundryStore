@@ -150,6 +150,11 @@ namespace LaundaryMan
                 yield return new WaitUntil(() => !ReferenceManager.Instance.basketTrigger.isPlayerInside);
             }
 
+            if (currentState == AIState.Dropping && washingMachineDropper)
+            {
+                yield return new WaitUntil(() => washingMachineDropper.isPlayerInside);
+            }
+
             SetDestination(targetPosition.gameObject);
             yield return new WaitUntil(() => Vector3.Distance(transform.position, targetPosition.position) < 0.5f);
             ChangeState(nextState);

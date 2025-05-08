@@ -15,25 +15,26 @@ namespace LaundaryMan
         {
             CanvasStateChanger(MachineCanvasStates.Full);
             DetergentImageChange(DetergentType.Green);
-
         }
 
         public PressBasketHandler myDropper;
 
         public Image detargentImage;
         public Sprite[] detargentSprites;
-       
+
         public void DetergentImageChange(DetergentType detargentuse)
         {
             detargentImage.preserveAspect = true;
-            detargentImage.sprite=detargentSprites[(int)detargentuse];
+            detargentImage.sprite = detargentSprites[(int)detargentuse];
         }
+
         public void MachineRefillNeeded()
         {
             index = myDropper.myIndex;
             ReferenceManager.Instance.detergentItemUI.index = index;
             CanvasStateChanger(MachineCanvasStates.RefillNeeded);
         }
+
         public RinseMachineCanvas rinManager;
 
         public void OnClickRefillButton()
@@ -54,11 +55,12 @@ namespace LaundaryMan
                     break;
                 case MachineCanvasStates.RefillNeeded:
                     ReferenceManager.Instance.notificationHandler.ShowNotification(
-                        $"Machine {index} detergent needs to be refilled");
+                        $"Rinse {index} needs to be refilled");
                     checkCube.gameObject.SetActive(true);
                     break;
             }
         }
+
         private int index;
         public WaitForSeconds waitForTextUpdate = new WaitForSeconds(.01f);
         [SerializeField] private GameObject[] canvasStates;

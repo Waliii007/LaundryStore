@@ -16,16 +16,28 @@ namespace LaundaryMan
         public GameObject tutorialPanel;
         public bool once;
         public GameObject crossBuuton;
+        public bool isDetergentFromTrigger;
         private void OnEnable()
         {
             crossBuuton.SetActive(ReferenceManager.Instance.GameData.isTutorialCompleted);
 
             tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
         }
-
+        
         public void OnClickCrossButton()
         {
+            if (isDetergentFromTrigger)
+            {
+                isDetergentFromTrigger = false;
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger
+                    (ReferenceManager.Instance.canvasManager.prev);
+                return;
+            }
             ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnClickCrossButton));
+            }
         }
 
         #region Buy Buttons

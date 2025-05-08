@@ -38,7 +38,7 @@ public class InternetCheck : MonoBehaviour
         }
         else if (PrivacyPolicy == 1)
         {
-            
+            Init();
             CanvasScriptSplash.instance.LoadScene(1);
         }
         
@@ -67,11 +67,10 @@ public class InternetCheck : MonoBehaviour
         while (true)
         {
             CheckInternet();
-            yield return   waitTime; // Internet check har 5 second baad
+            yield return new WaitForSeconds(5f); // Internet check har 5 second baad
         }
     }
 
-    WaitForSeconds waitTime = new WaitForSeconds(5f);
     public void CheckInternet()
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)

@@ -13,10 +13,20 @@ namespace LaundaryMan
         public int index;
         public GameObject tutorialPanel;
         public GameObject crossButton;
-
+        public bool isDetergentFromTrigger;
+        public void OnClickCrossButton()
+        {
+          
+            ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
+            if (TSS_AnalyticalManager.instance)
+            {
+                TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(OnClickCrossButton));
+            }
+        }
+        
         private void OnEnable()
         {
-            crossButton.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
+            crossButton.SetActive(ReferenceManager.Instance.GameData.isTutorialCompleted);
 
             UpdateDetergentUI();
             tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);

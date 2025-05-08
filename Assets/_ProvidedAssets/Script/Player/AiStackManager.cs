@@ -9,9 +9,6 @@ namespace LaundaryMan
 {
     public class AiStackManager : PlayerStackManager
     {
-       
-        
-        public int maxClothesPerCycle = 5;
         private void Start()
         {
             StartCoroutine(ArrangeStack());

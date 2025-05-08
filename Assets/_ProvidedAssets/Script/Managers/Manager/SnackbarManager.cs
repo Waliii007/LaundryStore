@@ -96,19 +96,7 @@ namespace LaundaryMan
 
         public void OnCustomerServed()
         {
-            if (isBoostActive)
-            {
-                int TextToShow = Random.Range(10, 20);
-                tipCash += textToShow;
-                textToShow = TextToShow;
-            }
-            else
-            {
-                tipCash = 0;
-            }
-
             if (activePack == SnackbarType.None) return;
-
             remainingBoostedCustomers--;
             UpdateFillImage();
 
@@ -157,20 +145,22 @@ namespace LaundaryMan
             }
         }
 
-        public void BuyProPack() {
-            
+        public void BuyProPack()
+        {
             BuyPack(1);
             if (TSS_AnalyticalManager.instance)
             {
                 TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(BuyProPack) + "Snack");
-            } 
+            }
         }
+
         public void BuyMaxPack()
         {
             if (TSS_AnalyticalManager.instance)
             {
                 TSS_AnalyticalManager.instance.CustomBtnEvent(nameof(BuyProPack) + "Snack");
             }
+
             BuyPack(2);
         }
 

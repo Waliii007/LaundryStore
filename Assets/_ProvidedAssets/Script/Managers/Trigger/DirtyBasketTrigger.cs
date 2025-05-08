@@ -68,6 +68,7 @@ namespace LaundryMan
         private void OnEnable()
         {
             ReferenceManager.OnPLayerGotUpgrade += OnUpgrade;
+            
         }
 
         public int Count()
@@ -163,7 +164,6 @@ namespace LaundryMan
                         RearrangeStack(playerStackManager);
                         ArrangeStack();
                     });
-
                     playerStackManager.SetIk(1);
                     yield return new WaitForSeconds(stackTime);
                 }
