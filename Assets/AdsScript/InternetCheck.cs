@@ -26,7 +26,7 @@ public class InternetCheck : MonoBehaviour
 
     public void Initlize()
     {
-        isInitialize = true;
+        Application.targetFrameRate = 90;
         remoteConfig.InternetAvailable();
         if (PrivacyPolicy == 0)
         {
@@ -41,7 +41,7 @@ public class InternetCheck : MonoBehaviour
             Init();
             CanvasScriptSplash.instance.LoadScene(1);
         }
-        
+        isInitialize = true;
     }
 
     void Start()

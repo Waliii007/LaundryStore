@@ -9,7 +9,7 @@ public static class GlobalConstant
     public static bool AdsON = true;
     public static bool ShowAppOpen = false;
     public static bool ISMAXON = false;
-    public static bool useAdPriority;
+    public static bool UseAdBidding;
     public static string TSS_Admob_Inter_IdHigh =
         "ca-app-pub-3940256099942544/1033173712";
 

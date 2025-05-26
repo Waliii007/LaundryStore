@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GameAnalyticsSDK;
 using GoogleMobileAds.Api;
+using ToastPlugin;
 using UnityEngine;
 
 public class AppLovinMax : MonoBehaviour
@@ -34,6 +35,7 @@ public class AppLovinMax : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+        MaxSdkKey = "D9Ut-HfJQ-2vKKsAQDCqFcckAiSRTAbDHADl_6Q90aqL2rqEkbWc3HxBNi-ZJWCg1hvZxTrbBVvSsMGHW8NLDG";
     }
 
     public void Init()
@@ -56,7 +58,6 @@ public class AppLovinMax : MonoBehaviour
                 return;
             }
 
-            Debug.Log("MAX SDK Initialized");
             InitializeInterstitialAds();
             InitializeRewardedAds();
         };
@@ -66,7 +67,7 @@ public class AppLovinMax : MonoBehaviour
 
     #region Interstitial Ad Methods
 
-    private void InitializeInterstitialAds()
+    public void InitializeInterstitialAds()
     {
         if (!GlobalConstant.AdsON)
         {
@@ -78,13 +79,14 @@ public class AppLovinMax : MonoBehaviour
         MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialFailedEvent;
         MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += InterstitialFailedToDisplayEvent;
         MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialDismissedEvent;
-        MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent += TSS_AnalyticalManager.instance.Revenue_ReportMax;
+        MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent +=
+            TSS_AnalyticalManager.instance.Revenue_ReportMax;
 
         // Load the first interstitial
         LoadInterstitial();
     }
 
-    void LoadInterstitial()
+    public void LoadInterstitial()
     {
         MaxSdk.LoadInterstitial(InterstitialAdUnitId);
     }
@@ -109,7 +111,6 @@ public class AppLovinMax : MonoBehaviour
         }
         else
         {
-            
             TSS_AnalyticalManager.instance.InterstitialEvent("Max_Inter_Failed");
         }
     }
@@ -183,6 +184,7 @@ public class AppLovinMax : MonoBehaviour
         action = ac;
         if (MaxSdk.IsRewardedAdReady(RewardedAdUnitId))
         {
+            TSS_Admob.isInterstialAdPresent = true;
             MaxSdk.ShowRewardedAd(RewardedAdUnitId);
         }
     }
@@ -233,8 +235,8 @@ public class AppLovinMax : MonoBehaviour
     private void OnRewardedAdDismissedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
         // Rewarded ad is hidden. Pre-load the next ad
-   
-        
+
+
         Debug.Log("Rewarded ad dismissed");
         LoadRewardedAd();
     }
@@ -244,7 +246,6 @@ public class AppLovinMax : MonoBehaviour
         GlobalConstant.RewardedAdsWatched(action);
         // Rewarded ad was displayed and user should receive the reward
         Debug.Log("Rewarded ad received reward");
-        
     }
 
     #endregion

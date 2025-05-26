@@ -1,13 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using GameAnalyticsSDK;
 using GoogleMobileAds.Api;
-using GoogleMobileAds.Common;
-using LaundaryMan;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
+
 
 public class TssAdsManager : MonoBehaviour
 {
@@ -33,7 +27,8 @@ public class TssAdsManager : MonoBehaviour
         admobInstance.HideBanner();
     }
 
-    [Header("Admob IDS")] private bool _isBannerShowing, _isBannerReady;
+    [Header("Admob IDS")] public bool _isBannerShowing, _isBannerReady;
+    [Header("Admob IDS")] public bool _isRecShowing, _isRecBannerReady;
     private bool _isFlooringBannerReady, _isFlooringBannerShowing;
     private bool isMRecShowing;
 
@@ -53,27 +48,17 @@ public class TssAdsManager : MonoBehaviour
 
     public void Init()
     {
-        /* AppLovinSettings.Instance.SdkKey = GlobalConstant.MaxSdkKey;
-         print(AppLovinSettings.Instance.SdkKey);*/
-
-
+    
         Debug.Log("Application.version " + Application.version);
-
-        //DontDestroyOnLoad(this.gameObject);
-        GameAnalytics.Initialize();
+ 
         PostInit();
-         adTimer.Init();
     }
-
-    public AdTimer adTimer;
-
 
     public TSS_Admob admobInstance;
     public AppLovinMax appLovinMax;
 
     void PostInit()
     {
-        //  admobInstance.appId = GlobalConstant.AppId;
         adPriority = GlobalConstant.adPriority;
         admobInstance.bannerIDMed = GlobalConstant.TSS_Admob_Banner_MID;
         admobInstance.InterMediumFloorID = GlobalConstant.TSS_Admob_Inter_IdMid;
@@ -99,6 +84,7 @@ public class TssAdsManager : MonoBehaviour
         MobileAds.SetiOSAppPauseOnBackground(true);
         MobileAds.RaiseAdEventsOnUnityMainThread = true;
         admobInstance.Initialize();
+        appLovinMax.Init();
     }
 
     public void ShowInterstitial(string placement)
@@ -120,9 +106,11 @@ public class TssAdsManager : MonoBehaviour
         {
             if (appLovinMax)
                 appLovinMax.ShowInterstitial();
+            
         }
         else
         {
+            appLovinMax.InitializeInterstitialAds();
             admobInstance.ShowInterstitial();
         }
     }
@@ -147,6 +135,7 @@ public class TssAdsManager : MonoBehaviour
         if (adPriority == AdPriority.Max)
         {
             appLovinMax.ShowRewardedAd(ac);
+            
         }
         else
             admobInstance.ShowRewardedAdmob(ac);
@@ -164,7 +153,7 @@ public class TssAdsManager : MonoBehaviour
             return;
         }
 
-        if (GlobalConstant.AdsON)
+        if (!GlobalConstant.AdsON)
         {
             return;
         }
@@ -209,7 +198,7 @@ public class TssAdsManager : MonoBehaviour
         }
     }
 
-    public void TopShowBanner(string placement)
+    public void RecShowBanner(string placement)
     {
         if (isAdsRemove)
         {
@@ -223,7 +212,7 @@ public class TssAdsManager : MonoBehaviour
 
         _isBannerShowing = true;
 
-        admobInstance.TopShowBanner();
+        admobInstance.ShowRecBanner();
         if (TSS_AnalyticalManager.instance)
         {
             TSS_AnalyticalManager.instance.CustomScreenEvent(placement);
@@ -237,8 +226,20 @@ public class TssAdsManager : MonoBehaviour
         _isBannerShowing = false;
         admobInstance.HideBanner();
     }
-
-
+    public void HideRecBanner()
+    {
+        _isBannerReady = false;
+        _isBannerShowing = false;
+        admobInstance.HideRecBanner();
+    } 
+    public void HideBannerAppOpen()
+    {
+        admobInstance.HideBanner();
+    }
+    public void HideRecBannerAppOpen()
+    {
+        admobInstance.HideRecBanner();
+    } 
     public bool IsBannerAdAvailable()
     {
         return _isBannerReady;

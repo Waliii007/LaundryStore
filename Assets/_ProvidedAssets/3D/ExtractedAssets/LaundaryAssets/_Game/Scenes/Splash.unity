@@ -919,6 +919,11 @@ PrefabInstance:
       objectReference: {fileID: 1130994245}
     - target: {fileID: 1643197690283546054, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
+      propertyPath: MaxSdkKey
+      value: D9Ut-HfJQ-2vKKsAQDCqFcckAiSRTAbDHADl_6Q90aqL2rqEkbWc3HxBNi-ZJWCg1hvZxTrbBVvSsMGHW8NLDG
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643197690283546054, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -1065,8 +1070,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2734714101565882209, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
+      propertyPath: MaxSdkKey
+      value: D9Ut-HfJQ-2vKKsAQDCqFcckAiSRTAbDHADl_6Q90aqL2rqEkbWc3HxBNi-ZJWCg1hvZxTrbBVvSsMGHW8NLDG
+      objectReference: {fileID: 0}
+    - target: {fileID: 2734714101565882209, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3017639062927164989, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}

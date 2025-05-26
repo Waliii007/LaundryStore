@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
 using Firebase.Analytics;
@@ -77,7 +78,6 @@ public class FirebaseRemoteConfig : MonoBehaviour
     }
 
     public TssAdsManager adsManager;
-    //public GoogleMobileAdsSettings googleMobileAdsSettingsObject;
 
     void FetchComplete(Task fetchTask)
     {
@@ -126,165 +126,95 @@ public class FirebaseRemoteConfig : MonoBehaviour
         }
     }
 
-    void GetRemoteData()
+    public void GetRemoteData()
     {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            /*/* print("Android platform is supported.");
-             adsManager.MaxSdkKey = GlobalConstant.MaxSdkKey = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
-                 .GetValue("MaxSdkKey")
-                 .StringValue;
-             if (GlobalConstant.isLogger)
-                 print(GlobalConstant.MaxSdkKey);
-             googleMobileAdsSettingsObject.GoogleMobileAdsAndroidAppId = Firebase.RemoteConfig.FirebaseRemoteConfig
-                 .DefaultInstance.GetValue("AndroidAPPID")
-                 .StringValue;
-             if (GlobalConstant.isLogger)
-                 print(GlobalConstant.AppId);
-            if (GlobalConstant.isLogger) print(GlobalConstant.AppId);
-            if (GlobalConstant.isLogger) print(AppLovinSettings.Instance.SdkKey);*/
-
+            if (GlobalConstant.isLogger) print("Android platform is supported.");
             GlobalConstant.ISMAXON =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.GetValue("ISMAXON")
                     .BooleanValue;
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.ISMAXON);
+            if (GlobalConstant.isLogger) print("19");
+
             GlobalConstant.AdsON =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.GetValue("isAdsOn")
                     .BooleanValue;
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.AdsON);
+            if (GlobalConstant.isLogger) print("18");
 
             GlobalConstant.TSS_Admob_Banner_MID =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("BannerMid").StringValue;
-
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Banner_MID);
-
+            if (GlobalConstant.isLogger) print("17");
 
             GlobalConstant.TSS_Admob_Inter_IdMid =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("InterMid").StringValue;
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Inter_IdMid);
-
+            if (GlobalConstant.isLogger) print("16");
             GlobalConstant.TSS_Admob_Rewarded_Id_Mid =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("RewardedMId").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Rewarded_Id_Mid);
-
+            if (GlobalConstant.isLogger) print("15");
             GlobalConstant.TSS_Admob_AppOpen_Id_Mid =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("AppOpenMid").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_AppOpen_Id_Mid);
-
+            if (GlobalConstant.isLogger) print("14");
             GlobalConstant.TSS_Admob_Banner_HIGH =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("BannerHigh").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Inter_IdHigh);
-
+            if (GlobalConstant.isLogger) print("13");
             GlobalConstant.TSS_Admob_Inter_IdHigh =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("InterHigh").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Inter_IdHigh);
-
+            if (GlobalConstant.isLogger) print("12");
             GlobalConstant.TSS_Admob_Rewarded_Id_High =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("RewardedHigh").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Rewarded_Id_High);
-
+            if (GlobalConstant.isLogger) print("11");
             GlobalConstant.TSS_Admob_AppOpen_IdHigh =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("AppOpenHigh").StringValue;
 
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_AppOpen_IdHigh);
-
+            if (GlobalConstant.isLogger) print("10");
             GlobalConstant.TSS_Admob_Banner_Simple =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("BannerSimple").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Banner_Simple);
-
+            if (GlobalConstant.isLogger) print("9");
             GlobalConstant.TSS_Admob_Inter_IdLow =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("InterSimple").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Inter_IdLow);
-
+            if (GlobalConstant.isLogger) print("8");
             GlobalConstant.TSS_Admob_Rewarded_Id_Simple =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("RewardedSimple").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Rewarded_Id_Simple);
-
+            if (GlobalConstant.isLogger) print("7");
             GlobalConstant.TSS_Admob_AppOpen_Id_Low =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("AppOpenLow").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_AppOpen_Id_Low);
+            if (GlobalConstant.isLogger) print("6");
 
             GlobalConstant.InterstitialAdUnitId =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("InterstitialMax").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.InterstitialAdUnitId);
-
+            if (GlobalConstant.isLogger) print("5");
             GlobalConstant.RewardedAdUnitId =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("RewardedAdMax").StringValue;
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.TSS_Admob_Rewarded_Id_High);
-         
+            if (GlobalConstant.isLogger) print("4");
             GlobalConstant.RateUsLink =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("RateUsLink").StringValue;
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.RateUsLink);
+            if (GlobalConstant.isLogger) print("3");
             GlobalConstant.PrivacyPoliciesLInk =
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
                     .GetValue("PrivacyPoliciesLInk").StringValue;
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.PrivacyPoliciesLInk);
+
+            if (GlobalConstant.isLogger) print("2");
             GlobalConstant.adPriority = (TssAdsManager.AdPriority)(int)Firebase.RemoteConfig.FirebaseRemoteConfig
                 .DefaultInstance
                 .GetValue("adPriority").DoubleValue;
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.adPriority);
-            GlobalConstant.adTimer = (int)Firebase.RemoteConfig.FirebaseRemoteConfig
-                .DefaultInstance
-                .GetValue("adsFrequency").DoubleValue;
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.adTimer);
+            
 
-            GlobalConstant.useAdPriority = Firebase.RemoteConfig.FirebaseRemoteConfig
-                .DefaultInstance
-                .GetValue("UseAdBiding").BooleanValue;
-
-           // print(GlobalConstant.UseAdPriority);
-
-            GlobalConstant.MoreGamesLink = Firebase.RemoteConfig.FirebaseRemoteConfig
-                .DefaultInstance
-                .GetValue("MoreGamesLink").StringValue;
-           // print(GlobalConstant.UseAdPriority);
+            if (GlobalConstant.isLogger) print("1");
             if (GlobalConstant.isLogger)
             {
                 print(GlobalConstant.TSS_Admob_Inter_IdHigh);
@@ -309,17 +239,6 @@ public class FirebaseRemoteConfig : MonoBehaviour
 
         if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            /*adsManager.MaxSdkKey = GlobalConstant.MaxSdkKey = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
-                .GetValue("MaxSdkKey")
-                .StringValue;
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.MaxSdkKey);
-            googleMobileAdsSettingsObject.GoogleMobileAdsIOSAppId = Firebase.RemoteConfig.FirebaseRemoteConfig
-                .DefaultInstance.GetValue("IOSAPPID")
-                .StringValue;
-
-            if (GlobalConstant.isLogger)
-                googleMobileAdsSettingsObject.GoogleMobileAdsIOSAppId = GlobalConstant.AppIdIOS;*/
             GlobalConstant.ISMAXON =
                 (bool)Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.GetValue("ISMAXONIOS")
                     .BooleanValue;
@@ -418,24 +337,8 @@ public class FirebaseRemoteConfig : MonoBehaviour
             GlobalConstant.adPriority = (TssAdsManager.AdPriority)(int)Firebase.RemoteConfig.FirebaseRemoteConfig
                 .DefaultInstance
                 .GetValue("adPriorityIOS").DoubleValue;
-
-
-/*            GlobalConstant.adPriority = (TssAdsManager.AdPriority)(int)Firebase.RemoteConfig.FirebaseRemoteConfig
-                .DefaultInstance
-                .GetValue("adsFrequency").DoubleValue;
-*/
-
-            GlobalConstant.useAdPriority = Firebase.RemoteConfig.FirebaseRemoteConfig
-                .DefaultInstance
-                .GetValue("UseAdBidingIOS").BooleanValue;
-
-            GlobalConstant.MoreGamesLink = Firebase.RemoteConfig.FirebaseRemoteConfig
-                .DefaultInstance
-                .GetValue("MoreGamesLinkIOS").StringValue;
-
-
-            if (GlobalConstant.isLogger)
-                print(GlobalConstant.useAdPriority + "|");
+             
+                print("GlobalConstant.adPriority");
 
             adsManager.Init();
             if (GlobalConstant.isLogger)
@@ -456,6 +359,8 @@ public class FirebaseRemoteConfig : MonoBehaviour
                 print(GlobalConstant.TSS_Admob_Rewarded_Id_Mid);
                 print(GlobalConstant.TSS_Admob_Rewarded_Id_Simple);
             }
+
+            
         }
     }
 
