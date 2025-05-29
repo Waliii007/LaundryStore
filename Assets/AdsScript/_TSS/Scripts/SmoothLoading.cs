@@ -135,7 +135,7 @@ public class SmoothLoading : MonoBehaviour
             isLoading = false;
             ShutLoading();
             targetValue = 0;
-            Debug.Log("Loading Complete");
+//            Debug.Log("Loading Complete");
             // gameObject.SetActive(false);
         }
     }

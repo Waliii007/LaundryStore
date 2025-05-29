@@ -8,9 +8,13 @@ public class GoogleConsent : MonoBehaviour
 {
     private void Awake()
     {
-        GatherConsent(print);
+        GatherConsent(p);
     }
 
+    void p(string p)
+    {
+        
+    }
     public bool CanRequestAds => ConsentInformation.CanRequestAds();
  public void GatherConsent(Action<string> onComplete)
     {

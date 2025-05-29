@@ -14,7 +14,15 @@ namespace LaundaryMan
 
         public void Accept()
         {
-            ReferenceManager.Instance.GameData.playerCash += 100;
+            if (ReferenceManager.Instance)
+            {
+                ReferenceManager.Instance.GameData.playerCash += 100;
+            }
+            else
+            {
+                SaveAndLoadSystem.Instance.GameData.playerCash += 100;
+            }
+
             TssAdsManager._Instance?.ShowInterstitial("AdsFrequency");
             CanvasScriptSplash.instance.adFrequency.timeElapsed = 0;
             CanvasScriptSplash.instance.adFrequency.isCalled = false;

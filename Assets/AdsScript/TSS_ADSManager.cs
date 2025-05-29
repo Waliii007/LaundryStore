@@ -49,7 +49,7 @@ public class TssAdsManager : MonoBehaviour
     public void Init()
     {
     
-        Debug.Log("Application.version " + Application.version);
+//        Debug.Log("Application.version " + Application.version);
  
         PostInit();
     }

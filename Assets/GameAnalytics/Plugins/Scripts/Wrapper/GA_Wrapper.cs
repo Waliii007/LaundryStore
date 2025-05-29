@@ -17,6 +17,7 @@ namespace GameAnalyticsSDK.Wrapper
             }
         }
 
+       
         private static void configureAvailableCustomDimensions02 (string list)
         {
             if (GameAnalytics.SettingsGA.InfoLogEditor) {

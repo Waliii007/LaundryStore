@@ -40,7 +40,7 @@ public class AppLovinMax : MonoBehaviour
 
     public void Init()
     {
-        Debug.Log("Application.version " + Application.version);
+//        Debug.Log("Application.version " + Application.version);
         DontDestroyOnLoad(this.gameObject);
         if (!GlobalConstant.ISMAXON)
             return;

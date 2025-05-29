@@ -84,7 +84,7 @@ public class TSS_Admob : MonoBehaviour
 
     public void PrintStatus(string message)
     {
-        print(message);
+//        print(message);
     }
 
     private AdRequest CreateAdRequest()
@@ -225,7 +225,7 @@ public class TSS_Admob : MonoBehaviour
             return;
         }
 
-        Debug.Log("Initialization complete.");
+//        Debug.Log("Initialization complete.");
         RequestAndLoadAppOpenAd();
         RequestAndLoadInterstitialAd();
         RequestBannerAd();
@@ -512,7 +512,7 @@ public class TSS_Admob : MonoBehaviour
 
     public void RequestBannerAd()
     {
-        Debug.Log("Requesting Banner ad.");
+//        Debug.Log("Requesting Banner ad.");
         string adUnitId = bannerIDHigh;
 
         if (GlobalConstant.UseAdBidding)

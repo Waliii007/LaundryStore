@@ -41,9 +41,9 @@ public class FirebaseRemoteConfig : MonoBehaviour
 
     void InitializeFirebase()
     {
-        Debug.Log("Enabling data collection.");
+//        Debug.Log("Enabling data collection.");
         FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
-        Debug.Log("Set user properties.");
+   //     Debug.Log("Set user properties.");
         FirebaseAnalytics.SetUserProperty(
             FirebaseAnalytics.UserPropertySignUpMethod,
             "Google");
@@ -70,7 +70,7 @@ public class FirebaseRemoteConfig : MonoBehaviour
 
     public Task FetchDataAsync()
     {
-        Debug.Log("Fetching data...");
+//        Debug.Log("Fetching data...");
         Task fetchTask =
             Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.FetchAsync(
                 TimeSpan.Zero);
@@ -83,15 +83,15 @@ public class FirebaseRemoteConfig : MonoBehaviour
     {
         if (fetchTask.IsCanceled)
         {
-            Debug.Log("Fetch canceled.");
+           // Debug.Log("Fetch canceled.");
         }
         else if (fetchTask.IsFaulted)
         {
-            Debug.Log("Fetch encountered an error.");
+           // Debug.Log("Fetch encountered an error.");
         }
         else if (fetchTask.IsCompleted)
         {
-            Debug.Log("Fetch completed successfully!");
+//            Debug.Log("Fetch completed successfully!");
         }
 
         var info = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.Info;
@@ -101,8 +101,8 @@ public class FirebaseRemoteConfig : MonoBehaviour
                 Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.ActivateAsync()
                     .ContinueWithOnMainThread(task =>
                     {
-                        Debug.Log(String.Format("Remote data loaded and ready (last fetch time {0}).",
-                            info.FetchTime));
+//                        Debug.Log(String.Format("Remote data loaded and ready (last fetch time {0}).",
+                    //        info.FetchTime));
                         GetRemoteData();
                         //print(GlobalConstant.TSS_Admob_Banner_MID);
                     });
