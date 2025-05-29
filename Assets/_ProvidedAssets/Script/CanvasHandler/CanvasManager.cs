@@ -12,6 +12,7 @@ namespace LaundaryMan
         public CanvasStates currentState;
         public Text cashText;
         public MachineButton machineButton;
+
         private void OnEnable()
         {
             StartCoroutine(TextUpdater());
@@ -26,8 +27,11 @@ namespace LaundaryMan
             switch (newState)
             {
                 case CanvasStates.MainControls:
+                    TssAdsManager._Instance?.ShowBanner("MainControl");
+                    TssAdsManager._Instance?.admobInstance.TopShowBanner();
                     break;
                 case CanvasStates.Hr:
+
                     if (SoundManager.instance)
                     {
                         SoundManager.instance.Play(SoundName.PopUp);
@@ -42,6 +46,7 @@ namespace LaundaryMan
 
                     break;
             }
+
             if (TSS_AnalyticalManager.instance)
             {
                 TSS_AnalyticalManager.instance.CustomScreenEvent(nameof(newState));
@@ -60,6 +65,7 @@ namespace LaundaryMan
 
             yield return waitForTextUpdate;
         }
+
         [SerializeField] private GameObject[] canvasStates;
     }
 }

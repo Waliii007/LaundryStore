@@ -76,6 +76,8 @@ namespace LaundaryMan
             activePickers = new List<Ai>();
             SaveDataAction += SaveAndLoadSystem.Instance.SaveGame;
             TssAdsManager._Instance?.ShowBanner("MainScreen");
+            
+            TssAdsManager._Instance?.admobInstance.TopShowBanner();
         }
 
         public void SaveUnlockingData(string key, int value)

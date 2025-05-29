@@ -78,13 +78,13 @@ public class TSS_Admob : MonoBehaviour
     public void Initialize()
     {
         DontDestroyOnLoad(this.gameObject);
-        
+
         PostInit();
     }
 
     public void PrintStatus(string message)
     {
-//        print(message);
+        print(message);
     }
 
     private AdRequest CreateAdRequest()
@@ -225,12 +225,13 @@ public class TSS_Admob : MonoBehaviour
             return;
         }
 
-//        Debug.Log("Initialization complete.");
+        Debug.Log("Initialization complete.");
         RequestAndLoadAppOpenAd();
         RequestAndLoadInterstitialAd();
         RequestBannerAd();
         RequestAndLoadRewardedAd();
-        //RequestRecBannerAd();
+        LeftRequestBannerAd();
+        RequestRecBannerAd();
         //RequestAndLoadInterstitialAd();
         //TopRequestBannerAd();
 
@@ -419,7 +420,7 @@ public class TSS_Admob : MonoBehaviour
                     {
                         appOpenAdRequestFloorType = (RequestFloorType)Math.Min((int)appOpenAdRequestFloorType + 1,
                             (int)RequestFloorType.Failed);
-                       
+
                         RequestAndLoadAppOpenAd();
                     }
 
@@ -446,12 +447,13 @@ public class TSS_Admob : MonoBehaviour
                     if (TssAdsManager._Instance && TssAdsManager._Instance._isBannerShowing)
                     {
                         TssAdsManager._Instance.ShowBanner("appOpenedClosed");
+                        TssAdsManager._Instance.admobInstance.TopShowBanner();
                     }
 
-                  /*  if (TssAdsManager._Instance && TssAdsManager._Instance._isRecShowing)
-                    {
-                        TssAdsManager._Instance.RecShowBanner("appOpenedClosed");
-                    }*/
+                    /*  if (TssAdsManager._Instance && TssAdsManager._Instance._isRecShowing)
+                      {
+                          TssAdsManager._Instance.RecShowBanner("appOpenedClosed");
+                      }*/
 
                     OnAdClosedEvent.Invoke();
                 };
@@ -498,6 +500,7 @@ public class TSS_Admob : MonoBehaviour
         {
             TssAdsManager._Instance.HideRecBannerAppOpen();
             TssAdsManager._Instance.HideBanner();
+            TssAdsManager._Instance.admobInstance.TopHideBanner();
         }
 
         HideBanner();
@@ -512,27 +515,11 @@ public class TSS_Admob : MonoBehaviour
 
     public void RequestBannerAd()
     {
-//        Debug.Log("Requesting Banner ad.");
-        string adUnitId = bannerIDHigh;
+        Debug.Log("Requesting Banner ad.");
+        string adUnitId = bannerIDMed;
 
-        if (GlobalConstant.UseAdBidding)
-        {
-            switch (bannerAdRequestFloorType)
-            {
-                case RequestFloorType.High:
 #if UNITY_EDITOR
-                    adUnitId = "unused";
-#elif UNITY_ANDROID
-            adUnitId = bannerIDHigh;
-#elif UNITY_IPHONE
-            adUnitId = bannerIDHigh;
-#else
-            adUnitId = "unexpected_platform";
-#endif
-                    break;
-                case RequestFloorType.Meduim: // ✅ Fixed spelling from "Meduim" to "Medium"
-#if UNITY_EDITOR
-                    adUnitId = "unused";
+        adUnitId = "unused";
 #elif UNITY_ANDROID
             adUnitId = bannerIDMed;
 #elif UNITY_IPHONE
@@ -540,36 +527,6 @@ public class TSS_Admob : MonoBehaviour
 #else
             adUnitId = "unexpected_platform";
 #endif
-                    break;
-                case RequestFloorType.Simple:
-#if UNITY_EDITOR
-                    adUnitId = "unused";
-#elif UNITY_ANDROID
-            adUnitId = LowBannerID;
-#elif UNITY_IPHONE
-            adUnitId = LowBannerID;
-#else
-            adUnitId = "unexpected_platform";
-#endif
-                    break;
-                case RequestFloorType.Failed:
-                    Debug.Log("All banner ad floors failed. Restarting from High.");
-                    bannerAdRequestFloorType = RequestFloorType.High; // ✅ Reset after trying all floors
-                    return;
-            }
-        }
-        else
-        {
-#if UNITY_EDITOR
-            adUnitId = "unused";
-#elif UNITY_ANDROID
-            adUnitId = LowBannerID;
-#elif UNITY_IPHONE
-            adUnitId = LowBannerID;
-#else
-            adUnitId = "unexpected_platform";
-#endif
-        }
 
         if (bannerView != null)
         {
@@ -661,118 +618,75 @@ public class TSS_Admob : MonoBehaviour
 
     public RequestFloorType TopbannerAdRequestFloorType;
 
-    public void TopRequestBannerAd()
+    public void LeftRequestBannerAd()
     {
-        Debug.Log("Requesting Banner ad.");
+        Debug.Log("Requesting Left Banner ad.");
         string adUnitId = bannerIDHigh;
-        if (GlobalConstant.UseAdBidding)
-        {
-            switch (TopbannerAdRequestFloorType)
-            {
-                case RequestFloorType.High:
-#if UNITY_EDITOR
-                    adUnitId = "unused";
-#elif UNITY_ANDROID
-            adUnitId = bannerIDHigh;
-#elif UNITY_IPHONE
-            adUnitId = bannerIDHigh;
-#else
-            adUnitId = "unexpected_platform";
-#endif
-                    break;
-                case RequestFloorType.Meduim: // ✅ Fixed spelling from "Meduim" to "Medium"
-#if UNITY_EDITOR
-                    adUnitId = "unused";
-#elif UNITY_ANDROID
-            adUnitId = bannerIDMed;
-#elif UNITY_IPHONE
-            adUnitId = bannerIDMed;
-#else
-            adUnitId = "unexpected_platform";
-#endif
-                    break;
-                case RequestFloorType.Simple:
-#if UNITY_EDITOR
-                    adUnitId = "unused";
-#elif UNITY_ANDROID
-            adUnitId = LowBannerID;
-#elif UNITY_IPHONE
-            adUnitId = LowBannerID;
-#else
-            adUnitId = "unexpected_platform";
-#endif
-                    break;
-                case RequestFloorType.Failed:
-                    Debug.Log("All banner ad floors failed. Restarting from High.");
-                    bannerAdRequestFloorType = RequestFloorType.High; // ✅ Reset after trying all floors
-                    return;
-            }
-        }
-        else
-        {
+     
 #if UNITY_EDITOR
             adUnitId = "unused";
 #elif UNITY_ANDROID
-            adUnitId = LowBannerID;
+            adUnitId = bannerIDHigh;
 #elif UNITY_IPHONE
-            adUnitId = LowBannerID;
+            adUnitId = bannerIDHigh;
 #else
             adUnitId = "unexpected_platform";
 #endif
-        }
 
-        if (TopbannerView != null)
-        {
-            TopbannerView.Destroy();
-        }
 
-        // ✅ Ad Position is now configurable
-        AdPosition _adPosition = AdPosition.Bottom; // Change as needed
+            if (TopbannerView != null)
+            {
+                TopbannerView.Destroy();
+            }
 
-        TopbannerView = new BannerView(adUnitId, AdSize.Banner, _adPosition);
+            // ✅ Ad Position is now configurable
+            AdPosition _adPosition = AdPosition.Bottom; // Change as needed
 
-        TopbannerView.OnBannerAdLoaded += () =>
-        {
-            PrintStatus("Banner ad loaded.");
-            OnAdLoadedEvent.Invoke();
-        };
+            TopbannerView = new BannerView(adUnitId, AdSize.Banner, _adPosition);
 
-        TopbannerView.OnBannerAdLoadFailed += (LoadAdError error) =>
-        {
-            PrintStatus("Banner ad failed to load with error: " + error.GetMessage());
-            OnAdFailedToLoadEvent.Invoke();
+            TopbannerView.OnBannerAdLoaded += () =>
+            {
+                PrintStatus("Banner ad loaded.");
+                OnAdLoadedEvent.Invoke();
+            };
 
-            // ✅ Prevents infinite recursion by clamping the request floor type
-            bannerAdRequestFloorType =
-                (RequestFloorType)Math.Min((int)bannerAdRequestFloorType + 1, (int)RequestFloorType.Failed);
+            TopbannerView.OnBannerAdLoadFailed += (LoadAdError error) =>
+            {
+                PrintStatus("Banner ad failed to load with error: " + error.GetMessage());
+                OnAdFailedToLoadEvent.Invoke();
 
-            DOVirtual.DelayedCall(1, TopRequestBannerAd);
-        };
+                // ✅ Prevents infinite recursion by clamping the request floor type
+                bannerAdRequestFloorType =
+                    (RequestFloorType)Math.Min((int)bannerAdRequestFloorType + 1, (int)RequestFloorType.Failed);
 
-        TopbannerView.OnAdImpressionRecorded += () => { PrintStatus("Banner ad recorded an impression."); };
-        TopbannerView.OnAdClicked += () => { PrintStatus("Banner ad recorded a click."); };
-        TopbannerView.OnAdFullScreenContentOpened += () =>
-        {
-            PrintStatus("Banner ad opening.");
-            OnAdOpeningEvent.Invoke();
-        };
+                DOVirtual.DelayedCall(1, LeftRequestBannerAd);
+            };
 
-        TopbannerView.OnAdFullScreenContentClosed += () =>
-        {
-            PrintStatus("Banner ad closed.");
-            OnAdClosedEvent.Invoke();
+            TopbannerView.OnAdImpressionRecorded += () => { PrintStatus("Banner ad recorded an impression."); };
+            TopbannerView.OnAdClicked += () => { PrintStatus("Banner ad recorded a click."); };
+            TopbannerView.OnAdFullScreenContentOpened += () =>
+            {
+                PrintStatus("Banner ad opening.");
+                OnAdOpeningEvent.Invoke();
+            };
 
-            DOVirtual.DelayedCall(1, TopRequestBannerAd);
-        };
+            TopbannerView.OnAdFullScreenContentClosed += () =>
+            {
+                PrintStatus("Banner ad closed.");
+                OnAdClosedEvent.Invoke();
 
-        TopbannerView.OnAdPaid += (AdValue adValue) =>
-        {
-            Debug.Log($"Banner view paid {adValue.Value} {adValue.CurrencyCode}.");
-            TSS_AnalyticalManager.instance?.Revenue_ReportAdmob(adValue, "Banner");
-        };
+                DOVirtual.DelayedCall(1, LeftRequestBannerAd);
+            };
 
-        TopbannerView.LoadAd(CreateAdRequest());
-        TopHideBanner();
+            TopbannerView.OnAdPaid += (AdValue adValue) =>
+            {
+                Debug.Log($"Banner view paid {adValue.Value} {adValue.CurrencyCode}.");
+                TSS_AnalyticalManager.instance?.Revenue_ReportAdmob(adValue, "Banner");
+            };
+
+            TopbannerView.LoadAd(CreateAdRequest());
+            TopHideBanner();
+        
     }
 
 
@@ -797,7 +711,7 @@ public class TSS_Admob : MonoBehaviour
         }
         else
         {
-            RequestBannerAd();
+            LeftRequestBannerAd();
         }
     }
 
@@ -1030,7 +944,7 @@ public class TSS_Admob : MonoBehaviour
         });
     }
 
-    public void ShowInterstitial()
+    public void ShowInterstitial(bool checkMax = true)
     {
         if (!GlobalConstant.AdsON)
         {
@@ -1046,11 +960,11 @@ public class TSS_Admob : MonoBehaviour
                 if (TSS_AnalyticalManager.instance)
                     TSS_AnalyticalManager.instance.CustomOtherEvent("Admob_Inter_Shown");
             }
-            else
+            else if (checkMax)
             {
                 RequestAndLoadInterstitialAd();
                 if (GlobalConstant.ISMAXON)
-                    AppLovinMax.Instance?.ShowInterstitial();
+                    AppLovinMax.Instance?.ShowInterstitial(false);
                 if (TSS_AnalyticalManager.instance)
                     TSS_AnalyticalManager.instance.CustomOtherEvent("Admob_Inter_Failed");
             }
