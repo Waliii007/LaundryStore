@@ -231,7 +231,7 @@ public class TSS_Admob : MonoBehaviour
         RequestBannerAd();
         RequestAndLoadRewardedAd();
         LeftRequestBannerAd();
-        RequestRecBannerAd();
+        //RequestRecBannerAd();
         //RequestAndLoadInterstitialAd();
         //TopRequestBannerAd();
 
@@ -548,15 +548,6 @@ public class TSS_Admob : MonoBehaviour
         {
             PrintStatus("Banner ad failed to load with error: " + error.GetMessage());
             OnAdFailedToLoadEvent.Invoke();
-
-            if (GlobalConstant.UseAdBidding)
-            {
-                // ✅ Prevents infinite recursion by clamping the request floor type
-                bannerAdRequestFloorType =
-                    (RequestFloorType)Math.Min((int)bannerAdRequestFloorType + 1, (int)RequestFloorType.Failed);
-
-                DOVirtual.DelayedCall(1, RequestBannerAd);
-            }
         };
 
         bannerView.OnAdImpressionRecorded += () => { PrintStatus("Banner ad recorded an impression."); };
@@ -571,8 +562,7 @@ public class TSS_Admob : MonoBehaviour
         {
             PrintStatus("Banner ad closed.");
             OnAdClosedEvent.Invoke();
-            if (GlobalConstant.UseAdBidding)
-                bannerAdRequestFloorType = RequestFloorType.High;
+          
             DOVirtual.DelayedCall(1, RequestBannerAd);
         };
 
@@ -640,7 +630,7 @@ public class TSS_Admob : MonoBehaviour
             }
 
             // ✅ Ad Position is now configurable
-            AdPosition _adPosition = AdPosition.Bottom; // Change as needed
+            AdPosition _adPosition = AdPosition.Top; // Change as needed
 
             TopbannerView = new BannerView(adUnitId, AdSize.Banner, _adPosition);
 
@@ -656,10 +646,8 @@ public class TSS_Admob : MonoBehaviour
                 OnAdFailedToLoadEvent.Invoke();
 
                 // ✅ Prevents infinite recursion by clamping the request floor type
-                bannerAdRequestFloorType =
-                    (RequestFloorType)Math.Min((int)bannerAdRequestFloorType + 1, (int)RequestFloorType.Failed);
-
-                DOVirtual.DelayedCall(1, LeftRequestBannerAd);
+               
+               // DOVirtual.DelayedCall(1, LeftRequestBannerAd);
             };
 
             TopbannerView.OnAdImpressionRecorded += () => { PrintStatus("Banner ad recorded an impression."); };

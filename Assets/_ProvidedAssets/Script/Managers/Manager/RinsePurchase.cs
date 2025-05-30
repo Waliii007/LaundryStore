@@ -49,7 +49,7 @@ namespace LaundaryMan
             {
                 AddRinse(RinseType.Green, 1);
                 ReferenceManager.Instance.GameData.playerCash -= price;
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Blue Rinse");
 
                 UpdateRinseUI();
                 if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !once)
@@ -63,7 +63,7 @@ namespace LaundaryMan
             }
             else
             {
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough cash for Green Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough cash for Blue Rinse");
             }
         }
 
@@ -74,7 +74,7 @@ namespace LaundaryMan
             {
                 AddRinse(RinseType.Blue, 1);
                 ReferenceManager.Instance.GameData.playerCash -= price;
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Blue Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Pink Rinse");
                 UpdateRinseUI();
                 if (TSS_AnalyticalManager.instance)
                 {
@@ -83,7 +83,7 @@ namespace LaundaryMan
             }
             else
             {
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough cash for Blue Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough cash for Pink Rinse");
             }
         }
 
@@ -94,7 +94,7 @@ namespace LaundaryMan
             {
                 AddRinse(RinseType.Red, 1);
                 ReferenceManager.Instance.GameData.playerCash -= price;
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Red Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Indigo Rinse");
                 UpdateRinseUI();
                 if (TSS_AnalyticalManager.instance)
                 {
@@ -103,7 +103,7 @@ namespace LaundaryMan
             }
             else
             {
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough cash for Red Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Not enough cash for Indigo Rinse");
             }
         }
 
@@ -113,7 +113,7 @@ namespace LaundaryMan
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
                 AddRinse(RinseType.Green, 1);
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Blue Rinse");
                 UpdateRinseUI();
                 if (TSS_AnalyticalManager.instance)
                 {
@@ -128,7 +128,7 @@ namespace LaundaryMan
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
                 AddRinse(RinseType.Green, 1);
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Pink Rinse");
                 UpdateRinseUI();
                 if (TSS_AnalyticalManager.instance)
                 {
@@ -143,7 +143,7 @@ namespace LaundaryMan
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
                 AddRinse(RinseType.Red, 1);
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Red Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Indigo Rinse");
                 UpdateRinseUI();
                 if (TSS_AnalyticalManager.instance)
                 {

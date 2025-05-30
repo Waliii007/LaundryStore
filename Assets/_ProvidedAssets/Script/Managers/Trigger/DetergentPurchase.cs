@@ -117,7 +117,7 @@ namespace LaundaryMan
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
                 AddDetergent(DetergentType.Green, 1);
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Detergent");
                 UpdateDetergentUI();
                 if (TSS_AnalyticalManager.instance)
                 {
@@ -131,7 +131,7 @@ namespace LaundaryMan
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
                 AddDetergent(DetergentType.Blue, 1);
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Green Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Blue Detergent");
                 UpdateDetergentUI();
                 if (TSS_AnalyticalManager.instance)
                 {
@@ -145,7 +145,7 @@ namespace LaundaryMan
             TssAdsManager._Instance.ShowRewardedAd(() =>
             {
                 AddDetergent(DetergentType.Red, 1);
-                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Red Rinse");
+                ReferenceManager.Instance.notificationHandler.ShowNotification("Purchased 1 Red Detergent");
                 UpdateDetergentUI();
                 if (TSS_AnalyticalManager.instance)
                 {
