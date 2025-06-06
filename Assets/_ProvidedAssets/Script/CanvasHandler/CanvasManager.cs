@@ -83,5 +83,8 @@ public enum CanvasStates
     RinRefill,
     CandyBar,
     TutorialObjective,
-    Empty
+    Empty,
+    CoffeePurchase,
+    CoffeeUse,
+    
 }

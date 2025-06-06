@@ -121,7 +121,11 @@ namespace LaundaryMan
 
             Ai removedAi = _dirtyClothQueueAi.Dequeue();
             dirtyQueuePoints[0].occupied = false;
-
+            // if (removedAi)
+            // {
+            //     removedAi.TryGetComponent(out CustomerAI ai);
+            //     if (ai) ai.canvasObject.gameObject.SetActive(true);
+            // }
             if (_canMove)
             {
                 ShiftToQueue(removedAi);
@@ -132,6 +136,8 @@ namespace LaundaryMan
                 NeedToEnqueue.Enqueue(removedAi);
                 StartCoroutine(CanMove());
             }
+
+           
         }
 
         private IEnumerator CanMove()

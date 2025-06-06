@@ -5,6 +5,7 @@ using System.Linq;
 using Pathfinding;
 using RootMotion.FinalIK;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace LaundaryMan
@@ -18,11 +19,18 @@ namespace LaundaryMan
         public List<Animator> aiSkins;
         public GameObject leftPoint;
         public GameObject rightPoint;
+        public bool requireCoffee;
+        public int coffeeCupsRequire;
+        public Text requireCoffeeText;
+        public Text clothesText;
+        public GameObject canvasObject;
 
         protected override void OnAiEnable()
         {
-            int i = Random.Range(0, aiSkins.Count);
+            canvasObject.gameObject.SetActive(false);
 
+
+            int i = Random.Range(0, aiSkins.Count);
             animator.avatar = aiSkins.ElementAt(i).avatar;
             aiSkins[i].gameObject.SetActive(true);
             for (int j = 0; j < aiSkins.Count; j++)
@@ -51,8 +59,18 @@ namespace LaundaryMan
 
         private void Start()
         {
+            if (ReferenceManager.Instance.GameData.isTutorialCompleted)
+            {
+                requireCoffee = Random.Range(0, 2) == 1;
+                print(requireCoffee);
+                coffeeCupsRequire = requireCoffee ? Random.Range(1, 3) : 0;
+            }
+
             clothStack =
                 customerObjectToStack.myClothFragment.Count;
+            print(coffeeCupsRequire + ":" + "coffeeCupsRequire");
+            requireCoffeeText.text = coffeeCupsRequire.ToString();
+            clothesText.text = clothStack.ToString();
         }
 
         public void SetIk(float iKWeight)
@@ -83,5 +101,31 @@ namespace LaundaryMan
         {
             return followerEntity.maxSpeed;
         }
+
+        public GameObject angry;
+        public GameObject happy;
+
+        public void ShowBadReview(Satisfaction satisfaction)
+        {
+            canvasObject.gameObject.SetActive(false);
+            switch (satisfaction)
+            {
+                case Satisfaction.Satisfied:
+                    happy.SetActive(true);
+                    break;
+                case Satisfaction.Unsatisfied:
+                    angry.SetActive(true);
+
+                    break;
+            }
+
+            print("Fuck u i will give u a bad review" + "Teri maa ki siri bc you are a bad consumer");
+        }
     }
+}
+
+public enum Satisfaction
+{
+    Satisfied,
+    Unsatisfied
 }

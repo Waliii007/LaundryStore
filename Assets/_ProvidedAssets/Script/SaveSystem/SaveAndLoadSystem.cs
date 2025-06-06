@@ -114,6 +114,12 @@ namespace LaundaryMan
                 saveData.gameEconomy.detergentCapacity2 = loadedData.gameEconomy.detergentCapacity2;
                 saveData.gameEconomy.detergentCapacity3 = loadedData.gameEconomy.detergentCapacity3;
 
+
+                saveData.gameEconomy.gloriaPantsCount = loadedData.gameEconomy.gloriaPantsCount;
+                saveData.gameEconomy.starPantsCount = loadedData.gameEconomy.starPantsCount;
+                saveData.gameEconomy.simHortanCount = loadedData.gameEconomy.simHortanCount;
+
+
                 saveData.selectedPlayersList = new List<SaveData.PlayerSelection>(loadedData.selectedPlayersList);
 //                print(loadedData.gameEconomy.cashierPrice + saveData.gameEconomy.cashierPrice);
                 saveData.ConvertListToDictionary();

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +47,8 @@ namespace LaundaryMan
                         return;
                     }
                 }
-                else if (other.TryGetComponent(out PlayerStackManager playerStackManager) && cleanClothes == null)
+                else if (other.TryGetComponent(out PlayerStackManager playerStackManager) && cleanClothes == null &&
+                         !ReferenceManager.playerHasTheCoffee && other.TryGetComponent(out vThirdPersonInput tpi))
                 {
                     isPlayerInside = true;
                     if (playerCoroutine == null)
@@ -59,7 +59,6 @@ namespace LaundaryMan
             }
         }
 
-        
 
         private void OnTriggerExit(Collider other)
         {
@@ -101,7 +100,7 @@ namespace LaundaryMan
             playerStackManager.TryGetComponent(out vThirdPersonInput tpi);
             if (tpi)
                 yield return new WaitUntil(() => !tpi.IsMoving());
-            while (isPlayerInside )
+            while (isPlayerInside)
             {
                 if (clothToPress.Count > 0)
                 {

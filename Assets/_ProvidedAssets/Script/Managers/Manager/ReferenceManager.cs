@@ -14,7 +14,9 @@ namespace LaundaryMan
         #region Singleton
 
         public static ReferenceManager Instance { get; private set; }
+        public static bool playerHasTheCoffee;
 
+         
 
         private void Awake()
         {
@@ -27,7 +29,7 @@ namespace LaundaryMan
         #endregion
 
         #region Variable
-
+        
         public DirtyBoxAiManager dirtyBoxAiManager;
         public TutorialHandler tutorialHandler;
         public bool isGameEnd = false;
@@ -49,10 +51,14 @@ namespace LaundaryMan
         public MachineUpgradeManager machineUpgradeManager;
         public NotificationHandler notificationHandler;
         public DetergentItemUI detergentItemUI;
+        public CoffeePurchase coffeePurchase;
+        public CoffeeItemUI coffeeItemUI;
+        public CoffeeBarHandler coffeeBarHandler;
         public RinseItemUI rinseItemUI;
         public RinsePurchase rinsePurchase;
         public SnackbarManager snackbarManager;
         public Camera mainCamera;
+        public int selectedMachineIndex;
         #endregion
 
         #region SaveSystemObserver

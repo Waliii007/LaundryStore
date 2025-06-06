@@ -15,7 +15,8 @@ namespace LaundaryMan
         public enum TypeMachine
         {
             Machine,
-            Rinse
+            Rinse,
+            Coffee
         }
 
         public GameObject refill;

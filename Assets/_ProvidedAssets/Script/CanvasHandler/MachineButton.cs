@@ -12,7 +12,9 @@ namespace LaundaryMan
         public PressBasketHandler pressingClothPickingHandler;
         public RinseMachineCanvas rinManager;
         public GameObject tutorialPanel;
-
+        public CoffeeType coffeeType;
+        public CoffeeMachineCanvas coffeeManager;
+        public bool isFromTrigger;
         private void OnEnable()
         {
             tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
@@ -43,6 +45,10 @@ namespace LaundaryMan
                     break;
                 case MachineRefillTrigger.TypeMachine.Rinse:
                     ReferenceManager.Instance.rinseItemUI.index = pressingClothPickingHandler.myIndex;
+                    ReferenceManager.Instance.canvasManager.CanvasStateChanger(canvasState);
+                    break;
+                
+                case MachineRefillTrigger.TypeMachine.Coffee:
                     ReferenceManager.Instance.canvasManager.CanvasStateChanger(canvasState);
                     break;
             }

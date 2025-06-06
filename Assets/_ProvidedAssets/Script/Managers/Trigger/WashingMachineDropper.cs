@@ -102,7 +102,7 @@ namespace LaundaryMan
         public Stack<ClothFragment> tempStack = new Stack<ClothFragment>();
         int upgradeindex = 0;
         public int available = 0;
-
+            
         private IEnumerator HandlePlayerInteraction(PlayerStackManager playerStackManager)
         {
             try
@@ -110,6 +110,7 @@ namespace LaundaryMan
                 currentClothesCount = 0;
                 int availableSpace =
                     maxClothesPerCycle - stackMachineStarter.transform.childCount - 1;
+                    //    fullIndicator.SetActive(availableSpace <= 0);
                 if (availableSpace <= 0)
                 {
                     yield break;
@@ -117,10 +118,7 @@ namespace LaundaryMan
 
                 available =
                     currentClothesCount += availableSpace;
-                fullIndicator.SetActive(stackMachineStarter.transform.childCount >= maxClothesPerCycle);
-
-
-                fullIndicator.SetActive(available >= maxClothesPerCycle);
+              
 
                 while (playerStackManager.ClothStack.Count > 0)
                 {
@@ -177,7 +175,7 @@ namespace LaundaryMan
             }
             finally
             {
-                fullIndicator.SetActive(currentClothesCount >= maxClothesPerCycle);
+              //  fullIndicator.SetActive(currentClothesCount >= maxClothesPerCycle);
 
                 _playerCoroutine = null;
             }
@@ -198,7 +196,7 @@ namespace LaundaryMan
             }
 
             available = availableSpace;
-            fullIndicator.SetActive(stackMachineStarter.transform.childCount >= (maxClothesPerCycle-1));
+        //    fullIndicator.SetActive(stackMachineStarter.transform.childCount >= (maxClothesPerCycle-1));
 
             currentClothesCount += availableSpace;
             //    currentClothesCount = stackMachineStarter.transform.childCount;

@@ -68,7 +68,6 @@ namespace LaundryMan
         private void OnEnable()
         {
             ReferenceManager.OnPLayerGotUpgrade += OnUpgrade;
-            
         }
 
         public int Count()
@@ -90,7 +89,7 @@ namespace LaundryMan
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("AI") )
+            if (other.CompareTag("AI"))
             {
                 if (!aiQueue.Contains(other))
                     aiQueue.Enqueue(other);
@@ -103,7 +102,7 @@ namespace LaundryMan
             else if (other.CompareTag("Player"))
             {
                 if (other.TryGetComponent(out PlayerStackManager playerStackManager) &&
-                    other.TryGetComponent(out vThirdPersonInput tpi))
+                    other.TryGetComponent(out vThirdPersonInput tpi) && !ReferenceManager.playerHasTheCoffee )
                 {
                     isPlayerInside = true;
 
@@ -111,14 +110,11 @@ namespace LaundryMan
                     if (playerCoroutine == null)
                     {
                         playerCoroutine = StartCoroutine(HandlePlayerInteraction(playerStackManager));
-                       
                     }
                 }
             }
         }
 
-        public GameObject playerPoint;
-        public GameObject lookatPoint;
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -148,7 +144,8 @@ namespace LaundryMan
             while (isPlayerInside)
             {
                 // Respect AI's max clothes limit
-                if (clothToWash.Count > 0 && playerStackManager.ClothStack.Count < playerStackManager.maxClothesPerCycle)
+                if (clothToWash.Count > 0 &&
+                    playerStackManager.ClothStack.Count < playerStackManager.maxClothesPerCycle)
                 {
                     var cloth = clothToWash.Pop();
                     cloth.transform.SetParent(playerStackManager.stackStarter.transform);
@@ -160,7 +157,7 @@ namespace LaundryMan
                     cloth.transform.DOJump(targetPosition, 1f, 1, stackTime).OnComplete(() =>
                     {
                         playerStackManager.ClothStack.Push(cloth);
-                       // playerStackManager.currentClothesCount++; // Track how many this AI has taken
+                        // playerStackManager.currentClothesCount++; // Track how many this AI has taken
                         RearrangeStack(playerStackManager);
                         ArrangeStack();
                     });
@@ -184,7 +181,7 @@ namespace LaundryMan
                 yield return new WaitUntil(() => !tpi.IsMoving());
             while (isPlayerInside)
             {
-                if (clothToWash.Count > 0 )
+                if (clothToWash.Count > 0)
                 {
                     var cloth = clothToWash.Pop();
                     cloth.transform.SetParent(playerStackManager.stackStarter.transform);
@@ -341,7 +338,7 @@ namespace LaundryMan
                 }
 
                 yield return new WaitForSeconds(stackTime);
-                
+
                 AddTask();
             }
 

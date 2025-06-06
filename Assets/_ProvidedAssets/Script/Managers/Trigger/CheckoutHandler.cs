@@ -46,7 +46,7 @@ namespace LaundaryMan
 
         public IEnumerator AICashierUnlocked()
         {
-      //      print("Calling coroutine"+_isBusy);
+            //      print("Calling coroutine"+_isBusy);
             if (!_isBusy)
             {
                 _isBusy = true;
@@ -54,6 +54,19 @@ namespace LaundaryMan
             }
 
             yield return null;
+        }
+
+        private void Update()
+        {
+            if (ReferenceManager.Instance.queueSystem._washedClothQueueAi.Count > 0)
+            {
+                ReferenceManager.Instance.queueSystem._washedClothQueueAi.Peek().TryGetComponent(out CustomerAI ai);
+                if (ai && ai.canvasObject)
+                    ai.canvasObject.SetActive(true);
+            }
+            //  print("isAICashierUnlocked"+isAICashierUnlocked);
+            //  print("isPlayerInside"+isPlayerInside);
+            //  print("isBusy"+_isBusy);
         }
 
         private void OnTriggerStay(Collider other)
@@ -103,18 +116,145 @@ namespace LaundaryMan
         //  public Stack<ClothFragment> IronClothes = new Stack<ClothFragment>();
         float multiplier;
         public int income;
-      
+        public int cofeeToServe;
+        public int coffeeGiven;
+
+
+        [SerializeField] private Image coffeeTimerImage; // assign in Inspector
+        [SerializeField] private Image coffeeImage; // assign in Inspector
+        private Coroutine _coffeeTimerCoroutine;
+
+        private bool _coffeeTimeout = false;
+
+//         public IEnumerator CheckOut()
+//         {
+//             yield return new WaitForSeconds(0.5f);
+//             if (isPlayerInside && ReferenceManager.Instance.queueSystem._washedClothQueueAi.Count > 0)
+//             {
+//                 if (_index == 0)
+//                 {
+//                     ai = (CustomerAI)ReferenceManager.Instance.queueSystem._washedClothQueueAi.Peek();
+//                     cofeeToServe = ReferenceManager.Instance.coffeeBarHandler.coffeeConsumeTrigger.serveIndex =
+//                         ai.coffeeCupsRequire;
+//                     ai.canvasObject.gameObject.SetActive(true);
+// //                    print("new ai found"+ai.name);
+//                     print(cofeeToServe);
+//                 }
+//
+//
+//                 if (!ai)
+//                 {
+//                     _index = 0;
+//                     _isBusy = false;
+//                     _playerCoroutine = null;
+//                     yield break;
+//                 }
+//
+// //            print("cloths to give"+ReadyToShipClothes.Count +" and ai clothes:"+ai.clothStack);
+//                 while (_index < ai.clothStack && ReadyToShipClothes.Count > 0)
+//                 {
+//                     ClothFragment cloth = ReadyToShipClothes.Pop();
+//
+//                     isCheckOut = false;
+//
+//                     if (ai.customerObjectToStack.myClothFragment.Count <= 0)
+//                     {
+//                         cloth.transform.DOMove(ai.customerObjectToStack.transform.position + offset, .2f).OnComplete(
+//                             () =>
+//                             {
+//                                 isCheckOut = true;
+//                                 cloth.transform.SetParent(ai.customerObjectToStack.transform);
+//                                 ai.customerObjectToStack.myClothFragment.Add(cloth);
+//                             });
+//                         ai.SetIk(1);
+//                     }
+//                     else
+//                     {
+//                         cloth.transform
+//                             .DOMove(
+//                                 ai.customerObjectToStack.myClothFragment[^1].nextPosition.transform.position + offset,
+//                                 .2f).OnComplete(() =>
+//                             {
+//                                 isCheckOut = true;
+//                                 cloth.transform.SetParent(ai.customerObjectToStack.transform);
+//                                 ai.customerObjectToStack.myClothFragment.Add(cloth);
+//                             });
+//                     }
+//
+//                     yield return new WaitUntil(() => isCheckOut);
+//                     isCheckOut = false;
+//                     _index++;
+//                     ai.clothesText.text = _index + "/" + ai.clothStack;
+//                 }
+//
+//                 if (ReferenceManager.playerHasTheCoffee && coffeeGiven <= cofeeToServe)
+//                 {
+//                     coffeeGiven++;
+//                     ai.requireCoffeeText.text = coffeeGiven + "/" + cofeeToServe;
+//                     ReferenceManager.Instance.playerStackManager.CupsOff();
+//                 }
+//
+//                 if (_index == ai.clothStack && coffeeGiven >= cofeeToServe)
+//                 {
+//                     ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
+//                     income = _index * 10;
+//                     if (ReferenceManager.Instance.snackbarManager.IsBoostActive())
+//                     {
+//                         multiplier = UnityEngine.Random.Range(10f, 20f);
+//                         multiplier = multiplier / 100f;
+//                     }
+//                     else
+//                     {
+//                         multiplier = 0;
+//                     }
+//
+//                     _index = 0;
+//                     StartCoroutine(CashGenerate());
+//
+//                     ReferenceManager.Instance.snackbarManager.tipCash += income;
+//                     ReferenceManager.Instance.snackbarManager.OnCustomerServed();
+//                     ShowTipText($"{income} $, {(income * multiplier):F2} Tips+");
+//                     yield return new WaitUntil(() => selectedAiReached);
+//                     yield return new WaitForSeconds(1f);
+//
+//
+//                     if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+//                     {
+//                         ReferenceManager.Instance.tutorialHandler.TaskCompleted();
+//                         ReferenceManager.Instance.tutorialHandler.UnSubscribe();
+//                     }
+//
+//                     ReferenceManager.playerHasTheCoffee = false;
+//                     coffeeGiven = 0;
+//                 }
+//
+// //                print("Nulling coroutine");
+//                 _isBusy = false;
+//                 _playerCoroutine = null;
+//                 yield return null;
+//                 // break;
+//             }
+//             else
+//             {
+//                 ///                print("Nulling coroutine2");
+//                 _isBusy = false;
+//                 _playerCoroutine = null;
+//             }
+//         }
         public IEnumerator CheckOut()
         {
             yield return new WaitForSeconds(0.5f);
+
             if (isPlayerInside && ReferenceManager.Instance.queueSystem._washedClothQueueAi.Count > 0)
             {
                 if (_index == 0)
                 {
                     ai = (CustomerAI)ReferenceManager.Instance.queueSystem._washedClothQueueAi.Peek();
-//                    print("new ai found"+ai.name);
+                    cofeeToServe = ReferenceManager.Instance.coffeeBarHandler.coffeeConsumeTrigger.serveIndex =
+                        ai.coffeeCupsRequire;
+                    ai.canvasObject.gameObject.SetActive(true);
+                    print(cofeeToServe);
                 }
-
 
                 if (!ai)
                 {
@@ -123,7 +263,7 @@ namespace LaundaryMan
                     _playerCoroutine = null;
                     yield break;
                 }
-//            print("cloths to give"+ReadyToShipClothes.Count +" and ai clothes:"+ai.clothStack);
+
                 while (_index < ai.clothStack && ReadyToShipClothes.Count > 0)
                 {
                     ClothFragment cloth = ReadyToShipClothes.Pop();
@@ -142,64 +282,150 @@ namespace LaundaryMan
                     }
                     else
                     {
-                        cloth.transform
-                            .DOMove(
-                                ai.customerObjectToStack.myClothFragment[^1].nextPosition.transform.position + offset,
-                                .2f).OnComplete(() =>
-                            {
-                                isCheckOut = true;
-                                cloth.transform.SetParent(ai.customerObjectToStack.transform);
-                                ai.customerObjectToStack.myClothFragment.Add(cloth);
-                            });
+                        cloth.transform.DOMove(
+                            ai.customerObjectToStack.myClothFragment[^1].nextPosition.transform.position + offset,
+                            .2f).OnComplete(() =>
+                        {
+                            isCheckOut = true;
+                            cloth.transform.SetParent(ai.customerObjectToStack.transform);
+                            ai.customerObjectToStack.myClothFragment.Add(cloth);
+                        });
                     }
 
                     yield return new WaitUntil(() => isCheckOut);
                     isCheckOut = false;
                     _index++;
-                    
-                 //   print(" cloths index is:"+_index);
+                    ai.clothesText.text = _index + "/" + ai.clothStack;
                 }
 
-//                print("index: "+_index + " ai stack "+ ai.clothStack);
-                if (_index == ai.clothStack)
+                // 🟡 Start coffee timer if clothes are done but coffee not given
+                if (_index == ai.clothStack && coffeeGiven < cofeeToServe && _coffeeTimerCoroutine == null)
+                {
+                    _coffeeTimeout = false;
+                    coffeeTimerImage.gameObject.SetActive(true);
+                    coffeeImage.gameObject.SetActive(true);
+                    if (_coffeeTimerCoroutine != null) StopCoroutine(_coffeeTimerCoroutine);
+                    _coffeeTimerCoroutine = StartCoroutine(StartCoffeeWaitTimer(60f)); // 5 sec for example
+                }
+
+                // ✅ Check for coffee giving
+                if (ReferenceManager.playerHasTheCoffee && coffeeGiven < cofeeToServe)
+                {
+                    coffeeGiven++;
+                    ai.requireCoffeeText.text = coffeeGiven + "/" + cofeeToServe;
+                    ReferenceManager.Instance.playerStackManager.CupsOff();
+                    if (coffeeGiven >= cofeeToServe)
+                        ReferenceManager.playerHasTheCoffee = false;
+                    // ✅ Cancel timer and hide image if done
+                    if (coffeeGiven >= cofeeToServe && _coffeeTimerCoroutine != null)
+                    {
+                        StopCoroutine(_coffeeTimerCoroutine);
+                        coffeeTimerImage.fillAmount = 0;
+                        coffeeTimerImage.gameObject.SetActive(false);
+                        coffeeImage.gameObject.SetActive(false);
+                        _coffeeTimerCoroutine = null;
+                    }
+                }
+
+                // // ❌ Timer finished and coffee not served
+                // if (_coffeeTimeout)
+                // {
+                //     ai.ShowBadReview(); // Optional visual feedback
+                //     ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
+                //
+                //     _index = 0;
+                //     coffeeGiven = 0;
+                //     ReferenceManager.playerHasTheCoffee = false;
+                //     ReferenceManager.Instance.playerStackManager.CupsOff();
+                //     _isBusy = false;
+                //     _playerCoroutine = null;
+                //     yield break;
+                // }
+
+                // ✅ Success: All clothes and coffee given
+                if (_index >= ai.clothStack && coffeeGiven >= cofeeToServe)
                 {
                     ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
                     income = _index * 10;
-                    if (ReferenceManager.Instance.snackbarManager.IsBoostActive())
-                    {
-                        multiplier = UnityEngine.Random.Range(10f, 20f);
-                        multiplier = multiplier / 100f;
-                    }
-                    else
-                    {
-                        multiplier = 0;
-                    }
+                    ReferenceManager.Instance.coffeeBarHandler.coffeeConsumeTrigger.serveIndex = 0;
+
+                    multiplier = ReferenceManager.Instance.snackbarManager.IsBoostActive()
+                        ? UnityEngine.Random.Range(10f, 20f) / 100f
+                        : 0f;
+
                     _index = 0;
                     StartCoroutine(CashGenerate());
-                    
+
                     ReferenceManager.Instance.snackbarManager.tipCash += income;
                     ReferenceManager.Instance.snackbarManager.OnCustomerServed();
-                    ShowTipText($"{income} $, {(income * multiplier):F2} Tips+");
+
+
+                    var tipText = $"{income} $, {(income * multiplier):F2} Tips+";
+                    ShowTipText(tipText);
+
                     yield return new WaitUntil(() => selectedAiReached);
                     yield return new WaitForSeconds(1f);
-                    
 
                     if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
                     {
                         ReferenceManager.Instance.tutorialHandler.TaskCompleted();
                         ReferenceManager.Instance.tutorialHandler.UnSubscribe();
                     }
+
+                    ReferenceManager.playerHasTheCoffee = false;
+                    coffeeGiven = 0;
+
+                    // Cancel and hide timer if still active
+                    if (_coffeeTimerCoroutine != null)
+                    {
+                        StopCoroutine(_coffeeTimerCoroutine);
+                        coffeeTimerImage.fillAmount = 0;
+                        coffeeTimerImage.gameObject.SetActive(false);
+                        _coffeeTimerCoroutine = null;
+                    }
+                    ai.ShowBadReview(Satisfaction.Satisfied); // Optional visual feedback
+
                 }
 
-//                print("Nulling coroutine");
                 _isBusy = false;
                 _playerCoroutine = null;
                 yield return null;
-                // break;
             }
             else
             {
-///                print("Nulling coroutine2");
+                _isBusy = false;
+                _playerCoroutine = null;
+            }
+        }
+
+        private IEnumerator StartCoffeeWaitTimer(float duration)
+        {
+            coffeeTimerImage.gameObject.SetActive(true);
+            float timeElapsed = 0f;
+
+            while (timeElapsed < duration)
+            {
+                timeElapsed += Time.deltaTime;
+                coffeeTimerImage.fillAmount = 1f - (timeElapsed / duration);
+                yield return null;
+            }
+
+            coffeeTimerImage.fillAmount = 0f;
+            coffeeTimerImage.gameObject.SetActive(false);
+
+
+            _coffeeTimeout = true;
+            if (!isCoffeeServed())
+            {
+                ai.ShowBadReview(Satisfaction.Unsatisfied); // Optional visual feedback
+                ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
+
+                _index = 0;
+                coffeeGiven = 0;
+                ReferenceManager.Instance.coffeeBarHandler.coffeeConsumeTrigger.serveIndex = 0;
+                ReferenceManager.playerHasTheCoffee = false;
+                ReferenceManager.Instance.playerStackManager.CupsOff();
+                coffeeImage.gameObject.SetActive(false);
                 _isBusy = false;
                 _playerCoroutine = null;
             }
@@ -212,7 +438,21 @@ namespace LaundaryMan
             textToShow.gameObject.SetActive(true);
 
             textToShow.text = tipText;
+
             DOVirtual.DelayedCall(2f, () => textToShow.gameObject.SetActive(false));
+            if (cofeeToServe > 0)
+                DOVirtual.DelayedCall(1.2f, () => ShowCoffeeIncome("Coffee: " + (float)cofeeToServe * 7.5f + "$"));
+        }
+
+        public TextMeshPro cofeePrice;
+
+        public void ShowCoffeeIncome(string tipText)
+        {
+            cofeePrice.gameObject.SetActive(true);
+
+            cofeePrice.text = tipText;
+
+            DOVirtual.DelayedCall(2f, () => cofeePrice.gameObject.SetActive(false));
         }
 
         #endregion
@@ -282,5 +522,10 @@ namespace LaundaryMan
         public CashCollectionTrigger cashCollectionTrigger;
 
         #endregion
+
+        public bool isCoffeeServed()
+        {
+            return coffeeGiven >= cofeeToServe;
+        }
     }
 }

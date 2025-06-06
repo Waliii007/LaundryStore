@@ -34,6 +34,10 @@ namespace LaundaryMan
         public int remainingRinseBottleGreen = 1;
         public int remainingRinseBottleBlue = 1;
         public int remainingRinseBottleRed = 1;
+
+        public int gloriaPantsCount = 1;
+        public int starPantsCount = 1;
+        public int simHortanCount = 1;
     }
 
     [System.Serializable]
@@ -53,6 +57,7 @@ namespace LaundaryMan
         public int playerMovingSpeed = 0;
         public int stackingSpeed = 0;
         public int playerCapacity = 0;
+        public int Coffee = 0;
 
         public GameEconomy gameEconomy = new GameEconomy();
 
