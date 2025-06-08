@@ -31,6 +31,7 @@ namespace LaundaryMan
 
             if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !once)
             {
+                
                 once = true;
 
 
@@ -130,6 +131,7 @@ namespace LaundaryMan
         {
             if (!other.gameObject.CompareTag("Player") ||
                 other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
+            
             ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
             //ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
             onceA = false;
