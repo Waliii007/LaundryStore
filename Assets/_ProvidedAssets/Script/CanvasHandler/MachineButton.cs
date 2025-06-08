@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,18 @@ namespace LaundaryMan
         public bool isFromTrigger;
         private void OnEnable()
         {
-            tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
+            //tutorialPanel.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
+            if (!ReferenceManager.Instance.GameData.isTutorialCompleted)
+            {
+                DOVirtual.DelayedCall(1, TriggerState);
+buttonImage.enabled = false;
+                // TriggerState();
+            }
+            else
+            {
+buttonImage.enabled = true;
+                
+            }
         }
 
         public void ChangeSprite(Sprite newSprite)
