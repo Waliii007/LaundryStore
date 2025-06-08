@@ -456,6 +456,7 @@ MonoBehaviour:
     playerMovingSpeed: 0
     stackingSpeed: 0
     playerCapacity: 0
+    Coffee: 0
     gameEconomy:
       machine1Price: 2000
       machine2Price: 2000
@@ -482,6 +483,9 @@ MonoBehaviour:
       remainingRinseBottleGreen: 1
       remainingRinseBottleBlue: 1
       remainingRinseBottleRed: 1
+      gloriaPantsCount: 1
+      starPantsCount: 1
+      simHortanCount: 1
     selectedPlayersList: []
   savePath: C:/Users/Arsalan Ahmad/AppData/LocalLow/DefaultCompany/My project (1)\MADARAUCHIHA.json
 --- !u!4 &247370237
@@ -917,6 +921,11 @@ PrefabInstance:
       propertyPath: m_PreserveAspect
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1556130617100062101, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1643197690283546054, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
       propertyPath: adTimer
@@ -1015,22 +1024,27 @@ PrefabInstance:
     - target: {fileID: 1882669160426219006, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.2
+      value: 0.18431373
       objectReference: {fileID: 0}
     - target: {fileID: 1882669160426219006, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.1509434
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1882669160426219006, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.1509434
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1882669160426219006, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.1509434
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882669160426219006, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1893927845060587895, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
@@ -1054,8 +1068,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2251153840482098512, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b73a54d82240b354a9be92a2e73a6f94,
+        type: 3}
+    - target: {fileID: 2251153840482098512, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
       propertyPath: m_Color.a
-      value: 0.6745098
+      value: 0.9137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251153840482098512, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251153840482098512, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251153840482098512, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277688189664286222, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
@@ -1074,6 +1109,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2544656615856618257, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721303348841637509, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1167,6 +1207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_MaxSize
       value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578341380004084835, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3613750209852107451, guid: 03fe2a99f9db77d49ae42d88e5ab2ba2,
         type: 3}

@@ -35,6 +35,12 @@ namespace LaundaryMan
             {
                 UnSubscribe();
             }
+
+            if (ReferenceManager.Instance.GameData.isTutorialCompleted)
+                for (int i = 5; i < someTriggerToOff.Length; i++)
+                {
+                    someTriggerToOff[i].SetActive(true);
+                }
         }
 
         public void TaskHandler(TutorialTask newTask)
@@ -52,10 +58,11 @@ namespace LaundaryMan
 
             reference.GameData.isTutorialCompleted = true;
             reference.taskHandler.HrHandler();
-            
+
             reference.canvasManager.CanvasStateChanger(CanvasStates.TutorialObjective);
-            reference.tutorialObjectivePanel.ShowObjective("Voila!!! You have learned everything , Now run your Laundry Store.");
-            
+            reference.tutorialObjectivePanel.ShowObjective(
+                "Voila!!! You have learned everything , Now run your Laundry Store.");
+
             reference.playerStackManager.pathDraw.gameObject.SetActive(false);
             reference.playerStackManager.pathDraw.destination = null;
             foreach (var some in someTriggerToOff)

@@ -110,9 +110,13 @@ namespace LaundaryMan
         public void OnBuyGloriaPants() => OnBuyCoffee(CoffeeType.GloriaPants);
         public void OnBuyStarPants() => OnBuyCoffee(CoffeeType.StarDucks);
         public void OnBuySimHortan() => OnBuyCoffee(CoffeeType.SimBortan);
+        
+        
+        public void OnBuyAdsCoffeeGloriaPants() => OnBuyAdsCoffee(CoffeeType.GloriaPants);
+        public void OnBuyAdsCoffeeStarDucks() => OnBuyAdsCoffee(CoffeeType.StarDucks);
+        public void OnBuyAdsCoffeeSimBortan() => OnBuyAdsCoffee(CoffeeType.SimBortan);
 
         private void UpdateCoffeeUI()
-
         {
             var ui = ReferenceManager.Instance.coffeeItemUI;
             if (ui) ui.UpdateCoffeeUI();
