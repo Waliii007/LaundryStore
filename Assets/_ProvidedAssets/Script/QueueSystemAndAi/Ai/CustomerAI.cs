@@ -107,19 +107,27 @@ namespace LaundaryMan
 
         public void ShowBadReview(Satisfaction satisfaction)
         {
+            
             canvasObject.gameObject.SetActive(false);
             switch (satisfaction)
             {
                 case Satisfaction.Satisfied:
                     happy.SetActive(true);
+                    if (SoundManager.instance)
+                    {
+                        //SoundManager.instance.Play(SoundName.Happy);
+                    }
                     break;
                 case Satisfaction.Unsatisfied:
                     angry.SetActive(true);
-
+                    if (SoundManager.instance)
+                    {
+                       // SoundManager.instance.Play(SoundName.Angry);
+                    }
                     break;
             }
 
-            print("Fuck u i will give u a bad review" + "Teri maa ki siri bc you are a bad consumer");
+            //print("Fuck u i will give u a bad review" + "Teri maa ki siri bc you are a bad consumer");
         }
     }
 }

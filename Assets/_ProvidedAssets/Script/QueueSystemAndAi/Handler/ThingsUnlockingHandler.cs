@@ -18,6 +18,7 @@ namespace LaundaryMan
         public ThingsToUnlock thingsToUnlock;
         public GameObject arrowObject;
         public GameObject selfExplainationObject;
+
         #endregion
 
         #region TriggerEvents
@@ -31,14 +32,15 @@ namespace LaundaryMan
                 StopCoroutine(_playerCoroutine);
                 _playerCoroutine = null;
             }
+
             selfExplainationObject.SetActive(true);
             arrowObject?.SetActive(!ReferenceManager.Instance.GameData.isTutorialCompleted);
             selfExplainationObject.SetActive(isPlayerInside);
-
         }
 
         public bool isthingUnlocked = false;
         public Text selfExplainationText;
+
         public void Init()
         {
             switch (thingsToUnlock)
@@ -83,12 +85,26 @@ namespace LaundaryMan
             {
                 this.gameObject.SetActive(false);
             }
-            selfExplainationObject.SetActive(false);
 
+            selfExplainationObject.SetActive(false);
         }
-            
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !thingsToUnlock.Equals(ThingsToUnlock.LaundryMachine1))
+            {
+             ReferenceManager.Instance.notificationHandler.ShowNotification("This Area will be unlock after tutorial");   
+                return;
+            }
+        }
+
         private void OnTriggerStay(Collider other)
         {
+            if (!ReferenceManager.Instance.GameData.isTutorialCompleted && !thingsToUnlock.Equals(ThingsToUnlock.LaundryMachine1))
+            {
+                
+                return;
+            }
             if (!other.CompareTag("Player") &&
                 other.gameObject.layer == ReferenceManager.Instance.playerStackManager.gameObject.layer) return;
 
@@ -97,7 +113,6 @@ namespace LaundaryMan
             if (_playerCoroutine == null)
                 _playerCoroutine = StartCoroutine(HandlePlayerInteraction());
             selfExplainationObject.SetActive(isPlayerInside);
-
         }
 
         public int initialCash = 2000;

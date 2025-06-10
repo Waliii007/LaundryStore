@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,8 +35,13 @@ namespace LaundaryMan
 
         public void UseSim()
         {
-            purchase.OnUseCoffee(CoffeeType.GloriaPants, index);
+            purchase.OnUseCoffee(CoffeeType.SimBortan, index);
             UpdateCoffeeUI();
+        }
+
+        private void OnDisable()
+        {
+            ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
         }
 
         public void UpdateCoffeeUI()
@@ -43,6 +49,7 @@ namespace LaundaryMan
             gloriaText.text = "X" + purchase.GetCoffeeCount(CoffeeType.GloriaPants);
             starText.text = "X" + purchase.GetCoffeeCount(CoffeeType.StarDucks);
             simText.text = "X" + purchase.GetCoffeeCount(CoffeeType.SimBortan);
+            ReferenceManager.Instance.canvasManager.machineButton.gameObject.SetActive(false);
         }
     }
 }

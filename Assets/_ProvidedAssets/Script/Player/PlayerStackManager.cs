@@ -35,6 +35,7 @@ namespace LaundaryMan
         }
 
         private int cupOff;
+        public Rigidbody myRigidBody;
 
         public void CupsOff()
         {

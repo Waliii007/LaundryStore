@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using GameAnalyticsSDK;
 using GoogleMobileAds.Api;
 using ToastPlugin;
@@ -57,6 +58,7 @@ public class AppLovinMax : MonoBehaviour
             {
                 return;
             }
+
             InitializeInterstitialAds();
             InitializeRewardedAds();
         };
@@ -144,8 +146,9 @@ public class AppLovinMax : MonoBehaviour
 
     private void OnInterstitialDismissedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
+        Time.timeScale = 1;
         Debug.Log("Interstitial dismissed");
-        LoadInterstitial();
+        DOVirtual.DelayedCall(1, LoadInterstitial);
     }
 
     #endregion

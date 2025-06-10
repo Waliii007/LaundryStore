@@ -10,7 +10,7 @@ namespace LaundaryMan
         public CoffeeConsumeTrigger coffeeConsumeTrigger;
 
         private int maxServes = 0;
-        private int remainingServes = 0;
+        public int remainingServes = 0;
         public CoffeeType currentCoffeeType;
         public CoffeeMachineCanvas coffeeCanvasManager;
         public GameObject consumeTrigger;
@@ -27,6 +27,7 @@ namespace LaundaryMan
             maxServes = GetMaxServeCount(type);
             print(maxServes);
             remainingServes = maxServes;
+            coffeeSlider.fillAmount = 1;    
             UpdateUI();
         }
 
@@ -48,7 +49,8 @@ namespace LaundaryMan
 
         public bool HasEnoughCoffee(int customers)
         {
-            return remainingServes >= customers;
+            print(remainingServes+":"+customers);
+            return remainingServes > 0;
         }
 
         private int GetMaxServeCount(CoffeeType type)

@@ -95,7 +95,9 @@ namespace LaundaryMan
                     _playerCoroutine = StartCoroutine(CheckOut());
                     if (!onceOnly && !ReferenceManager.Instance.GameData.isTutorialCompleted)
                     {
+                        ReferenceManager.Instance.playerStackManager.myRigidBody.isKinematic = true;
                         onceOnly = true;
+                        other.transform.DOMove(this.transform.position, 1f);
                         ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.Empty);
                     }
                 }
@@ -327,24 +329,16 @@ namespace LaundaryMan
                     }
                 }
 
-                // // ❌ Timer finished and coffee not served
-                // if (_coffeeTimeout)
-                // {
-                //     ai.ShowBadReview(); // Optional visual feedback
-                //     ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
-                //
-                //     _index = 0;
-                //     coffeeGiven = 0;
-                //     ReferenceManager.playerHasTheCoffee = false;
-                //     ReferenceManager.Instance.playerStackManager.CupsOff();
-                //     _isBusy = false;
-                //     _playerCoroutine = null;
-                //     yield break;
-                // }
-
                 // ✅ Success: All clothes and coffee given
                 if (_index >= ai.clothStack && coffeeGiven >= cofeeToServe)
                 {
+                    var removeAi = ai;
+                    if (removeAi)
+                    {
+                        removeAi.canvasObject.gameObject.SetActive(false);
+                        removeAi.ShowBadReview(Satisfaction.Satisfied);
+                    }
+
                     ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
                     income = _index * 10;
                     ReferenceManager.Instance.coffeeBarHandler.coffeeConsumeTrigger.serveIndex = 0;
@@ -383,8 +377,6 @@ namespace LaundaryMan
                         coffeeTimerImage.gameObject.SetActive(false);
                         _coffeeTimerCoroutine = null;
                     }
-                    ai.ShowBadReview(Satisfaction.Satisfied); // Optional visual feedback
-
                 }
 
                 _isBusy = false;
@@ -417,6 +409,7 @@ namespace LaundaryMan
             _coffeeTimeout = true;
             if (!isCoffeeServed())
             {
+                ai.canvasObject.gameObject.SetActive(false);
                 ai.ShowBadReview(Satisfaction.Unsatisfied); // Optional visual feedback
                 ReferenceManager.Instance.queueSystem.DequeueAndDestroyWashedQueue();
 

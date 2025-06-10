@@ -17,7 +17,7 @@ namespace LaundaryMan
 
         private void OnEnable()
         {
-            limitOnBasket = ReferenceManager.Instance.GameData.gameEconomy.limitBasket;
+            //   limitOnBasket = ReferenceManager.Instance.GameData.gameEconomy.limitBasket;
 
 
             if (ReferenceManager.Instance.GameData.isTutorialCompleted)
@@ -40,8 +40,30 @@ namespace LaundaryMan
             };
         }
 
+        private void Start()
+        {
+            StartCoroutine(CheckMachineSpaceRoutine());
+        }
+
         #endregion
 
+        private IEnumerator CheckMachineSpaceRoutine()
+        {
+            var wait = new WaitForSeconds(0.1f); // Check every 0.1 seconds
+
+            while (true)
+            {
+                availableSpaceInsideMachine =
+                    maxClothesPerCycle - stackMachineStarter.transform.childCount - 1;
+                fullIndicator.SetActive(availableSpaceInsideMachine <= 0);
+
+                yield return wait;
+            }
+            yield return wait;
+
+        }
+
+        
 
         private static readonly int MachineWashed = Animator.StringToHash("WashingMachine");
         private static readonly int DrayerAnimation = Animator.StringToHash("DrayerAnimation");
@@ -58,7 +80,7 @@ namespace LaundaryMan
         public Transform machineStackPoint; // Machine stacking position
 
         public Animator washingMachine;
-        public int limitOnBasket;
+        public int availableSpaceInsideMachine = 0;
         public int limitOnCleanBasket;
 
         private void RearrangeStack(PlayerStackManager playerStackManager)
@@ -102,7 +124,7 @@ namespace LaundaryMan
         public Stack<ClothFragment> tempStack = new Stack<ClothFragment>();
         int upgradeindex = 0;
         public int available = 0;
-            
+
         private IEnumerator HandlePlayerInteraction(PlayerStackManager playerStackManager)
         {
             try
@@ -110,7 +132,8 @@ namespace LaundaryMan
                 currentClothesCount = 0;
                 int availableSpace =
                     maxClothesPerCycle - stackMachineStarter.transform.childCount - 1;
-                    //    fullIndicator.SetActive(availableSpace <= 0);
+                availableSpaceInsideMachine = availableSpace;
+                //    fullIndicator.SetActive(availableSpace <= 0);
                 if (availableSpace <= 0)
                 {
                     yield break;
@@ -118,7 +141,7 @@ namespace LaundaryMan
 
                 available =
                     currentClothesCount += availableSpace;
-              
+
 
                 while (playerStackManager.ClothStack.Count > 0)
                 {
@@ -133,6 +156,7 @@ namespace LaundaryMan
                     {
                         TempCLothes.Push(cloth);
                         availableSpace--;
+                        availableSpaceInsideMachine = availableSpace;
                     }
                     else
                     {
@@ -155,7 +179,7 @@ namespace LaundaryMan
                     Vector3 targetPosition = (clothToWash.Count == 0)
                         ? stackMachineStarter.transform.position
                         : clothToWash.Peek().nextPosition.transform.position;
-                   
+
                     cloth.transform.DOJump(targetPosition, 1f, 1, stackTime).OnComplete(() =>
                     {
                         clothToWash.Push(cloth);
@@ -175,7 +199,7 @@ namespace LaundaryMan
             }
             finally
             {
-              //  fullIndicator.SetActive(currentClothesCount >= maxClothesPerCycle);
+                //  fullIndicator.SetActive(currentClothesCount >= maxClothesPerCycle);
 
                 _playerCoroutine = null;
             }
@@ -188,6 +212,7 @@ namespace LaundaryMan
 
             int availableSpace = Mathf.Min(playerStackManager.ClothStack.Count,
                 maxClothesPerCycle - stackMachineStarter.transform.childCount);
+            availableSpaceInsideMachine = availableSpace;
 
             if (availableSpace <= 0)
             {
@@ -196,7 +221,7 @@ namespace LaundaryMan
             }
 
             available = availableSpace;
-        //    fullIndicator.SetActive(stackMachineStarter.transform.childCount >= (maxClothesPerCycle-1));
+            //    fullIndicator.SetActive(stackMachineStarter.transform.childCount >= (maxClothesPerCycle-1));
 
             currentClothesCount += availableSpace;
             //    currentClothesCount = stackMachineStarter.transform.childCount;
@@ -214,6 +239,8 @@ namespace LaundaryMan
                 {
                     TempCLothes.Push(cloth);
                     availableSpace--;
+                    availableSpaceInsideMachine = availableSpace;
+
                     // Position the fullIndicator after pushing cloth 
                 }
                 else
@@ -237,8 +264,8 @@ namespace LaundaryMan
                 Vector3 targetPosition = (clothToWash.Count == 0)
                     ? stackMachineStarter.transform.position
                     : clothToWash.Peek().nextPosition.transform.position;
-            
-             
+
+
                 cloth.transform.DOJump(targetPosition, 1f, 1, stackTime).OnComplete(() =>
                 {
                     clothToWash.Push(cloth);
@@ -524,7 +551,6 @@ namespace LaundaryMan
                     pressingClothPickingHandler.stackStarter.transform.position.z);
                 cleanBasketFullIndicator.transform.SetParent(stackPoint.transform);
                 // Position the fullIndicator after pushing cloth
-              
             }
             else
             {
@@ -535,7 +561,6 @@ namespace LaundaryMan
                     pressingClothPickingHandler.clothToPress.Peek().nextPosition.transform.position.y + .01f,
                     pressingClothPickingHandler.clothToPress.Peek().nextPosition.transform.position.z);
                 // Position the fullIndicator after pushing cloth
-                 
             }
 
             bool moveDone = false;

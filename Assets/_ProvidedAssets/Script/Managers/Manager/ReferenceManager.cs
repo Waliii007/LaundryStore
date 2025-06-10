@@ -15,9 +15,6 @@ namespace LaundaryMan
 
         public static ReferenceManager Instance { get; private set; }
         public static bool playerHasTheCoffee;
-
-         
-
         private void Awake()
         {
             // environment.SetActive(true);

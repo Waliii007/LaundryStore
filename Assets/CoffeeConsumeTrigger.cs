@@ -35,10 +35,17 @@ namespace LaundaryMan
 
                 if (coffeeBar != null)
                 {
+                    print(customersToServe);
                     if (coffeeBar.HasEnoughCoffee(customersToServe))
                     {
                         coffeeBar.ConsumeServe(customersToServe);
                         Debug.Log($"Consumed {customersToServe} coffee serves.");
+                        if (SoundManager.instance)
+                        {
+                            SoundManager.instance.Play(SoundName.CoffeeOut);
+                            Debug.Log($"Consumed {customersToServe} coffee serves.SoundPlay");
+
+                        }
                     }
                     else
                     {

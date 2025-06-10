@@ -44,8 +44,9 @@ namespace LaundaryMan
             if (UseCoffee(type))
             {
                 ReferenceManager.Instance.notificationHandler.ShowNotification($"Used {type}");
+                ReferenceManager.Instance.canvasManager.CanvasStateChanger(CanvasStates.MainControls);
                 UpdateCoffeeUI();
-                // Add custom logic if needed
+                
             }
             else
             {

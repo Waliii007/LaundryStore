@@ -21,6 +21,7 @@ namespace LaundaryMan
             ReferenceManager.Instance.playerStackManager.pathDraw.destination = navmeshTarget;
             if (taskObject) taskObject.SetActive(true);
             TaskStart();
+            ReferenceManager.Instance.playerStackManager.myRigidBody.isKinematic = false;
         }
 
         public GameObject taskObject;

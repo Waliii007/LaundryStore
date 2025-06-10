@@ -160,6 +160,9 @@ namespace LaundaryMan
         Upgrade,
         Washing,
         Click,
-        PopUp
+        PopUp,
+        Happy,
+        Angry,
+        CoffeeOut
     }
 }
