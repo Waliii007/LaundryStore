@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using LaundaryMan;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,6 @@ public class InternetCheck : MonoBehaviour
 
     private void Awake()
     {
-      
     }
 
     public void Initlize()
@@ -39,8 +39,12 @@ public class InternetCheck : MonoBehaviour
         else if (PrivacyPolicy == 1)
         {
             Init();
-            CanvasScriptSplash.instance.LoadScene(1);
+            if (!PlayerPrefsManager.Shown)
+                CanvasScriptSplash.instance.LoadScene(1);
+            else
+                CanvasScriptSplash.instance.LoadScene(2);
         }
+
         isInitialize = true;
     }
 
@@ -76,10 +80,8 @@ public class InternetCheck : MonoBehaviour
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             ShowPanel();
-         //   return;
+            //   return;
         }
-
-        
     }
 
     public bool isInitialize;
@@ -100,11 +102,11 @@ public class InternetCheck : MonoBehaviour
         {
             CanvasScriptSplash.instance.ChangeCanvas(cStats);
             Time.timeScale = 1;
-            
+
             if (!isInitialize)
             {
                 Initlize();
-            } 
+            }
         }
     }
 }

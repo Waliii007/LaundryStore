@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MainMenuEventListener : MonoBehaviour
 {
     public Button playbutton;
+    public Image logo;
 
     private void OnEnable()
     {
@@ -20,7 +21,17 @@ public class MainMenuEventListener : MonoBehaviour
             TssAdsManager._Instance.admobInstance.TopShowBanner();
             TssAdsManager._Instance.HideRecBanner();
         }
+
+        logo.sprite = PlayerPrefsManager.GenderSelection switch
+        {
+            Sex.Male => boySprite,
+            Sex.Female => girlSprite,
+            _ => logo.sprite
+        };
     }
+
+    public Sprite boySprite;
+    public Sprite girlSprite;
 
     public void Settings()
     {
@@ -29,6 +40,15 @@ public class MainMenuEventListener : MonoBehaviour
         {
             SoundManager.instance.Play(SoundName.Click);
         }
+    }
+    public void UserInfo()
+    {
+        CanvasScriptSplash.instance.LoadScene(1);
+        if (SoundManager.instance)
+        {
+            SoundManager.instance.Play(SoundName.Click);
+        }
+        TssAdsManager._Instance.ShowInterstitial("UserInfo");
     }
 
     public void Play()

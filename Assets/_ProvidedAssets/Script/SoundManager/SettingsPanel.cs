@@ -43,6 +43,14 @@ namespace LaundaryMan
         UpdateButtonVisual(soundButton, isSoundOn);
         SoundManager.instance.ToggleMute(SoundType.SFX);
     }
+    public void Cross()
+    {
+       CanvasScriptSplash.instance.ChangeCanvas(CanvasStats.MainScreen);
+    }
+    public void PrivacyPoslicy()
+    {
+      Application.OpenURL(GlobalConstant.PrivacyPoliciesLInk);
+    }
 
     private void ToggleMusic()
     {
