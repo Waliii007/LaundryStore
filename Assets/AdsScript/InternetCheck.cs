@@ -79,15 +79,7 @@ public class InternetCheck : MonoBehaviour
          //   return;
         }
 
-        // if (!isInitialize)
-        // {
-        //     isInitialize = true;
-        //     remoteConfig.InternetAvailable();
-        // }
-        /* else if (Application.internetReachability != NetworkReachability.NotReachable)
-         {
-             HidePanel();
-         }*/
+        
     }
 
     public bool isInitialize;

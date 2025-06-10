@@ -42,5 +42,6 @@ public enum CanvasStats
     MainScreen,
     PrivacyPolicy,
     Loading,
-    AdFrequency
+    AdFrequency,
+    Setting
 }

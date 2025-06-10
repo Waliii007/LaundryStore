@@ -11,7 +11,7 @@ namespace LaundaryMan
     public class PlayerStackManager : MonoBehaviour
     {
         public GameObject stackStarter;
-        [SerializeField] protected FullBodyBipedIK bipedIk;
+        public FullBodyBipedIK bipedIk;
         public Stack<ClothFragment> ClothStack = new Stack<ClothFragment>();
         public NavmeshPathDraw pathDraw;
         public int maxClothesPerCycle = 10;
@@ -61,11 +61,14 @@ namespace LaundaryMan
 
         public void SetIk(float iKWeight)
         {
-            bipedIk.solver.leftHandEffector.positionWeight = iKWeight;
-            bipedIk.solver.leftHandEffector.rotationWeight = iKWeight;
-            bipedIk.solver.rightHandEffector.positionWeight = iKWeight;
-            bipedIk.solver.rightHandEffector.rotationWeight = iKWeight;
-            bipedIk.solver.leftHandEffector.rotationWeight = iKWeight;
+            if (bipedIk)
+            {
+                bipedIk.solver.leftHandEffector.positionWeight = iKWeight;
+                bipedIk.solver.leftHandEffector.rotationWeight = iKWeight;
+                bipedIk.solver.rightHandEffector.positionWeight = iKWeight;
+                bipedIk.solver.rightHandEffector.rotationWeight = iKWeight;
+                bipedIk.solver.leftHandEffector.rotationWeight = iKWeight;
+            }
         }
     }
 }

@@ -9,6 +9,13 @@ EditorBuildSettings:
     path: Assets/_ProvidedAssets/3D/ExtractedAssets/LaundaryAssets/_Game/Scenes/Splash.unity
     guid: 654aaae52568dc44b88a5ae93285331b
   - enabled: 1
+    path: Assets/_ProvidedAssets/3D/ExtractedAssets/LaundaryAssets/_Game/Scenes/UserInfo.unity
+    guid: c537489af1eec164faaa5cdf896c219d
+  - enabled: 1
+    path: Assets/_ProvidedAssets/3D/ExtractedAssets/LaundaryAssets/_Game/Scenes/MainMenu.unity
+    guid: 965f667abfb2c1949a59a3526d5abaed
+  - enabled: 1
     path: Assets/_ProvidedAssets/3D/ExtractedAssets/LaundaryAssets/_Game/Scenes/LaundryScene.unity
     guid: 20ff46db1f4a1e8439eb279bc381a5f0
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
