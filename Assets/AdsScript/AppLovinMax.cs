@@ -146,9 +146,8 @@ public class AppLovinMax : MonoBehaviour
 
     private void OnInterstitialDismissedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
-        Time.timeScale = 1;
+    //    Time.timeScale = 1;
         Debug.Log("Interstitial dismissed");
-        DOVirtual.DelayedCall(1, LoadInterstitial);
     }
 
     #endregion

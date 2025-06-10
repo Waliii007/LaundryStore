@@ -18,6 +18,7 @@ public class CountryEventListener : MonoBehaviour
 
     public void Next()
     {
+        PlayerPrefsManager.Shown = true;
         CanvasScriptSplash.instance.LoadScene(2);
         if (TssAdsManager._Instance)
         {
@@ -25,7 +26,6 @@ public class CountryEventListener : MonoBehaviour
             TssAdsManager._Instance.HideRecBanner();
         }
 
-        PlayerPrefsManager.Shown = true;
     }
 
     public void OnAvatarImageClicked(Sprite i, GameObject avatarPanelSelected)
@@ -51,7 +51,7 @@ public static class PlayerPrefsManager
 
     public static bool Shown
     {
-        get => PlayerPrefs.GetInt("Shown", 0) == 0;
+        get => PlayerPrefs.GetInt("Shown", 0) == 1;
         set => PlayerPrefs.SetInt("Shown", value ? 1 : 0);
     }
 }

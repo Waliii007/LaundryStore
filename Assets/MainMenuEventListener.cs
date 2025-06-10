@@ -10,6 +10,7 @@ public class MainMenuEventListener : MonoBehaviour
 
     private void OnEnable()
     {
+        PlayerPrefsManager.Shown = true;
         if (SoundManager.instance)
         {
             SoundManager.instance.Play(SoundName.BackGround);
@@ -41,6 +42,7 @@ public class MainMenuEventListener : MonoBehaviour
             SoundManager.instance.Play(SoundName.Click);
         }
     }
+
     public void UserInfo()
     {
         CanvasScriptSplash.instance.LoadScene(1);
@@ -48,6 +50,7 @@ public class MainMenuEventListener : MonoBehaviour
         {
             SoundManager.instance.Play(SoundName.Click);
         }
+
         TssAdsManager._Instance.ShowInterstitial("UserInfo");
     }
 

@@ -16,24 +16,24 @@ namespace LaundaryMan
 
     private bool isSoundOn;
     private bool isMusicOn;
-    private bool isHapticsOn;
+   
 
     private void Start()
     {
         // Load saved states
         isSoundOn = PlayerPrefs.GetInt("SFXMuted", 0) == 0;
         isMusicOn = PlayerPrefs.GetInt("BGMuted", 0) == 0;
-        isHapticsOn = PlayerPrefs.GetInt("HapticsEnabled", 1) == 1;
+      
 
         // Setup visuals
         UpdateButtonVisual(soundButton, isSoundOn);
         UpdateButtonVisual(musicButton, isMusicOn);
-        UpdateButtonVisual(hapticsButton, isHapticsOn);
+       
 
         // Add listeners
         soundButton.onClick.AddListener(() => ToggleSound());
         musicButton.onClick.AddListener(() => ToggleMusic());
-        hapticsButton.onClick.AddListener(() => ToggleHaptics());
+       // hapticsButton.onClick.AddListener(() => ToggleHaptics());
     }
 
     private void ToggleSound()
@@ -62,10 +62,10 @@ namespace LaundaryMan
 
     private void ToggleHaptics()
     {
-        isHapticsOn = !isHapticsOn;
-        PlayerPrefs.SetInt("HapticsEnabled", isHapticsOn ? 1 : 0);
-        UpdateButtonVisual(hapticsButton, isHapticsOn);
-        HapticManager.SetHapticsEnabled(isHapticsOn);
+        // isHapticsOn = !isHapticsOn;
+        // PlayerPrefs.SetInt("HapticsEnabled", isHapticsOn ? 1 : 0);
+        // UpdateButtonVisual(hapticsButton, isHapticsOn);
+        // HapticManager.SetHapticsEnabled(isHapticsOn);
     }
 
     private void UpdateButtonVisual(Button button, bool isOn)
